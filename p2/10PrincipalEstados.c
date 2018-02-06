@@ -4,7 +4,7 @@
 
 #include "10Estados.h"
 
-main (int argc, char *argv[]) {
+int main (int argc, char *argv[]) {
   
   int estado;
   int transicion;

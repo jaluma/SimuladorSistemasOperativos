@@ -7,7 +7,7 @@ int main (int argc, char *argv[]) {
   int posicion;
 
   if (argc==1)
-    printf("La lista contiene los %d primeros números primos\n",sizeof(numerosPrimos)/sizeof(int));
+    printf("La lista contiene los %d primeros números primos\n",(int)(sizeof(numerosPrimos)/sizeof(int)));
   else {
     posicion=atoi(argv[1]);
     printf("El número primo que ocupa la posición %d es %d\n",posicion, numerosPrimos[posicion]);

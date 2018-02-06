@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-main () {
+int main () {
 
   int edad=23;
   float dineroEnElBanco= 300.17/2;

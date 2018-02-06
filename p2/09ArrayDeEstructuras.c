@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 #define TAMANIOMAXIMO 20
 
@@ -37,16 +38,13 @@ float ingresosMedios(struct persona gente[]) {
 }
   
   int getMasJoven(struct persona gente[]) {
-	if (sizeof(gente) == 0)
-		return -1;
-	  
 	int edadMoreJoven=-1;
 	int i;
 	for (i = 0; i < NUMERO_DE_ALUMNOS;i++) {
 		if (i==0)
 			edadMoreJoven = 0;
 		
-		if (gente[edadMoreJoven].edad < gente[i].edad) {
+		if (gente[i].edad < gente[edadMoreJoven].edad) {
 			edadMoreJoven = i;
 		}
 	}

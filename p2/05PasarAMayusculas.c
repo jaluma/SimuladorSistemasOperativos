@@ -7,7 +7,9 @@
 
 #define POSICION_CADENA_EN_LINEA_COMANDOS 1
 
-main (int argc, char *argv[]) {
+void pasarAMayusculas(char cadena[]);
+
+int main (int argc, char *argv[]) {
   
   char cadena[]=CADENA_POR_DEFECTO;
   

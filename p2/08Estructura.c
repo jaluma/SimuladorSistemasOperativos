@@ -8,12 +8,12 @@ struct persona {
   char nombre[TAMANIOMAXIMO];
   int edad;
   float ingresos;
-}
+};
 
-main (int argc, char *argv[]) {
-  char nom[TAMANIOMAXIMO];
+int main (int argc, char *argv[]) {
+  char* nom = (char*)malloc(TAMANIOMAXIMO * sizeof(char));
   printf("Nombre del profesor: ");
-  scanf("%s", &nom);
+  scanf("%s", nom);
   
   int ed = 0;
   printf("Edad del profesor: ");
@@ -24,7 +24,7 @@ main (int argc, char *argv[]) {
   scanf("%f", &ing);
   
   
-  struct persona profesor={nom, ed, ing};
+  struct persona profesor={*nom, ed, ing};
   
   struct persona alumno;
   

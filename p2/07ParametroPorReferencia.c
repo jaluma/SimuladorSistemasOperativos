@@ -6,7 +6,10 @@
 
 #define POSICION_CADENA_EN_LINEA_COMANDOS 1
 
-main (int argc, char *argv[]) {
+void sustituyeEnteroPorSuCuadrado(int *longi);
+void sustituyeEnteroPorSuCuadradoNoRefencia(int longi);
+
+int main (int argc, char *argv[]) {
   
   int longitud=strlen(CADENA_POR_DEFECTO);
   

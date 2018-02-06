@@ -8,7 +8,9 @@
 #define POSICION_CADENA_EN_LINEA_COMANDOS 1
 #define POSICION_CARACTER_EN_LINEA_COMANDOS 2
 
-main (int argc, char *argv[]) {
+void buscarYContar(char caracter, char *cadena);
+
+int main (int argc, char *argv[]) {
 
   if (argc==1)
     buscarYContar(CARACTER_POR_DEFECTO, CADENA_POR_DEFECTO);

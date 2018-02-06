@@ -21,3 +21,6 @@ build:
 	gcc 09ArrayDeEstructuras.c -o build/09ArrayDeEstructuras
 10PrincipalEstados: 10PrincipalEstados.c 10Estados.c
 	gcc 10PrincipalEstados.c 10Estados.c -o build/10PrincipalEstados
+	
+clean: 
+	rm -rf build
