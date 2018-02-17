@@ -4,11 +4,11 @@
 
 #define TAMANIOMAXIMO 20
 
-struct persona {
+typedef struct persona {
   char nombre[TAMANIOMAXIMO];
   int edad;
   float ingresos;
-};
+} Persona;
 
 int main (int argc, char *argv[]) {
   char* nom = (char*)malloc(TAMANIOMAXIMO * sizeof(char));
@@ -24,11 +24,11 @@ int main (int argc, char *argv[]) {
   scanf("%f", &ing);
   
   
-  struct persona profesor={*nom, ed, ing};
+  Persona profesor={*nom, ed, ing};
   
-  struct persona alumno;
+  Persona alumno;
   
-  strcpy(alumno.nombre,"Juan");
+  strcpy(alumno.nombre,"Juan");	// *alumno.nombre = &("Juan");
   alumno.edad=19;
   alumno.ingresos=11.777;
   

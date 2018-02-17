@@ -7,26 +7,27 @@
 
 #define NUMERO_DE_ALUMNOS 3
 
-struct persona {
+typedef struct persona {
   char nombre[TAMANIOMAXIMO];
   int edad;
   float ingresos;
-};
+} Persona;
 
-float ingresosMedios(struct persona []);
-int getMasJoven(struct persona gente[]);
+// deberian ir en un *.h e #include
+float ingresosMedios(Persona []);
+int getMasJoven(Persona gente[]);
 
 
 int main (int argc, char *argv[]) {
   
-  struct persona alumnos[NUMERO_DE_ALUMNOS]={{"Juan", 23, 777.11}, {"Luis",19,111.1}, {"Pedro",56,9327.2}};
+  Persona alumnos[NUMERO_DE_ALUMNOS]={{"Juan", 23, 777.11}, {"Luis",19,111.1}, {"Pedro",56,9327.2}};
   
   printf("La posición del alumno con menor edad es %d\n", getMasJoven(alumnos));
   printf("Los ingresos medios de los alumnnos son %f\n", ingresosMedios(alumnos));
   exit(1);
 }
 
-float ingresosMedios(struct persona gente[]) {
+float ingresosMedios(Persona gente[]) {
   
   int i;
   float acumulado=0;
