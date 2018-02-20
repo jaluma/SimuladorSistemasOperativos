@@ -8,7 +8,7 @@ void ComputerSystem_PowerOn(int argc, char *argv[]);
 void ComputerSystem_PowerOff();
 void ComputerSystem_DebugMessage(int , char,  ...);
 
-#define PROGRAM_TO_BE_EXECUTED "programToBeExecuted"
+#define PROGRAM_TO_BE_EXECUTED "V0-Ejemplo1"
 
 // Sections in which we divide our simulator in terms of
 // debugging messages that show its internal working details

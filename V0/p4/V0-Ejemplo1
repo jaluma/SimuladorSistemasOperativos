@@ -1,1 +1,12 @@
-asd
+// Vo-Ejemplo1
+55  // Tamanio del programa en posiciones de memoria
+//Inicializar el valor de memoria
+ADD 0 7
+WRITE 100
+//Cuerpo
+MEMADD 1 100
+WRITE 100
+MEMADD -17 100
+ZJUMP 2
+JUMP -4
+HALT
