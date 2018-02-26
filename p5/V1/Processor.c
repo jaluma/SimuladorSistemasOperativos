@@ -174,6 +174,17 @@ void Processor_DecodeAndExecuteInstruction() {
 			registerPC_CPU++;
 			break;
 
+		case 'm': 
+			registerMAR_CPU=registerIR_CPU.operand2;
+			// Send to the main memory controller the address in which the reading has to take place: use the address bus for this
+			Buses_write_AddressBus_From_To(CPU, MAINMEMORY);
+			// Tell the main memory controller to read
+			MainMemory_readMemory();
+			// Copy the read data to the accumulator register
+			registerAccumulator_CPU= registerMBR_CPU.operand2 + registerIR_CPU.operand1;
+			registerPC_CPU++;
+			break;
+			
 		// Instruction HALT
 		case 'h':
 			Processor_ActivatePSW_Bit(POWEROFF_BIT);
