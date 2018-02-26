@@ -30,7 +30,8 @@ void ComputerSystem_PowerOn(int argc, char *argv[]) {
 
 	// Obtain a list of programs in the command line
 	int daemonsBaseIndex = ComputerSystem_ObtainProgramList(argc, argv);
-
+	ComputerSystem_PrintProgramList();
+	
 	// Request the OS to do the initial set of tasks. The last one will be
 	// the processor allocation to the process with the highest priority
 	OperatingSystem_Initialize(daemonsBaseIndex);
@@ -49,3 +50,12 @@ void ComputerSystem_PowerOff() {
 
 /////////////////////////////////////////////////////////
 //  New functions below this line  //////////////////////
+
+void ComputerSystem_PrintProgramList() {
+	ComputerSystem_DebugMessage(101, INIT); 
+	int i;
+	for (i = 2; i < PROGRAMSMAXNUMBER; i++) {
+		PROGRAMS_DATA p = *programList[i];
+		ComputerSystem_DebugMessage(102, INIT, *p.executableName, p.arrivalTime); 
+	}
+}

@@ -89,7 +89,8 @@ void ComputerSystem_DebugMessage(int, char , ...);
 
 void ComputerSystem_PowerOn(int argc, char *argv[]);
 void ComputerSystem_PowerOff();
-# 33 "ComputerSystem.h"
+void ComputerSystem_PrintProgramList();
+# 34 "ComputerSystem.h"
 typedef struct ProgramData {
     char *executableName;
     unsigned int arrivalTime;
@@ -1436,6 +1437,17 @@ void Processor_DecodeAndExecuteInstruction() {
    registerPC_CPU++;
    break;
 
+  case 'm':
+   registerMAR_CPU=registerIR_CPU.operand2;
+
+   Buses_write_AddressBus_From_To(CPU, MAINMEMORY);
+
+   MainMemory_readMemory();
+
+   registerAccumulator_CPU= registerMBR_CPU.operand2 + registerIR_CPU.operand1;
+   registerPC_CPU++;
+   break;
+
 
   case 'h':
    Processor_ActivatePSW_Bit(POWEROFF_BIT);
@@ -1633,7 +1645,7 @@ int Processor_GetMBR_Value(){
 void Processor_SetPC(int pc){
   registerPC_CPU= pc;
 }
-# 389 "Processor.c"
+# 400 "Processor.c"
 int Processor_GetRegisterA() {
   return registerA_CPU;
 }

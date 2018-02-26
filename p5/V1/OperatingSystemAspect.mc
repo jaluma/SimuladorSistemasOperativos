@@ -29,7 +29,8 @@ void ComputerSystem_DebugMessage(int, char , ...);
 
 void ComputerSystem_PowerOn(int argc, char *argv[]);
 void ComputerSystem_PowerOff();
-# 33 "ComputerSystem.h"
+void ComputerSystem_PrintProgramList();
+# 34 "ComputerSystem.h"
 typedef struct ProgramData {
     char *executableName;
     unsigned int arrivalTime;
