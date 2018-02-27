@@ -52,10 +52,9 @@ void ComputerSystem_PowerOff() {
 //  New functions below this line  //////////////////////
 
 void ComputerSystem_PrintProgramList() {
-	ComputerSystem_DebugMessage(101, INIT); 
 	int i;
-	for (i = 2; i < PROGRAMSMAXNUMBER; i++) {
-		PROGRAMS_DATA p = *programList[i];
-		ComputerSystem_DebugMessage(102, INIT, *p.executableName, p.arrivalTime); 
+	ComputerSystem_DebugMessage(101, INIT); 
+	for (i = 1; i < PROGRAMSMAXNUMBER && programList[i] != NULL; i++) {
+		ComputerSystem_DebugMessage(102, INIT, programList[i]->executableName, programList[i]->arrivalTime); 
 	}
 }

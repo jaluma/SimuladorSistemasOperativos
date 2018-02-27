@@ -3,5 +3,5 @@
 //
 // numbers of messages greather than 100 for students
 //
-101,User program list
-102,	Program [@C%s@@] with arrival time [@C%d@@]
+101,User program list\n
+102,	Program [@C%s@@] with arrival time [@C%d@@]\n
