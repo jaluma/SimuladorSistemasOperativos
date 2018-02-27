@@ -2749,6 +2749,8 @@ void OperatingSystem_Initialize(int daemonsIndex) {
 
 
  selectedProcess=OperatingSystem_ShortTermScheduler();
+ if (selectedProcess < 0)
+  return;
 
 
  OperatingSystem_Dispatch(selectedProcess);
@@ -2786,20 +2788,25 @@ int OperatingSystem_LongTermScheduler() {
   numberOfSuccessfullyCreatedProcesses=0;
 
  for (i=0; programList[i]!=
-# 121 "OperatingSystem.c" 3 4
+# 123 "OperatingSystem.c" 3 4
                           ((void *)0) 
-# 121 "OperatingSystem.c"
-                               && i<20 ; i++) {
+# 123 "OperatingSystem.c"
+                               && i<20; i++) {
   PID=OperatingSystem_CreateProcess(i);
+
   if(PID == -3) {
    ComputerSystem_DebugMessage(103,'e',programList[i]->executableName);
-   continue;
-  }
-  numberOfSuccessfullyCreatedProcesses++;
-  if (programList[i]->type==(unsigned int) 0)
-   numberOfNotTerminatedUserProcesses++;
+  } else if (PID == -1) {
+   ComputerSystem_DebugMessage(104,'e',programList[i]->executableName, "--- it does not exist ---");
+  } else if (PID == -2) {
+   ComputerSystem_DebugMessage(104,'e',programList[i]->executableName, "--- invalid priority or size ---");
+  } else {
+   numberOfSuccessfullyCreatedProcesses++;
+   if (programList[i]->type==(unsigned int) 0)
+    numberOfNotTerminatedUserProcesses++;
 
-  OperatingSystem_MoveToTheREADYState(PID);
+   OperatingSystem_MoveToTheREADYState(PID);
+  }
  }
 
 
@@ -2820,14 +2827,24 @@ int OperatingSystem_CreateProcess(int indexOfExecutableProgram) {
 
  PID=OperatingSystem_ObtainAnEntryInTheProcessTable();
 
- if (PID == -3)
+ if (PID == -3) {
   return -3;
+ }
 
 
  processSize=OperatingSystem_ObtainProgramSize(&programFile, executableProgram->executableName);
 
+ if (processSize == -1) {
+  return -1;
+ } if (processSize == -2) {
+  return -2;
+ }
+
 
  priority=OperatingSystem_ObtainPriority(programFile);
+
+ if (priority == -2)
+  return -2;
 
 
   loadingPhysicalAddress=OperatingSystem_ObtainMainMemory(processSize, PID);
