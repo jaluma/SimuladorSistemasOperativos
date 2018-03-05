@@ -1,14 +1,5 @@
 20 Messages Loaded
 Asserts file unavailable
-Process [0] created from program [SystemIdleProcess]
-ERROR: Program [programa6] is too big
-ERROR: Program [programaQueNoExiste] is not valid [--- it does not exist ---]
-ERROR: Program [programa7] is too big
-ERROR: Program [programa5c] is not valid [--- it does not exist ---]
-Process [1] created from program [newProgramVerySimple]
-Process [2] created from program [programVerySimple]
-Process [3] created from program [programVerySimple]
-ERROR: There are not free entries in the process table for the program [programVerySimple]
 User program list
 	Program [programa6] with arrival time [0]
 	Program [programaQueNoExiste] with arrival time [0]
@@ -18,24 +9,33 @@ User program list
 	Program [programVerySimple] with arrival time [0]
 	Program [programVerySimple] with arrival time [0]
 	Program [programVerySimple] with arrival time [0]
+Process [0] created from program [SystemIdleProcess]
+ERROR: Program [programa6] is too big
+ERROR: Program [programaQueNoExiste] is not valid [--- it does not exist ---]
+ERROR: Program [programa7] is too big
+ERROR: Program [programa5c] is not valid [--- invalid priority or size ---]
+Process [1] created from program [newProgramVerySimple]
+Process [2] created from program [programVerySimple]
+Process [3] created from program [programVerySimple]
+ERROR: There are not free entries in the process table for the program [programVerySimple]
 New Tick (1)
 y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
 New Tick (2)
 n 0 0 (PC: 1, Accumulator: 0, PSW: 2 [--------------Z-])
 New Tick (3)
-a 10 -3 (PC: 2, Accumulator: 7, PSW: 0 [----------------])
+a 10 -13 (PC: 2, Accumulator: -3, PSW: 4 [-------------N--])
 New Tick (4)
-w 15 0 (PC: 3, Accumulator: 7, PSW: 0 [----------------])
+w 15 0 (PC: 3, Accumulator: -3, PSW: 4 [-------------N--])
 New Tick (5)
-t 3 0 (PC: 4, Accumulator: 7, PSW: 0 [----------------])
+t 3 0 (PC: 4, Accumulator: -3, PSW: 4 [-------------N--])
 New Tick (6)
-o 2 0 (PC: 241, Accumulator: 7, PSW: 128 [--------X-------])
+o 2 0 (PC: 241, Accumulator: -3, PSW: 132 [--------X----N--])
 New Tick (7)
 Process [1] has requested to terminate
 New Tick (8)
-y 0 0 (PC: 0, Accumulator: 7, PSW: 0 [----------------])
+y 0 0 (PC: 0, Accumulator: -3, PSW: 4 [-------------N--])
 New Tick (9)
-n 0 0 (PC: 1, Accumulator: 7, PSW: 0 [----------------])
+n 0 0 (PC: 1, Accumulator: -3, PSW: 4 [-------------N--])
 New Tick (10)
 a 10 -13 (PC: 2, Accumulator: -3, PSW: 4 [-------------N--])
 New Tick (11)
