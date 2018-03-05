@@ -30,11 +30,11 @@ void ComputerSystem_PowerOn(int argc, char *argv[]) {
 
 	// Obtain a list of programs in the command line
 	int daemonsBaseIndex = ComputerSystem_ObtainProgramList(argc, argv);
+	ComputerSystem_PrintProgramList();
 	
 	// Request the OS to do the initial set of tasks. The last one will be
 	// the processor allocation to the process with the highest priority
 	OperatingSystem_Initialize(daemonsBaseIndex);
-	ComputerSystem_PrintProgramList();
 	
 	// Tell the processor to begin its instruction cycle 
 	Processor_InstructionCycleLoop();

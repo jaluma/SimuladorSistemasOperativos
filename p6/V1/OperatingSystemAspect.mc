@@ -2691,6 +2691,7 @@ int OperatingSystem_ShortTermScheduler();
 int OperatingSystem_ExtractFromReadyToRun();
 void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
+void OperatingSystem_PrintReadyToRunQueue();
 
 
 PCB processTable[4];
@@ -2767,7 +2768,7 @@ void OperatingSystem_PrepareDaemons(int programListDaemonsBase) {
  programList[0]->arrivalTime=0;
  programList[0]->type=(unsigned int) 1;
 
- sipID=0%4;
+ sipID=3%4;
 
 
 
@@ -2785,9 +2786,9 @@ int OperatingSystem_LongTermScheduler() {
   numberOfSuccessfullyCreatedProcesses=0;
 
  for (i=0; programList[i]!=
-# 121 "OperatingSystem.c" 3 4
+# 122 "OperatingSystem.c" 3 4
                           ((void *)0) 
-# 121 "OperatingSystem.c"
+# 122 "OperatingSystem.c"
                                && i<20; i++) {
   PID=OperatingSystem_CreateProcess(i);
 
@@ -2911,6 +2912,8 @@ void OperatingSystem_MoveToTheREADYState(int PID) {
  if (Heap_add(PID, readyToRunQueue,1 ,&numberOfReadyToRunProcesses ,4)>=0) {
   processTable[PID].state=READY;
  }
+
+ OperatingSystem_PrintReadyToRunQueue();
 }
 
 
@@ -3052,4 +3055,21 @@ void OperatingSystem_InterruptLogic(int entryPoint){
    break;
  }
 
+}
+
+void OperatingSystem_PrintReadyToRunQueue() {
+ int i;
+ ComputerSystem_DebugMessage(106,'s');
+ for (i = 0; i < 4; i++) {
+  if (readyToRunQueue[i] != 
+# 394 "OperatingSystem.c" 3 4
+                           ((void *)0)
+# 394 "OperatingSystem.c"
+                               ) {
+    if (i == 4 - 1)
+     ComputerSystem_DebugMessage(107,'s', processTable[i] -> priority, readyToRunQueue[i], "\n");
+    else
+     ComputerSystem_DebugMessage(107,'s', processTable[i] -> priority, readyToRunQueue[i], ", ");
+   }
+  }
 }

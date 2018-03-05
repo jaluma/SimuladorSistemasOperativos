@@ -25,6 +25,7 @@ int OperatingSystem_ShortTermScheduler();
 int OperatingSystem_ExtractFromReadyToRun();
 void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
+void OperatingSystem_PrintReadyToRunQueue();
 
 // The process table
 PCB processTable[PROCESSTABLEMAXSIZE];
@@ -241,6 +242,8 @@ void OperatingSystem_MoveToTheREADYState(int PID) {
 	if (Heap_add(PID, readyToRunQueue,QUEUE_PRIORITY ,&numberOfReadyToRunProcesses ,PROCESSTABLEMAXSIZE)>=0) {
 		processTable[PID].state=READY;
 	} 
+	
+	OperatingSystem_PrintReadyToRunQueue();
 }
 
 
@@ -382,5 +385,18 @@ void OperatingSystem_InterruptLogic(int entryPoint){
 			break;
 	}
 
+}
+
+void OperatingSystem_PrintReadyToRunQueue() {
+	int i;
+	ComputerSystem_DebugMessage(106,SHORTTERMSCHEDULE);
+	for (i = 0; i < PROCESSTABLEMAXSIZE; i++) {
+		if (readyToRunQueue[i] != NULL) {
+				if (i == PROCESSTABLEMAXSIZE - 1)
+					ComputerSystem_DebugMessage(107,SHORTTERMSCHEDULE, processTable[i] -> priority, readyToRunQueue[i], "\n");
+				else
+					ComputerSystem_DebugMessage(107,SHORTTERMSCHEDULE, processTable[i] -> priority, readyToRunQueue[i], ", ");
+		 }
+	 }
 }
 
