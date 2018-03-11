@@ -4,6 +4,9 @@
 #include "ComputerSystem.h"
 #include <stdio.h>
 
+#define NUMBEROFQUEUES 2
+#define USERPROCESSQUEUE 0
+#define DAEMONSQUEUE 1
 
 #define SUCCESS 1
 #define PROGRAMDOESNOTEXIST -1
@@ -43,6 +46,7 @@ typedef struct {
 	int copyOfPCRegister;
 	unsigned int copyOfPSWRegister;
 	int programListIndex;
+	int queueID;
 } PCB;
 
 // These "extern" declaration enables other source code files to gain access
