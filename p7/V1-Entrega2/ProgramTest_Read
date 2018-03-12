@@ -1,0 +1,8 @@
+
+50
+4
+ADD 7 0
+WRITE 10
+ADD 0 8
+READ 10
+HALT

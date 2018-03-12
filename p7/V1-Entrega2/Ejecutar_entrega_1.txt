@@ -1,0 +1,21 @@
+Grupo 1: 
+
+Meter en un fichero de nombre V1-1-UOxxxx.zip lo siguiente: 
+
+Fichero con el ejecutable en Ritchie.  
+Genera el Simulator y cámbiale el nombre a este: “V1-1-Simulator.UOxxxx” 
+
+Programa que has hecho en el ejercicio 3: newProgramVerySimple 
+
+Programas que has hecho para probar los ejercicios 5-c, 6 y 7 
+
+Salida redireccionada al fichero: “V1-1-salidaSimulador.log” de la ejecución: 
+“./Simulator a programa6 programaQueNoExiste programa7 programa5c  newProgramVerySimple programVerySimple programVerySimple programVerySimple > V1-1-salidaSimulador.log” 
+
+Fichero “leeme.txt” con la información de hasta qué punto de las tareas has llegado y cualquier otra observación que quieras hacer al respecto de lo que entregas. 
+
+USAR en ritchie el programa “zip” de esta forma (suponiendo que todos los ficheros están en el directorio actual, y que los programas que has hecho para probar las tareas  5-c, 6 y 7 se llamen programa5c, programa6 y programa7): 
+
+“zip V1-1-UOxxxx.zip V1-1-Simulator.UOxxxx NewProgramVerySimple 
+
+ programa5c programa6 programa7 V1-1-salidaSimulador.log leeme.txt” 

@@ -1,0 +1,60 @@
+25 Messages Loaded
+Asserts file unavailable
+User program list
+	Program [programaEntregaV1-2] with arrival time [0]
+	Program [newProgramVerySimple] with arrival time [0]
+New process [3] moving to the [NEW] state
+Process [3] created from program [SystemIdleProcess]
+Process [3] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	DAEMONS: [3,100]
+New process [0] moving to the [NEW] state
+Process [0] created from program [programaEntregaV1-2]
+Process [0] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [0,111]
+	DAEMONS: [3,100]
+New process [1] moving to the [NEW] state
+Process [1] created from program [newProgramVerySimple]
+Process [1] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [1,5], [0,111]
+	DAEMONS: [3,100]
+Process [1] moving from the [READY] state to the [EXECUTING] state
+New Tick (1)
+y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+New Tick (2)
+n 0 0 (PC: 1, Accumulator: 0, PSW: 2 [--------------Z-])
+New Tick (3)
+a 10 -13 (PC: 2, Accumulator: -3, PSW: 4 [-------------N--])
+New Tick (4)
+w 15 0 (PC: 3, Accumulator: -3, PSW: 4 [-------------N--])
+New Tick (5)
+t 3 0 (PC: 4, Accumulator: -3, PSW: 4 [-------------N--])
+New Tick (6)
+o 2 0 (PC: 241, Accumulator: -3, PSW: 132 [--------X----N--])
+New Tick (7)
+Process [1] has requested to terminate
+Process [1] moving from the [EXECUTING] state to the [EXIT] state
+Process [0] moving from the [READY] state to the [EXECUTING] state
+New Tick (8)
+y 0 0 (PC: 0, Accumulator: -3, PSW: 4 [-------------N--])
+New Tick (9)
+a 7 0 (PC: 1, Accumulator: 7, PSW: 0 [----------------])
+New Tick (10)
+w 10 0 (PC: 2, Accumulator: 7, PSW: 0 [----------------])
+New Tick (11)
+m 15 10 (PC: 3, Accumulator: 22, PSW: 0 [----------------])
+New Tick (12)
+t 3 0 (PC: 4, Accumulator: 22, PSW: 0 [----------------])
+New Tick (13)
+o 2 0 (PC: 241, Accumulator: 22, PSW: 128 [--------X-------])
+New Tick (14)
+Process [0] has requested to terminate
+Process [0] moving from the [EXECUTING] state to the [EXIT] state
+Process [3] moving from the [READY] state to the [EXECUTING] state
+New Tick (15)
+y 0 0 (PC: 183, Accumulator: 22, PSW: 128 [--------X-------])
+New Tick (16)
+h 0 0 (PC: 183, Accumulator: 22, PSW: 129 [--------X------S])
+END of the simulation
