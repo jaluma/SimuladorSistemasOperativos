@@ -252,8 +252,8 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
 // a queue of identifiers of READY processes
 void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
 	if (Heap_add(PID, readyToRunQueue[queueID] ,QUEUE_PRIORITY , &numberOfReadyToRunProcesses[queueID] ,PROCESSTABLEMAXSIZE)>=0) {
+		ComputerSystem_DebugMessage(110, SYSPROC, PID, statesNames[processTable[PID].state], statesNames[1]);
 		processTable[PID].state=READY;
-		ComputerSystem_DebugMessage(110, SYSPROC, PID, statesNames[0], statesNames[1]);
 	} 
 	OperatingSystem_PrintReadyToRunQueue();
 }
@@ -374,6 +374,8 @@ void OperatingSystem_TerminateProcess() {
 void OperatingSystem_HandleSystemCall() {
   
 	int systemCallID;
+	int pid;
+	int oldPID;
 
 	// Register A contains the identifier of the issued system call
 	systemCallID=Processor_GetRegisterA();
@@ -389,6 +391,22 @@ void OperatingSystem_HandleSystemCall() {
 			ComputerSystem_DebugMessage(25,SYSPROC,executingProcessID);
 			OperatingSystem_TerminateProcess();
 			break;
+			
+		case SYSCALL_YIELD: //  SYSCALL_YIELD=4
+			oldPID = executingProcessID;
+			pid = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);
+			
+			if (pid == NOPROCESS)
+				pid = Heap_getFirst(readyToRunQueue[DAEMONSQUEUE], numberOfReadyToRunProcesses[DAEMONSQUEUE]);
+			
+			if (processTable[oldPID].priority == processTable[pid].priority) {
+				ComputerSystem_DebugMessage(115, SHORTTERMSCHEDULE, oldPID, pid);
+				OperatingSystem_ShortTermScheduler(USERPROCESSQUEUE);
+				
+				OperatingSystem_PreemptRunningProcess();
+				OperatingSystem_Dispatch(pid);
+			}
+			break;
 	}
 }
 	
@@ -398,6 +416,7 @@ void OperatingSystem_InterruptLogic(int entryPoint){
 		case SYSCALL_BIT: // SYSCALL_BIT=2
 			OperatingSystem_HandleSystemCall();
 			break;
+			
 		case EXCEPTION_BIT: // EXCEPTION_BIT=6
 			OperatingSystem_HandleException();
 			break;

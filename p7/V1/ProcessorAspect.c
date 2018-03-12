@@ -53,7 +53,7 @@ void MainMemory_SetMBR( MEMORYCELL *);
 #line 10 "Processor.h"
 enum PSW_BITS {POWEROFF_BIT=0,ZERO_BIT=1,NEGATIVE_BIT=2,OVERFLOW_BIT=3,EXECUTION_MODE_BIT=7}; 
 #line 14 "Processor.h"
-enum INT_BITS {SYSCALL_BIT=2,EXCEPTION_BIT=6}; 
+enum INT_BITS {SYSCALL_BIT=2,EXCEPTION_BIT=6,SYSCALL_YIELD=4}; 
 #line 17 "Processor.h"
 void Processor_InitializeInterruptVectorTable(); 
 #line 18 "Processor.h"
@@ -110,21 +110,22 @@ extern  PROGRAMS_DATA *programList[20];
 # 1 "/usr/include/stdio.h" 1 3 4
 # 27 "/usr/include/stdio.h" 3 4
 # 1 "/usr/include/features.h" 1 3 4
-# 374 "/usr/include/features.h" 3 4
+# 367 "/usr/include/features.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 1 3 4
-# 385 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 3 4
+# 410 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
-# 386 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 2 3 4
-# 375 "/usr/include/features.h" 2 3 4
-# 398 "/usr/include/features.h" 3 4
+# 411 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 2 3 4
+# 368 "/usr/include/features.h" 2 3 4
+# 391 "/usr/include/features.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/gnu/stubs.h" 1 3 4
 # 10 "/usr/include/x86_64-linux-gnu/gnu/stubs.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/gnu/stubs-64.h" 1 3 4
 # 11 "/usr/include/x86_64-linux-gnu/gnu/stubs.h" 2 3 4
-# 399 "/usr/include/features.h" 2 3 4
+# 392 "/usr/include/features.h" 2 3 4
 # 28 "/usr/include/stdio.h" 2 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/include/stddef.h" 1 3 4
-# 212 "/usr/lib/gcc/x86_64-linux-gnu/4.9/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
 typedef long unsigned int size_t; 
 # 34 "/usr/include/stdio.h" 2 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/types.h" 1 3 4
@@ -250,7 +251,7 @@ typedef struct _IO_FILE __FILE;
 # 31 "/usr/include/libio.h" 3 4
 # 1 "/usr/include/_G_config.h" 1 3 4
 # 15 "/usr/include/_G_config.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
 # 16 "/usr/include/_G_config.h" 2 3 4
 # 1 "/usr/include/wchar.h" 1 3 4
 # 94 "/usr/include/wchar.h" 3 4
@@ -266,82 +267,81 @@ typedef struct { __off64_t __pos;  __mbstate_t __state;
 # 21 "/usr/include/_G_config.h" 2 3 4
 # 32 "/usr/include/libio.h" 2 3 4
 # 49 "/usr/include/libio.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/include/stdarg.h" 1 3 4
-# 40 "/usr/lib/gcc/x86_64-linux-gnu/4.9/include/stdarg.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 1 3 4
+# 40 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 3 4
 typedef __builtin_va_list __gnuc_va_list; 
 # 50 "/usr/include/libio.h" 2 3 4
 # 144 "/usr/include/libio.h" 3 4
 struct _IO_jump_t ; 
 #line 144 "/usr/include/libio.h"
 struct _IO_FILE ; 
-#line 154 "/usr/include/libio.h"
+#line 150 "/usr/include/libio.h"
 typedef void _IO_lock_t; 
-# 154 "/usr/include/libio.h" 3 4
-# 177 "/usr/include/libio.h" 3 4
+#line 173 "/usr/include/libio.h"
 struct _IO_marker {struct _IO_marker *_next; struct _IO_FILE *_sbuf; int _pos; 
 }; 
-#line 186 "/usr/include/libio.h"
+#line 182 "/usr/include/libio.h"
 enum __codecvt_result {__codecvt_ok,__codecvt_partial,__codecvt_error,__codecvt_noconv}; 
-# 245 "/usr/include/libio.h" 3 4
-# 293 "/usr/include/libio.h" 3 4
-# 312 "/usr/include/libio.h" 3 4
+# 173 "/usr/include/libio.h" 3 4
+# 241 "/usr/include/libio.h" 3 4
+# 307 "/usr/include/libio.h" 3 4
 struct _IO_FILE {int _flags; char *_IO_read_ptr; char *_IO_read_end; char *_IO_read_base; char *_IO_write_base; char *_IO_write_ptr; char *_IO_write_end; char *_IO_buf_base; char *_IO_buf_end; char *_IO_save_base; char *_IO_backup_base; char *_IO_save_end; struct _IO_marker *_markers; struct _IO_FILE *_chain; int _fileno; int _flags2;  __off_t _old_offset; unsigned short _cur_column; signed char _vtable_offset; char _shortbuf[1];  _IO_lock_t *_lock;  __off64_t _offset; void *__pad1; void *__pad2; void *__pad3; void *__pad4;  size_t __pad5; int _mode; char _unused2[15 * sizeof (int ) - 4 * sizeof (void *) - sizeof ( size_t )]; 
 }; 
-#line 315 "/usr/include/libio.h"
+#line 310 "/usr/include/libio.h"
 typedef struct _IO_FILE _IO_FILE; 
-#line 318 "/usr/include/libio.h"
+#line 313 "/usr/include/libio.h"
 struct _IO_FILE_plus ; 
-#line 320 "/usr/include/libio.h"
+#line 315 "/usr/include/libio.h"
 extern struct _IO_FILE_plus _IO_2_1_stdin_; 
-#line 321 "/usr/include/libio.h"
+#line 316 "/usr/include/libio.h"
 extern struct _IO_FILE_plus _IO_2_1_stdout_; 
-#line 322 "/usr/include/libio.h"
+#line 317 "/usr/include/libio.h"
 extern struct _IO_FILE_plus _IO_2_1_stderr_; 
-#line 338 "/usr/include/libio.h"
+#line 333 "/usr/include/libio.h"
 typedef  __ssize_t __io_read_fn(void *__cookie, char *__buf,  size_t __nbytes); 
-#line 347 "/usr/include/libio.h"
+#line 342 "/usr/include/libio.h"
 typedef  __ssize_t __io_write_fn(void *__cookie, const char *__buf,  size_t __n); 
-#line 355 "/usr/include/libio.h"
+#line 350 "/usr/include/libio.h"
 typedef int __io_seek_fn(void *__cookie,  __off64_t *__pos, int __w); 
-#line 358 "/usr/include/libio.h"
+#line 353 "/usr/include/libio.h"
 typedef int __io_close_fn(void *__cookie); 
-# 338 "/usr/include/libio.h" 3 4
-# 390 "/usr/include/libio.h" 3 4
+# 333 "/usr/include/libio.h" 3 4
+# 385 "/usr/include/libio.h" 3 4
 extern int __underflow( _IO_FILE *); 
-#line 391 "/usr/include/libio.h"
+#line 386 "/usr/include/libio.h"
 extern int __uflow( _IO_FILE *); 
-#line 392 "/usr/include/libio.h"
+#line 387 "/usr/include/libio.h"
 extern int __overflow( _IO_FILE *, int ); 
-#line 434 "/usr/include/libio.h"
+#line 429 "/usr/include/libio.h"
 extern int _IO_getc( _IO_FILE *__fp); 
-#line 435 "/usr/include/libio.h"
+#line 430 "/usr/include/libio.h"
 extern int _IO_putc(int __c,  _IO_FILE *__fp); 
-#line 436 "/usr/include/libio.h"
+#line 431 "/usr/include/libio.h"
 extern int _IO_feof( _IO_FILE *__fp) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-#line 437 "/usr/include/libio.h"
+#line 432 "/usr/include/libio.h"
 extern int _IO_ferror( _IO_FILE *__fp) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-#line 439 "/usr/include/libio.h"
+#line 434 "/usr/include/libio.h"
 extern int _IO_peekc_locked( _IO_FILE *__fp); 
-#line 445 "/usr/include/libio.h"
+#line 440 "/usr/include/libio.h"
 extern void _IO_flockfile( _IO_FILE *) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-#line 446 "/usr/include/libio.h"
+#line 441 "/usr/include/libio.h"
 extern void _IO_funlockfile( _IO_FILE *) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-#line 447 "/usr/include/libio.h"
+#line 442 "/usr/include/libio.h"
 extern int _IO_ftrylockfile( _IO_FILE *) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-# 434 "/usr/include/libio.h" 3 4
-# 465 "/usr/include/libio.h" 3 4
+# 429 "/usr/include/libio.h" 3 4
+# 460 "/usr/include/libio.h" 3 4
 extern int _IO_vfscanf( _IO_FILE *__restrict , const char *__restrict ,  __gnuc_va_list , int *__restrict ); 
-#line 467 "/usr/include/libio.h"
+#line 462 "/usr/include/libio.h"
 extern int _IO_vfprintf( _IO_FILE *__restrict , const char *__restrict ,  __gnuc_va_list ); 
-#line 468 "/usr/include/libio.h"
+#line 463 "/usr/include/libio.h"
 extern  __ssize_t _IO_padn( _IO_FILE *, int ,  __ssize_t ); 
-#line 469 "/usr/include/libio.h"
+#line 464 "/usr/include/libio.h"
 extern  size_t _IO_sgetn( _IO_FILE *, void *,  size_t ); 
-#line 471 "/usr/include/libio.h"
+#line 466 "/usr/include/libio.h"
 extern  __off64_t _IO_seekoff( _IO_FILE *,  __off64_t , int , int ); 
-#line 472 "/usr/include/libio.h"
+#line 467 "/usr/include/libio.h"
 extern  __off64_t _IO_seekpos( _IO_FILE *,  __off64_t , int ); 
-#line 474 "/usr/include/libio.h"
+#line 469 "/usr/include/libio.h"
 extern void _IO_free_backup_area( _IO_FILE *) __attribute__  (( __nothrow__ , __leaf__ )) ; 
 #line 79 "/usr/include/stdio.h"
 typedef  __gnuc_va_list va_list; 
@@ -481,9 +481,8 @@ extern int putw(int __w,  FILE *__stream);
 #line 623 "/usr/include/stdio.h"
 extern char *fgets(char *__restrict __s, int __n,  FILE *__restrict __stream); 
 # 594 "/usr/include/stdio.h" 3 4
-# 638 "/usr/include/stdio.h" 3 4
-extern char *gets(char *__s) __attribute__  (( __deprecated__ )) ; 
-#line 667 "/usr/include/stdio.h"
+# 640 "/usr/include/stdio.h" 3 4
+# 667 "/usr/include/stdio.h" 3 4
 extern  __ssize_t __getdelim(char **__restrict __lineptr,  size_t *__restrict __n, int __delimiter,  FILE *__restrict __stream); 
 #line 670 "/usr/include/stdio.h"
 extern  __ssize_t getdelim(char **__restrict __lineptr,  size_t *__restrict __n, int __delimiter,  FILE *__restrict __stream); 
@@ -499,8 +498,7 @@ extern int ungetc(int __c,  FILE *__stream);
 extern  size_t fread(void *__restrict __ptr,  size_t __size,  size_t __n,  FILE *__restrict __stream); 
 #line 716 "/usr/include/stdio.h"
 extern  size_t fwrite(const void *__restrict __ptr,  size_t __size,  size_t __n,  FILE *__restrict __s); 
-# 665 "/usr/include/stdio.h" 3 4
-# 738 "/usr/include/stdio.h" 3 4
+#line 738 "/usr/include/stdio.h"
 extern  size_t fread_unlocked(void *__restrict __ptr,  size_t __size,  size_t __n,  FILE *__restrict __stream); 
 #line 740 "/usr/include/stdio.h"
 extern  size_t fwrite_unlocked(const void *__restrict __ptr,  size_t __size,  size_t __n,  FILE *__restrict __stream); 
@@ -510,15 +508,16 @@ extern int fseek( FILE *__stream, long int __off, int __whence);
 extern long int ftell( FILE *__stream); 
 #line 759 "/usr/include/stdio.h"
 extern void rewind( FILE *__stream); 
-#line 773 "/usr/include/stdio.h"
+# 737 "/usr/include/stdio.h" 3 4
+# 773 "/usr/include/stdio.h" 3 4
 extern int fseeko( FILE *__stream,  __off_t __off, int __whence); 
 #line 778 "/usr/include/stdio.h"
 extern  __off_t ftello( FILE *__stream); 
-# 773 "/usr/include/stdio.h" 3 4
-# 798 "/usr/include/stdio.h" 3 4
+#line 798 "/usr/include/stdio.h"
 extern int fgetpos( FILE *__restrict __stream,  fpos_t *__restrict __pos); 
 #line 803 "/usr/include/stdio.h"
 extern int fsetpos( FILE *__stream, const  fpos_t *__pos); 
+# 792 "/usr/include/stdio.h" 3 4
 # 815 "/usr/include/stdio.h" 3 4
 # 826 "/usr/include/stdio.h" 3 4
 extern void clearerr( FILE *__stream) __attribute__  (( __nothrow__ , __leaf__ )) ; 
@@ -544,21 +543,22 @@ extern int fileno( FILE *__stream) __attribute__  (( __nothrow__ , __leaf__ )) ;
 #line 863 "/usr/include/stdio.h"
 extern int fileno_unlocked( FILE *__stream) __attribute__  (( __nothrow__ , __leaf__ )) ; 
 # 854 "/usr/include/stdio.h" 2 3 4
-# 873 "/usr/include/stdio.h" 3 4
+# 872 "/usr/include/stdio.h" 3 4
 extern  FILE *popen(const char *__command, const char *__modes); 
-#line 879 "/usr/include/stdio.h"
+#line 878 "/usr/include/stdio.h"
 extern int pclose( FILE *__stream); 
-#line 885 "/usr/include/stdio.h"
+#line 884 "/usr/include/stdio.h"
 extern char *ctermid(char *__s) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-#line 913 "/usr/include/stdio.h"
+#line 912 "/usr/include/stdio.h"
 extern void flockfile( FILE *__stream) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-#line 917 "/usr/include/stdio.h"
+#line 916 "/usr/include/stdio.h"
 extern int ftrylockfile( FILE *__stream) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-#line 920 "/usr/include/stdio.h"
+#line 919 "/usr/include/stdio.h"
 extern void funlockfile( FILE *__stream) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-# 913 "/usr/include/stdio.h" 3 4
-# 943 "/usr/include/stdio.h" 3 4
+# 912 "/usr/include/stdio.h" 3 4
+# 942 "/usr/include/stdio.h" 3 4
 # 6 "OperatingSystem.h" 2
+# 34 "OperatingSystem.h" 
 # 34 "OperatingSystem.h" 
 enum ProcessStates {NEW,READY,EXECUTING,BLOCKED,EXIT}; 
 #line 37 "OperatingSystem.h"
@@ -603,36 +603,36 @@ int MMU_GetLimit();
 # 5 "Processor.c" 2
 # 1 "/usr/include/string.h" 1 3 4
 # 27 "/usr/include/string.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/4.9/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
 # 33 "/usr/include/string.h" 2 3 4
-# 47 "/usr/include/string.h" 3 4
+# 43 "/usr/include/string.h" 3 4
 extern void *memcpy(void *__restrict __dest, const void *__restrict __src,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 51 "/usr/include/string.h"
+#line 47 "/usr/include/string.h"
 extern void *memmove(void *__dest, const void *__src,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 60 "/usr/include/string.h"
+#line 56 "/usr/include/string.h"
 extern void *memccpy(void *__restrict __dest, const void *__restrict __src, int __c,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 66 "/usr/include/string.h"
+#line 62 "/usr/include/string.h"
 extern void *memset(void *__s, int __c,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-#line 70 "/usr/include/string.h"
+#line 66 "/usr/include/string.h"
 extern int memcmp(const void *__s1, const void *__s2,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 97 "/usr/include/string.h"
+#line 93 "/usr/include/string.h"
 extern void *memchr(const void *__s, int __c,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-# 96 "/usr/include/string.h" 3 4
-# 130 "/usr/include/string.h" 3 4
+# 92 "/usr/include/string.h" 3 4
+# 126 "/usr/include/string.h" 3 4
 extern char *strcpy(char *__restrict __dest, const char *__restrict __src) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 134 "/usr/include/string.h"
+#line 130 "/usr/include/string.h"
 extern char *strncpy(char *__restrict __dest, const char *__restrict __src,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 138 "/usr/include/string.h"
+#line 134 "/usr/include/string.h"
 extern char *strcat(char *__restrict __dest, const char *__restrict __src) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 141 "/usr/include/string.h"
+#line 137 "/usr/include/string.h"
 extern char *strncat(char *__restrict __dest, const char *__restrict __src,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 145 "/usr/include/string.h"
+#line 141 "/usr/include/string.h"
 extern int strcmp(const char *__s1, const char *__s2) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 148 "/usr/include/string.h"
+#line 144 "/usr/include/string.h"
 extern int strncmp(const char *__s1, const char *__s2,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 152 "/usr/include/string.h"
+#line 148 "/usr/include/string.h"
 extern int strcoll(const char *__s1, const char *__s2) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 156 "/usr/include/string.h"
+#line 152 "/usr/include/string.h"
 extern  size_t strxfrm(char *__restrict __dest, const char *__restrict __src,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 2 )  )) ; 
 # 1 "/usr/include/xlocale.h" 1 3 4
 # 39 "/usr/include/xlocale.h" 3 4
@@ -640,82 +640,83 @@ typedef struct __locale_struct {struct __locale_data *__locales[13]; const unsig
 }*__locale_t; 
 #line 42 "/usr/include/xlocale.h"
 typedef  __locale_t locale_t; 
-#line 167 "/usr/include/string.h"
+#line 163 "/usr/include/string.h"
 extern int strcoll_l(const char *__s1, const char *__s2,  __locale_t __l) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2, 3 )  )) ; 
-#line 170 "/usr/include/string.h"
+#line 166 "/usr/include/string.h"
 extern  size_t strxfrm_l(char *__dest, const char *__src,  size_t __n,  __locale_t __l) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 2, 4 )  )) ; 
-#line 177 "/usr/include/string.h"
+#line 172 "/usr/include/string.h"
 extern char *strdup(const char *__s) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __malloc__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-#line 185 "/usr/include/string.h"
+#line 180 "/usr/include/string.h"
 extern char *strndup(const char *__string,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __malloc__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-# 164 "/usr/include/string.h" 2 3 4
-# 211 "/usr/include/string.h" 3 4
-# 237 "/usr/include/string.h" 3 4
+# 160 "/usr/include/string.h" 2 3 4
+# 206 "/usr/include/string.h" 3 4
+# 232 "/usr/include/string.h" 3 4
 extern char *strchr(const char *__s, int __c) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-#line 264 "/usr/include/string.h"
+#line 259 "/usr/include/string.h"
 extern char *strrchr(const char *__s, int __c) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-# 263 "/usr/include/string.h" 3 4
-# 286 "/usr/include/string.h" 3 4
+# 258 "/usr/include/string.h" 3 4
+# 281 "/usr/include/string.h" 3 4
 extern  size_t strcspn(const char *__s, const char *__reject) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 290 "/usr/include/string.h"
+#line 285 "/usr/include/string.h"
 extern  size_t strspn(const char *__s, const char *__accept) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 316 "/usr/include/string.h"
+#line 311 "/usr/include/string.h"
 extern char *strpbrk(const char *__s, const char *__accept) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-# 315 "/usr/include/string.h" 3 4
-# 343 "/usr/include/string.h" 3 4
+# 310 "/usr/include/string.h" 3 4
+# 338 "/usr/include/string.h" 3 4
 extern char *strstr(const char *__haystack, const char *__needle) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 349 "/usr/include/string.h"
+#line 344 "/usr/include/string.h"
 extern char *strtok(char *__restrict __s, const char *__restrict __delim) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 2 )  )) ; 
-#line 357 "/usr/include/string.h"
+#line 352 "/usr/include/string.h"
 extern char *__strtok_r(char *__restrict __s, const char *__restrict __delim, char **__restrict __save_ptr) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 2, 3 )  )) ; 
-#line 361 "/usr/include/string.h"
+#line 356 "/usr/include/string.h"
 extern char *strtok_r(char *__restrict __s, const char *__restrict __delim, char **__restrict __save_ptr) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 2, 3 )  )) ; 
-#line 400 "/usr/include/string.h"
+#line 395 "/usr/include/string.h"
 extern  size_t strlen(const char *__s) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-#line 407 "/usr/include/string.h"
+#line 402 "/usr/include/string.h"
 extern  size_t strnlen(const char *__string,  size_t __maxlen) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-#line 413 "/usr/include/string.h"
+#line 408 "/usr/include/string.h"
 extern char *strerror(int __errnum) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-# 397 "/usr/include/string.h" 3 4
-# 429 "/usr/include/string.h" 3 4
+# 392 "/usr/include/string.h" 3 4
+# 424 "/usr/include/string.h" 3 4
 extern int strerror_r(int __errnum, char *__buf,  size_t __buflen) __asm__ ("""__xpg_strerror_r") __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 2 )  )) ; 
-#line 445 "/usr/include/string.h"
+#line 440 "/usr/include/string.h"
 extern char *strerror_l(int __errnum,  __locale_t __l) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-#line 451 "/usr/include/string.h"
+#line 446 "/usr/include/string.h"
 extern void __bzero(void *__s,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-#line 456 "/usr/include/string.h"
+#line 451 "/usr/include/string.h"
 extern void bcopy(const void *__src, void *__dest,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 459 "/usr/include/string.h"
+#line 454 "/usr/include/string.h"
 extern void bzero(void *__s,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-#line 463 "/usr/include/string.h"
+#line 458 "/usr/include/string.h"
 extern int bcmp(const void *__s1, const void *__s2,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-# 445 "/usr/include/string.h" 3 4
-# 490 "/usr/include/string.h" 3 4
+# 440 "/usr/include/string.h" 3 4
+# 485 "/usr/include/string.h" 3 4
 extern char *index(const char *__s, int __c) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-#line 518 "/usr/include/string.h"
+#line 513 "/usr/include/string.h"
 extern char *rindex(const char *__s, int __c) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1 )  )) ; 
-#line 523 "/usr/include/string.h"
+#line 518 "/usr/include/string.h"
 extern int ffs(int __i) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __const__ )) ; 
-# 517 "/usr/include/string.h" 3 4
-# 535 "/usr/include/string.h" 3 4
+# 512 "/usr/include/string.h" 3 4
+# 530 "/usr/include/string.h" 3 4
 extern int strcasecmp(const char *__s1, const char *__s2) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 539 "/usr/include/string.h"
+#line 534 "/usr/include/string.h"
 extern int strncasecmp(const char *__s1, const char *__s2,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __pure__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 559 "/usr/include/string.h"
+#line 554 "/usr/include/string.h"
 extern char *strsep(char **__restrict __stringp, const char *__restrict __delim) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 564 "/usr/include/string.h"
+#line 559 "/usr/include/string.h"
 extern char *strsignal(int __sig) __attribute__  (( __nothrow__ , __leaf__ )) ; 
-#line 568 "/usr/include/string.h"
+#line 563 "/usr/include/string.h"
 extern char *__stpcpy(char *__restrict __dest, const char *__restrict __src) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 570 "/usr/include/string.h"
+#line 565 "/usr/include/string.h"
 extern char *stpcpy(char *__restrict __dest, const char *__restrict __src) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 576 "/usr/include/string.h"
+#line 571 "/usr/include/string.h"
 extern char *__stpncpy(char *__restrict __dest, const char *__restrict __src,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-#line 579 "/usr/include/string.h"
+#line 574 "/usr/include/string.h"
 extern char *stpncpy(char *__restrict __dest, const char *__restrict __src,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
-# 557 "/usr/include/string.h" 3 4
-# 644 "/usr/include/string.h" 3 4
-# 10 "Processor.c" 2
+# 552 "/usr/include/string.h" 3 4
+# 658 "/usr/include/string.h" 3 4
+# 7 "Processor.c" 2
+# 10 "Processor.c" 
 void Processor_FetchInstruction(); 
 #line 11 "Processor.c"
 void Processor_DecodeAndExecuteInstruction(); 
@@ -757,12 +758,12 @@ int interruptVectorTable[10];
 char pswmask[] = "----------------"; 
 #line 42 "Processor.c"
 void Processor_InitializeInterruptVectorTable(int interruptVectorInitialAddress)  
-# 761 "ProcessorAspect.c"
+# 762 "ProcessorAspect.c"
 {
 
 
 
-# 766 "ProcessorAspect.c"
+# 767 "ProcessorAspect.c"
 {
 
 #line 43 "Processor.c"
@@ -775,22 +776,22 @@ for(i = 0;i < 10;i++) { interruptVectorTable[i] = interruptVectorInitialAddress 
 interruptVectorTable[SYSCALL_BIT] = interruptVectorInitialAddress; 
 #line 48 "Processor.c"
 interruptVectorTable[EXCEPTION_BIT] = interruptVectorInitialAddress + 2; 
-# 779 "ProcessorAspect.c"
+# 780 "ProcessorAspect.c"
 
 }
 
-# 783 "ProcessorAspect.c"
+# 784 "ProcessorAspect.c"
 
 }
  
 #line 55 "Processor.c"
 void Processor_InstructionCycleLoop()  
-# 789 "ProcessorAspect.c"
+# 790 "ProcessorAspect.c"
 {
 
 
 
-# 794 "ProcessorAspect.c"
+# 795 "ProcessorAspect.c"
 {
 
 #line 62 "Processor.c"
@@ -802,11 +803,11 @@ Processor_DecodeAndExecuteInstruction();
 #line 60 "Processor.c"
 if (interruptLines_CPU){
 Processor_ManageInterrupts(); }} } 
-# 806 "ProcessorAspect.c"
+# 807 "ProcessorAspect.c"
 
 }
 
-# 810 "ProcessorAspect.c"
+# 811 "ProcessorAspect.c"
 
 }
  
@@ -815,7 +816,7 @@ Processor_ManageInterrupts(); }} }
 
 #line 66 "Processor.c"
 void Processor_FetchInstruction()  
-# 819 "ProcessorAspect.c"
+# 820 "ProcessorAspect.c"
 {
 
 
@@ -825,7 +826,7 @@ __utac_acc__Aspect__1();
 
 }
 
-# 829 "ProcessorAspect.c"
+# 830 "ProcessorAspect.c"
 {
 
 #line 69 "Processor.c"
@@ -840,11 +841,11 @@ memcpy(((void *)((&registerIR_CPU))), ((void *)((&registerMBR_CPU))), sizeof ( M
 #line 79 "Processor.c"
 ComputerSystem_DebugMessage(1, 'h', registerIR_CPU.operationCode, registerIR_CPU.operand1, registerIR_CPU.operand2); } }else{
 ComputerSystem_DebugMessage(2, 'h'); }
-# 844 "ProcessorAspect.c"
+# 845 "ProcessorAspect.c"
 
 }
 
-# 848 "ProcessorAspect.c"
+# 849 "ProcessorAspect.c"
 
 }
  
@@ -856,12 +857,12 @@ ComputerSystem_DebugMessage(2, 'h'); }
 
 #line 88 "Processor.c"
 void Processor_DecodeAndExecuteInstruction()  
-# 860 "ProcessorAspect.c"
+# 861 "ProcessorAspect.c"
 {
 
 
 
-# 865 "ProcessorAspect.c"
+# 866 "ProcessorAspect.c"
 {
 
 #line 89 "Processor.c"
@@ -1002,7 +1003,7 @@ break; } }
 Processor_UpdatePSW(); 
 #line 223 "Processor.c"
 ComputerSystem_DebugMessage(3, 'h', registerPC_CPU, registerAccumulator_CPU, registerPSW_CPU, Processor_ShowPSW()); 
-# 1006 "ProcessorAspect.c"
+# 1007 "ProcessorAspect.c"
 
 }
 
@@ -1011,18 +1012,18 @@ __utac_acc__Aspect__2();
 
 }
 
-# 1015 "ProcessorAspect.c"
+# 1016 "ProcessorAspect.c"
 
 }
  
 #line 228 "Processor.c"
 void Processor_ManageInterrupts()  
-# 1021 "ProcessorAspect.c"
+# 1022 "ProcessorAspect.c"
 {
 
 
 
-# 1026 "ProcessorAspect.c"
+# 1027 "ProcessorAspect.c"
 {
 
 #line 230 "Processor.c"
@@ -1044,22 +1045,22 @@ Processor_ActivatePSW_Bit(EXECUTION_MODE_BIT);
 registerPC_CPU = interruptVectorTable[i]; 
 #line 244 "Processor.c"
 break; } }} 
-# 1048 "ProcessorAspect.c"
+# 1049 "ProcessorAspect.c"
 
 }
 
-# 1052 "ProcessorAspect.c"
+# 1053 "ProcessorAspect.c"
 
 }
  
 #line 249 "Processor.c"
 void Processor_UpdatePSW()  
-# 1058 "ProcessorAspect.c"
+# 1059 "ProcessorAspect.c"
 {
 
 
 
-# 1063 "ProcessorAspect.c"
+# 1064 "ProcessorAspect.c"
 {
 
 #line 258 "Processor.c"
@@ -1082,43 +1083,43 @@ Processor_ActivatePSW_Bit(NEGATIVE_BIT); }} }else{
 #line 268 "Processor.c"
 if (Processor_PSW_BitState(NEGATIVE_BIT)){
 Processor_DeactivatePSW_Bit(NEGATIVE_BIT); }} }
-# 1086 "ProcessorAspect.c"
+# 1087 "ProcessorAspect.c"
 
 }
 
-# 1090 "ProcessorAspect.c"
+# 1091 "ProcessorAspect.c"
 
 }
  
 #line 273 "Processor.c"
 void Processor_CheckOverflow(int op1, int op2)  
-# 1096 "ProcessorAspect.c"
+# 1097 "ProcessorAspect.c"
 {
 
 
 
-# 1101 "ProcessorAspect.c"
+# 1102 "ProcessorAspect.c"
 {
 
 #line 277 "Processor.c"
 if ((op1 > 0 && op2 > 0 && registerAccumulator_CPU < 0) || (op1 < 0 && op2 < 0 && registerAccumulator_CPU > 0)){
 Processor_ActivatePSW_Bit(OVERFLOW_BIT); }
-# 1107 "ProcessorAspect.c"
+# 1108 "ProcessorAspect.c"
 
 }
 
-# 1111 "ProcessorAspect.c"
+# 1112 "ProcessorAspect.c"
 
 }
  
 #line 280 "Processor.c"
 void Processor_CopyInSystemStack(int physicalMemoryAddress, int data)  
-# 1117 "ProcessorAspect.c"
+# 1118 "ProcessorAspect.c"
 {
 
 
 
-# 1122 "ProcessorAspect.c"
+# 1123 "ProcessorAspect.c"
 {
 
 #line 282 "Processor.c"
@@ -1131,25 +1132,25 @@ Buses_write_AddressBus_From_To(CPU, MAINMEMORY);
 Buses_write_DataBus_From_To(CPU, MAINMEMORY); 
 #line 286 "Processor.c"
 MainMemory_writeMemory(); 
-# 1135 "ProcessorAspect.c"
+# 1136 "ProcessorAspect.c"
 
 }
 
-# 1139 "ProcessorAspect.c"
+# 1140 "ProcessorAspect.c"
 
 }
  
 #line 290 "Processor.c"
 int Processor_CopyFromSystemStack(int physicalMemoryAddress)  
-# 1145 "ProcessorAspect.c"
+# 1146 "ProcessorAspect.c"
 {
-# 1147 "ProcessorAspect.c"
+# 1148 "ProcessorAspect.c"
 int retValue_acc;
 
 
 
 
-# 1153 "ProcessorAspect.c"
+# 1154 "ProcessorAspect.c"
 {
 
 #line 292 "Processor.c"
@@ -1160,30 +1161,30 @@ Buses_write_AddressBus_From_To(CPU, MAINMEMORY);
 MainMemory_readMemory(); 
 #line 295 "Processor.c"
 
-# 1164 "ProcessorAspect.c"
+# 1165 "ProcessorAspect.c"
 retValue_acc = registerMBR_CPU.operand1;
-# 1166 "ProcessorAspect.c"
+# 1167 "ProcessorAspect.c"
 return (int )retValue_acc;
  
-# 1169 "ProcessorAspect.c"
+# 1170 "ProcessorAspect.c"
 
 }
 
-# 1173 "ProcessorAspect.c"
+# 1174 "ProcessorAspect.c"
 return (int )retValue_acc;
 
-# 1176 "ProcessorAspect.c"
+# 1177 "ProcessorAspect.c"
 
 }
  
 #line 300 "Processor.c"
 void Processor_RaiseInterrupt(const unsigned int interruptNumber)  
-# 1182 "ProcessorAspect.c"
+# 1183 "ProcessorAspect.c"
 {
 
 
 
-# 1187 "ProcessorAspect.c"
+# 1188 "ProcessorAspect.c"
 {
 
 #line 301 "Processor.c"
@@ -1194,22 +1195,22 @@ unsigned int mask = 1;
 mask = mask << interruptNumber; 
 #line 304 "Processor.c"
 interruptLines_CPU = interruptLines_CPU | mask; 
-# 1198 "ProcessorAspect.c"
+# 1199 "ProcessorAspect.c"
 
 }
 
-# 1202 "ProcessorAspect.c"
+# 1203 "ProcessorAspect.c"
 
 }
  
 #line 308 "Processor.c"
 void Processor_ACKInterrupt(const unsigned int interruptNumber)  
-# 1208 "ProcessorAspect.c"
+# 1209 "ProcessorAspect.c"
 {
 
 
 
-# 1213 "ProcessorAspect.c"
+# 1214 "ProcessorAspect.c"
 {
 
 #line 309 "Processor.c"
@@ -1222,25 +1223,25 @@ mask = mask << interruptNumber;
 mask = (~mask); 
 #line 314 "Processor.c"
 interruptLines_CPU = interruptLines_CPU & mask; 
-# 1226 "ProcessorAspect.c"
+# 1227 "ProcessorAspect.c"
 
 }
 
-# 1230 "ProcessorAspect.c"
+# 1231 "ProcessorAspect.c"
 
 }
  
 #line 318 "Processor.c"
 unsigned int Processor_GetInterruptLineStatus(const unsigned int interruptNumber)  
-# 1236 "ProcessorAspect.c"
+# 1237 "ProcessorAspect.c"
 {
-# 1238 "ProcessorAspect.c"
+# 1239 "ProcessorAspect.c"
 unsigned int retValue_acc;
 
 
 
 
-# 1244 "ProcessorAspect.c"
+# 1245 "ProcessorAspect.c"
 {
 
 #line 319 "Processor.c"
@@ -1251,30 +1252,30 @@ unsigned int mask = 1;
 mask = mask << interruptNumber; 
 #line 322 "Processor.c"
 
-# 1255 "ProcessorAspect.c"
+# 1256 "ProcessorAspect.c"
 retValue_acc = (interruptLines_CPU & mask) >> interruptNumber;
-# 1257 "ProcessorAspect.c"
+# 1258 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
  
-# 1260 "ProcessorAspect.c"
+# 1261 "ProcessorAspect.c"
 
 }
 
-# 1264 "ProcessorAspect.c"
+# 1265 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
 
-# 1267 "ProcessorAspect.c"
+# 1268 "ProcessorAspect.c"
 
 }
  
 #line 326 "Processor.c"
 void Processor_ActivatePSW_Bit(const unsigned int nbit)  
-# 1273 "ProcessorAspect.c"
+# 1274 "ProcessorAspect.c"
 {
 
 
 
-# 1278 "ProcessorAspect.c"
+# 1279 "ProcessorAspect.c"
 {
 
 #line 327 "Processor.c"
@@ -1285,22 +1286,22 @@ unsigned int mask = 1;
 mask = mask << nbit; 
 #line 331 "Processor.c"
 registerPSW_CPU = registerPSW_CPU | mask; 
-# 1289 "ProcessorAspect.c"
+# 1290 "ProcessorAspect.c"
 
 }
 
-# 1293 "ProcessorAspect.c"
+# 1294 "ProcessorAspect.c"
 
 }
  
 #line 335 "Processor.c"
 void Processor_DeactivatePSW_Bit(const unsigned int nbit)  
-# 1299 "ProcessorAspect.c"
+# 1300 "ProcessorAspect.c"
 {
 
 
 
-# 1304 "ProcessorAspect.c"
+# 1305 "ProcessorAspect.c"
 {
 
 #line 336 "Processor.c"
@@ -1313,25 +1314,25 @@ mask = mask << nbit;
 mask = (~mask); 
 #line 341 "Processor.c"
 registerPSW_CPU = registerPSW_CPU & mask; 
-# 1317 "ProcessorAspect.c"
+# 1318 "ProcessorAspect.c"
 
 }
 
-# 1321 "ProcessorAspect.c"
+# 1322 "ProcessorAspect.c"
 
 }
  
 #line 345 "Processor.c"
 unsigned int Processor_PSW_BitState(const unsigned int nbit)  
-# 1327 "ProcessorAspect.c"
+# 1328 "ProcessorAspect.c"
 {
-# 1329 "ProcessorAspect.c"
+# 1330 "ProcessorAspect.c"
 unsigned int retValue_acc;
 
 
 
 
-# 1335 "ProcessorAspect.c"
+# 1336 "ProcessorAspect.c"
 {
 
 #line 346 "Processor.c"
@@ -1342,257 +1343,257 @@ unsigned int mask = 1;
 mask = mask << nbit; 
 #line 349 "Processor.c"
 
-# 1346 "ProcessorAspect.c"
+# 1347 "ProcessorAspect.c"
 retValue_acc = (registerPSW_CPU & mask) >> nbit;
-# 1348 "ProcessorAspect.c"
+# 1349 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
  
-# 1351 "ProcessorAspect.c"
+# 1352 "ProcessorAspect.c"
 
 }
 
-# 1355 "ProcessorAspect.c"
+# 1356 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
 
-# 1358 "ProcessorAspect.c"
+# 1359 "ProcessorAspect.c"
 
 }
  
 #line 353 "Processor.c"
 int Processor_GetMAR()  
-# 1364 "ProcessorAspect.c"
+# 1365 "ProcessorAspect.c"
 {
-# 1366 "ProcessorAspect.c"
+# 1367 "ProcessorAspect.c"
 int retValue_acc;
 
 
 
 
-# 1372 "ProcessorAspect.c"
+# 1373 "ProcessorAspect.c"
 {
 
 #line 354 "Processor.c"
 
-# 1377 "ProcessorAspect.c"
+# 1378 "ProcessorAspect.c"
 retValue_acc = registerMAR_CPU;
-# 1379 "ProcessorAspect.c"
+# 1380 "ProcessorAspect.c"
 return (int )retValue_acc;
  
-# 1382 "ProcessorAspect.c"
+# 1383 "ProcessorAspect.c"
 
 }
 
-# 1386 "ProcessorAspect.c"
+# 1387 "ProcessorAspect.c"
 return (int )retValue_acc;
 
-# 1389 "ProcessorAspect.c"
+# 1390 "ProcessorAspect.c"
 
 }
  
 #line 358 "Processor.c"
 void Processor_SetMAR(int data)  
-# 1395 "ProcessorAspect.c"
+# 1396 "ProcessorAspect.c"
 {
 
 
 
-# 1400 "ProcessorAspect.c"
+# 1401 "ProcessorAspect.c"
 {
 
 #line 359 "Processor.c"
 registerMAR_CPU = data; 
-# 1405 "ProcessorAspect.c"
+# 1406 "ProcessorAspect.c"
 
 }
 
-# 1409 "ProcessorAspect.c"
+# 1410 "ProcessorAspect.c"
 
 }
  
 #line 363 "Processor.c"
 void Processor_GetMBR( MEMORYCELL *toRegister)  
-# 1415 "ProcessorAspect.c"
+# 1416 "ProcessorAspect.c"
 {
 
 
 
-# 1420 "ProcessorAspect.c"
+# 1421 "ProcessorAspect.c"
 {
 
 #line 364 "Processor.c"
 memcpy(((void *)toRegister), ((void *)((&registerMBR_CPU))), sizeof ( MEMORYCELL )); 
-# 1425 "ProcessorAspect.c"
+# 1426 "ProcessorAspect.c"
 
 }
 
-# 1429 "ProcessorAspect.c"
+# 1430 "ProcessorAspect.c"
 
 }
  
 #line 368 "Processor.c"
 void Processor_SetMBR( MEMORYCELL *fromRegister)  
-# 1435 "ProcessorAspect.c"
+# 1436 "ProcessorAspect.c"
 {
 
 
 
-# 1440 "ProcessorAspect.c"
+# 1441 "ProcessorAspect.c"
 {
 
 #line 369 "Processor.c"
 memcpy(((void *)((&registerMBR_CPU))), ((void *)fromRegister), sizeof ( MEMORYCELL )); 
-# 1445 "ProcessorAspect.c"
+# 1446 "ProcessorAspect.c"
 
 }
 
-# 1449 "ProcessorAspect.c"
+# 1450 "ProcessorAspect.c"
 
 }
  
 #line 373 "Processor.c"
 int Processor_GetMBR_Value()  
-# 1455 "ProcessorAspect.c"
+# 1456 "ProcessorAspect.c"
 {
-# 1457 "ProcessorAspect.c"
+# 1458 "ProcessorAspect.c"
 int retValue_acc;
 
 
 
 
-# 1463 "ProcessorAspect.c"
+# 1464 "ProcessorAspect.c"
 {
 
 #line 374 "Processor.c"
 
-# 1468 "ProcessorAspect.c"
+# 1469 "ProcessorAspect.c"
 retValue_acc = registerMBR_CPU.operationCode;
-# 1470 "ProcessorAspect.c"
+# 1471 "ProcessorAspect.c"
 return (int )retValue_acc;
  
-# 1473 "ProcessorAspect.c"
+# 1474 "ProcessorAspect.c"
 
 }
 
-# 1477 "ProcessorAspect.c"
+# 1478 "ProcessorAspect.c"
 return (int )retValue_acc;
 
-# 1480 "ProcessorAspect.c"
+# 1481 "ProcessorAspect.c"
 
 }
  
 #line 383 "Processor.c"
 void Processor_SetPC(int pc)  
-# 1486 "ProcessorAspect.c"
+# 1487 "ProcessorAspect.c"
 {
 
 
 
-# 1491 "ProcessorAspect.c"
+# 1492 "ProcessorAspect.c"
 {
 
 #line 384 "Processor.c"
 registerPC_CPU = pc; 
-# 1496 "ProcessorAspect.c"
+# 1497 "ProcessorAspect.c"
 
 }
 
-# 1500 "ProcessorAspect.c"
+# 1501 "ProcessorAspect.c"
 
 }
  
 #line 401 "Processor.c"
 int Processor_GetRegisterA()  
-# 1506 "ProcessorAspect.c"
+# 1507 "ProcessorAspect.c"
 {
-# 1508 "ProcessorAspect.c"
+# 1509 "ProcessorAspect.c"
 int retValue_acc;
 
 
 
 
-# 1514 "ProcessorAspect.c"
+# 1515 "ProcessorAspect.c"
 {
 
 #line 402 "Processor.c"
 
-# 1519 "ProcessorAspect.c"
+# 1520 "ProcessorAspect.c"
 retValue_acc = registerA_CPU;
-# 1521 "ProcessorAspect.c"
+# 1522 "ProcessorAspect.c"
 return (int )retValue_acc;
  
-# 1524 "ProcessorAspect.c"
+# 1525 "ProcessorAspect.c"
 
 }
 
-# 1528 "ProcessorAspect.c"
+# 1529 "ProcessorAspect.c"
 return (int )retValue_acc;
 
-# 1531 "ProcessorAspect.c"
+# 1532 "ProcessorAspect.c"
 
 }
  
 #line 406 "Processor.c"
 void Processor_SetPSW(unsigned int psw)  
-# 1537 "ProcessorAspect.c"
+# 1538 "ProcessorAspect.c"
 {
 
 
 
-# 1542 "ProcessorAspect.c"
+# 1543 "ProcessorAspect.c"
 {
 
 #line 407 "Processor.c"
 registerPSW_CPU = psw; 
-# 1547 "ProcessorAspect.c"
+# 1548 "ProcessorAspect.c"
 
 }
 
-# 1551 "ProcessorAspect.c"
+# 1552 "ProcessorAspect.c"
 
 }
  
 #line 411 "Processor.c"
 unsigned int Processor_GetPSW()  
-# 1557 "ProcessorAspect.c"
+# 1558 "ProcessorAspect.c"
 {
-# 1559 "ProcessorAspect.c"
+# 1560 "ProcessorAspect.c"
 unsigned int retValue_acc;
 
 
 
 
-# 1565 "ProcessorAspect.c"
+# 1566 "ProcessorAspect.c"
 {
 
 #line 412 "Processor.c"
 
-# 1570 "ProcessorAspect.c"
+# 1571 "ProcessorAspect.c"
 retValue_acc = registerPSW_CPU;
-# 1572 "ProcessorAspect.c"
+# 1573 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
  
-# 1575 "ProcessorAspect.c"
+# 1576 "ProcessorAspect.c"
 
 }
 
-# 1579 "ProcessorAspect.c"
+# 1580 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
 
-# 1582 "ProcessorAspect.c"
+# 1583 "ProcessorAspect.c"
 
 }
  
 #line 415 "Processor.c"
 char *Processor_ShowPSW()  
-# 1588 "ProcessorAspect.c"
+# 1589 "ProcessorAspect.c"
 {
-# 1590 "ProcessorAspect.c"
+# 1591 "ProcessorAspect.c"
 char* retValue_acc;
 
 
 
 
-# 1596 "ProcessorAspect.c"
+# 1597 "ProcessorAspect.c"
 {
 
 #line 416 "Processor.c"
@@ -1618,19 +1619,19 @@ if (Processor_PSW_BitState(POWEROFF_BIT)){
 pswmask[tam - POWEROFF_BIT] = 'S'; }
 #line 428 "Processor.c"
 
-# 1622 "ProcessorAspect.c"
+# 1623 "ProcessorAspect.c"
 retValue_acc = pswmask;
-# 1624 "ProcessorAspect.c"
+# 1625 "ProcessorAspect.c"
 return (char* )retValue_acc;
  
-# 1627 "ProcessorAspect.c"
+# 1628 "ProcessorAspect.c"
 
 }
 
-# 1631 "ProcessorAspect.c"
+# 1632 "ProcessorAspect.c"
 return (char* )retValue_acc;
 
-# 1634 "ProcessorAspect.c"
+# 1635 "ProcessorAspect.c"
 
 }
  

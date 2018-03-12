@@ -1,0 +1,1 @@
+./Simulator a ProgramTest_Yield1 ProgramTest_Yield2 ProgramTest_Yield3 > V1-3-salidaSimulador.log

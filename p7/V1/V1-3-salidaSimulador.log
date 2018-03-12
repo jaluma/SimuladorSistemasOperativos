@@ -1,0 +1,116 @@
+26 Messages Loaded
+Asserts file unavailable
+User program list
+	Program [ProgramTest_Yield1] with arrival time [0]
+	Program [ProgramTest_Yield2] with arrival time [0]
+	Program [ProgramTest_Yield3] with arrival time [0]
+New process [3] moving to the [NEW] state
+Process [3] created from program [SystemIdleProcess]
+Process [3] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	DAEMONS: [3,100]
+New process [0] moving to the [NEW] state
+Process [0] created from program [ProgramTest_Yield1]
+Process [0] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [0,5]
+	DAEMONS: [3,100]
+New process [1] moving to the [NEW] state
+Process [1] created from program [ProgramTest_Yield2]
+Process [1] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [0,5], [1,5]
+	DAEMONS: [3,100]
+New process [2] moving to the [NEW] state
+Process [2] created from program [ProgramTest_Yield3]
+Process [2] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [0,5], [1,5], [2,6]
+	DAEMONS: [3,100]
+Process [0] moving from the [READY] state to the [EXECUTING] state
+New Tick (1)
+y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+New Tick (2)
+a 7 0 (PC: 1, Accumulator: 7, PSW: 0 [----------------])
+New Tick (3)
+w 10 0 (PC: 2, Accumulator: 7, PSW: 0 [----------------])
+New Tick (4)
+t 4 0 (PC: 3, Accumulator: 7, PSW: 0 [----------------])
+New Tick (5)
+o 2 0 (PC: 241, Accumulator: 7, PSW: 128 [--------X-------])
+New Tick (6)
+Process [0] transfers control of the processor to process [1]
+Process [0] moving from the [EXECUTING] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [0,5], [2,6]
+	DAEMONS: [3,100]
+Process [1] moving from the [READY] state to the [EXECUTING] state
+New Tick (7)
+y 0 0 (PC: 0, Accumulator: 7, PSW: 0 [----------------])
+New Tick (8)
+a 15 5 (PC: 1, Accumulator: 20, PSW: 0 [----------------])
+New Tick (9)
+w 10 0 (PC: 2, Accumulator: 20, PSW: 0 [----------------])
+New Tick (10)
+t 4 0 (PC: 3, Accumulator: 20, PSW: 0 [----------------])
+New Tick (11)
+o 2 0 (PC: 241, Accumulator: 20, PSW: 128 [--------X-------])
+New Tick (12)
+Process [1] transfers control of the processor to process [0]
+Process [1] moving from the [EXECUTING] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [1,5], [2,6]
+	DAEMONS: [3,100]
+Process [0] moving from the [READY] state to the [EXECUTING] state
+New Tick (13)
+y 0 0 (PC: 3, Accumulator: 20, PSW: 0 [----------------])
+New Tick (14)
+m 7 10 (PC: 4, Accumulator: 14, PSW: 0 [----------------])
+New Tick (15)
+t 3 0 (PC: 5, Accumulator: 14, PSW: 0 [----------------])
+New Tick (16)
+o 2 0 (PC: 241, Accumulator: 14, PSW: 128 [--------X-------])
+New Tick (17)
+Process [0] has requested to terminate
+Process [0] moving from the [EXECUTING] state to the [EXIT] state
+Process [1] moving from the [READY] state to the [EXECUTING] state
+New Tick (18)
+y 0 0 (PC: 3, Accumulator: 14, PSW: 0 [----------------])
+New Tick (19)
+a 20 5 (PC: 4, Accumulator: 25, PSW: 0 [----------------])
+New Tick (20)
+t 4 0 (PC: 5, Accumulator: 25, PSW: 0 [----------------])
+New Tick (21)
+o 2 0 (PC: 241, Accumulator: 25, PSW: 128 [--------X-------])
+New Tick (22)
+New Tick (23)
+y 0 0 (PC: 5, Accumulator: 25, PSW: 0 [----------------])
+New Tick (24)
+a 25 5 (PC: 6, Accumulator: 30, PSW: 0 [----------------])
+New Tick (25)
+t 3 0 (PC: 7, Accumulator: 30, PSW: 0 [----------------])
+New Tick (26)
+o 2 0 (PC: 241, Accumulator: 30, PSW: 128 [--------X-------])
+New Tick (27)
+Process [1] has requested to terminate
+Process [1] moving from the [EXECUTING] state to the [EXIT] state
+Process [2] moving from the [READY] state to the [EXECUTING] state
+New Tick (28)
+y 0 0 (PC: 0, Accumulator: 30, PSW: 0 [----------------])
+New Tick (29)
+a 10 0 (PC: 1, Accumulator: 10, PSW: 0 [----------------])
+New Tick (30)
+w 10 0 (PC: 2, Accumulator: 10, PSW: 0 [----------------])
+New Tick (31)
+t 3 0 (PC: 3, Accumulator: 10, PSW: 0 [----------------])
+New Tick (32)
+o 2 0 (PC: 241, Accumulator: 10, PSW: 128 [--------X-------])
+New Tick (33)
+Process [2] has requested to terminate
+Process [2] moving from the [EXECUTING] state to the [EXIT] state
+Process [3] moving from the [READY] state to the [EXECUTING] state
+New Tick (34)
+y 0 0 (PC: 183, Accumulator: 10, PSW: 128 [--------X-------])
+New Tick (35)
+h 0 0 (PC: 183, Accumulator: 10, PSW: 129 [--------X------S])
+END of the simulation
