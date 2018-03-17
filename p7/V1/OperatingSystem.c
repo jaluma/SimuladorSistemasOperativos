@@ -55,7 +55,7 @@ char * statesNames [5]={"NEW","READY","EXECUTING","BLOCKED","EXIT"};
 // Initial set of tasks of the OS
 void OperatingSystem_Initialize(int daemonsIndex) {
 	
-	int i, selectedProcess;
+	int i, selectedProcess, long_term_schreduler;
 	FILE *programFile; // For load Operating System Code
 
 	// Obtain the memory requirements of the program
@@ -75,7 +75,11 @@ void OperatingSystem_Initialize(int daemonsIndex) {
 	OperatingSystem_PrepareDaemons(daemonsIndex);
 
 	// Create all user processes from the information given in the command line
-	OperatingSystem_LongTermScheduler();
+	long_term_schreduler = OperatingSystem_LongTermScheduler();
+	
+	if (long_term_schreduler <= 1) {
+		OperatingSystem_ReadyToShutdown();
+	}
 	
 	if (strcmp(programList[processTable[sipID].programListIndex]->executableName,"SystemIdleProcess")) {
 		// Show message "ERROR: Missing SIP program!\n"
@@ -239,10 +243,12 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
 	if (programList[processPLIndex]->type == DAEMONPROGRAM) {
 		processTable[PID].copyOfPCRegister=initialPhysicalAddress;
 		processTable[PID].copyOfPSWRegister= ((unsigned int) 1) << EXECUTION_MODE_BIT;
+		processTable[PID].copyOfAccumulatorRegister=0;
 	} 
 	else {
 		processTable[PID].copyOfPCRegister=0;
 		processTable[PID].copyOfPSWRegister=0;
+		processTable[PID].copyOfAccumulatorRegister=0;
 	}
 	processTable[PID].queueID=queueID;
 }
@@ -254,8 +260,8 @@ void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
 	if (Heap_add(PID, readyToRunQueue[queueID] ,QUEUE_PRIORITY , &numberOfReadyToRunProcesses[queueID] ,PROCESSTABLEMAXSIZE)>=0) {
 		ComputerSystem_DebugMessage(110, SYSPROC, PID, statesNames[processTable[PID].state], statesNames[1]);
 		processTable[PID].state=READY;
+		OperatingSystem_PrintReadyToRunQueue();
 	} 
-	OperatingSystem_PrintReadyToRunQueue();
 }
 
 
@@ -291,6 +297,7 @@ void OperatingSystem_Dispatch(int PID) {
 	executingProcessID=PID;
 	// Change the process' state
 	processTable[PID].state=EXECUTING;
+	
 	ComputerSystem_DebugMessage(110, SYSPROC, PID, statesNames[1], statesNames[2]);
 	// Modify hardware registers with appropriate values for the process identified by PID
 	OperatingSystem_RestoreContext(PID);
@@ -298,11 +305,12 @@ void OperatingSystem_Dispatch(int PID) {
 
 
 // Modify hardware registers with appropriate values for the process identified by PID
-void OperatingSystem_RestoreContext(int PID) {
-  
+void OperatingSystem_RestoreContext(int PID) {  
 	// New values for the CPU registers are obtained from the PCB
 	Processor_CopyInSystemStack(MAINMEMORYSIZE-1,processTable[PID].copyOfPCRegister);
 	Processor_CopyInSystemStack(MAINMEMORYSIZE-2,processTable[PID].copyOfPSWRegister);
+	Processor_CopyInSystemStack(MAINMEMORYSIZE-3,processTable[PID].copyOfAccumulatorRegister);
+	Processor_SetAccumulator(processTable[PID].copyOfAccumulatorRegister);
 	
 	// Same thing for the MMU registers
 	MMU_SetBase(processTable[PID].initialPhysicalAddress);
@@ -331,6 +339,8 @@ void OperatingSystem_SaveContext(int PID) {
 	// Load PSW saved for interrupt manager
 	processTable[PID].copyOfPSWRegister=Processor_CopyFromSystemStack(MAINMEMORYSIZE-2);
 	
+	// Load Accumulator saved for interrupt manager
+	processTable[PID].copyOfAccumulatorRegister=Processor_CopyFromSystemStack(MAINMEMORYSIZE-3);
 }
 
 
@@ -350,6 +360,7 @@ void OperatingSystem_TerminateProcess() {
 	int selectedProcess;
   	
 	processTable[executingProcessID].state=EXIT;
+	
 	ComputerSystem_DebugMessage(110, SYSPROC, executingProcessID, statesNames[2], statesNames[4]);
 	
 	// One more process that has terminated
@@ -359,6 +370,7 @@ void OperatingSystem_TerminateProcess() {
 		// Simulation must finish 
 		OperatingSystem_ReadyToShutdown();
 	}
+	
 	// Select the next process to execute (sipID if no more user processes)
 	selectedProcess=OperatingSystem_ShortTermScheduler(USERPROCESSQUEUE);
 	
@@ -401,9 +413,15 @@ void OperatingSystem_HandleSystemCall() {
 			
 			if (processTable[oldPID].priority == processTable[pid].priority) {
 				ComputerSystem_DebugMessage(115, SHORTTERMSCHEDULE, oldPID, pid);
-				OperatingSystem_ShortTermScheduler(USERPROCESSQUEUE);
-				
+				//ComputerSystem_DebugMessage(110, SYSPROC, executingProcessID, statesNames[processTable[executingProcessID].state], statesNames[3]);
+				//processTable[executingProcessID].state = BLOCKED;
 				OperatingSystem_PreemptRunningProcess();
+				
+				pid = OperatingSystem_ShortTermScheduler(USERPROCESSQUEUE);
+				
+				if (pid == NOPROCESS)
+					pid = OperatingSystem_ShortTermScheduler(DAEMONSQUEUE);
+				
 				OperatingSystem_Dispatch(pid);
 			}
 			break;
@@ -428,26 +446,28 @@ void OperatingSystem_InterruptLogic(int entryPoint){
 	 int i;
 	 ComputerSystem_DebugMessage(106,SHORTTERMSCHEDULE);
 
-	 if (numberOfReadyToRunProcesses[USERPROCESSQUEUE] != 0) {
-
-		ComputerSystem_DebugMessage(112,SHORTTERMSCHEDULE, "USER");
+	ComputerSystem_DebugMessage(112,SHORTTERMSCHEDULE, "USER");
+	if (numberOfReadyToRunProcesses[USERPROCESSQUEUE] == 0) {
+		ComputerSystem_DebugMessage(113,SHORTTERMSCHEDULE);
+	} else {
 		for (i = 0; i < numberOfReadyToRunProcesses[USERPROCESSQUEUE]; i++) {
 			if (i == numberOfReadyToRunProcesses[USERPROCESSQUEUE] - 1)
 				ComputerSystem_DebugMessage(107,SHORTTERMSCHEDULE, readyToRunQueue[USERPROCESSQUEUE][i], processTable[readyToRunQueue[USERPROCESSQUEUE][i]].priority, "\n");
 			else
 				ComputerSystem_DebugMessage(107,SHORTTERMSCHEDULE, readyToRunQueue[USERPROCESSQUEUE][i], processTable[readyToRunQueue[USERPROCESSQUEUE][i]].priority, ", ");
 		}
-	 }
+	}
 
-	if (numberOfReadyToRunProcesses[DAEMONSQUEUE] != 0) {
-
-		 ComputerSystem_DebugMessage(112,SHORTTERMSCHEDULE, "DAEMONS");
-		 for (i = 0; i < numberOfReadyToRunProcesses[DAEMONSQUEUE]; i++) {
-			 if (i == numberOfReadyToRunProcesses[DAEMONSQUEUE] - 1)
-				 ComputerSystem_DebugMessage(107,SHORTTERMSCHEDULE, readyToRunQueue[DAEMONSQUEUE][i], processTable[readyToRunQueue[DAEMONSQUEUE][i]].priority, "\n");
-			 else
-				 ComputerSystem_DebugMessage(107,SHORTTERMSCHEDULE, readyToRunQueue[DAEMONSQUEUE][i], processTable[readyToRunQueue[DAEMONSQUEUE][i]].priority, ", ");
-		  }
+	ComputerSystem_DebugMessage(112,SHORTTERMSCHEDULE, "DAEMONS");
+	if (numberOfReadyToRunProcesses[DAEMONSQUEUE] == 0) {
+		ComputerSystem_DebugMessage(113,SHORTTERMSCHEDULE);
+	} else {
+	 for (i = 0; i < numberOfReadyToRunProcesses[DAEMONSQUEUE]; i++) {
+		 if (i == numberOfReadyToRunProcesses[DAEMONSQUEUE] - 1)
+			 ComputerSystem_DebugMessage(107,SHORTTERMSCHEDULE, readyToRunQueue[DAEMONSQUEUE][i], processTable[readyToRunQueue[DAEMONSQUEUE][i]].priority, "\n");
+		 else
+			 ComputerSystem_DebugMessage(107,SHORTTERMSCHEDULE, readyToRunQueue[DAEMONSQUEUE][i], processTable[readyToRunQueue[DAEMONSQUEUE][i]].priority, ", ");
+	  }
 	}
  }
 

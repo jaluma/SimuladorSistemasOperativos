@@ -1,8 +1,9 @@
 # 1 "Processor.c"
 # 1 "<built-in>"
 # 1 "<command-line>"
+# 31 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
-# 1 "<command-line>" 2
+# 32 "<command-line>" 2
 # 1 "Processor.c"
 # 1 "Processor.h" 1
 
@@ -51,7 +52,16 @@ int Processor_GetMAR();
 void Processor_SetMAR(int);
 void Processor_GetMBR(MEMORYCELL *);
 void Processor_SetMBR(MEMORYCELL *);
-# 41 "Processor.h"
+
+
+
+
+
+void Processor_SetAccumulator(int);
+int Processor_GetAccumulator();
+
+
+
 void Processor_SetPC(int);
 
 
@@ -122,10 +132,10 @@ extern PROGRAMS_DATA *programList[20];
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef long unsigned int size_t;
 # 34 "/usr/include/stdio.h" 2 3 4
 
@@ -249,7 +259,7 @@ typedef struct _IO_FILE __FILE;
 # 31 "/usr/include/libio.h" 3 4
 # 1 "/usr/include/_G_config.h" 1 3 4
 # 15 "/usr/include/_G_config.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 16 "/usr/include/_G_config.h" 2 3 4
 
 
@@ -283,8 +293,8 @@ typedef struct
 } _G_fpos64_t;
 # 32 "/usr/include/libio.h" 2 3 4
 # 49 "/usr/include/libio.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 1 3 4
-# 40 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 1 3 4
+# 40 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 3 4
 typedef __builtin_va_list __gnuc_va_list;
 # 50 "/usr/include/libio.h" 2 3 4
 # 144 "/usr/include/libio.h" 3 4
@@ -959,6 +969,7 @@ typedef struct {
  int priority;
  int copyOfPCRegister;
  unsigned int copyOfPSWRegister;
+ int copyOfAccumulatorRegister;
  int programListIndex;
  int queueID;
 } PCB;
@@ -1014,7 +1025,7 @@ int MMU_GetLimit();
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 33 "/usr/include/string.h" 2 3 4
 
 
@@ -1447,30 +1458,43 @@ void Processor_DecodeAndExecuteInstruction() {
    MMU_readMemory();
 
    registerAccumulator_CPU= registerMBR_CPU.operand1 + registerIR_CPU.operand1;
+   Processor_CheckOverflow(registerMBR_CPU.operand1,registerIR_CPU.operand1);
    registerPC_CPU++;
    break;
 
 
   case 'h':
-   Processor_ActivatePSW_Bit(POWEROFF_BIT);
+   if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1)
+    Processor_ActivatePSW_Bit(POWEROFF_BIT);
+   else
+    Processor_RaiseInterrupt(EXCEPTION_BIT);
    break;
 
 
   case 'o':
+   if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1) {
 
 
-   ComputerSystem_DebugMessage(3, 'h',registerPC_CPU,registerAccumulator_CPU,registerPSW_CPU,Processor_ShowPSW());
+    ComputerSystem_DebugMessage(3, 'h',registerPC_CPU,registerAccumulator_CPU,registerPSW_CPU,Processor_ShowPSW());
 
-   OperatingSystem_InterruptLogic(registerIR_CPU.operand1);
-   registerPC_CPU++;
+    OperatingSystem_InterruptLogic(registerIR_CPU.operand1);
+    registerPC_CPU++;
 
-   Processor_UpdatePSW();
+    Processor_UpdatePSW();
+   } else {
+    Processor_RaiseInterrupt(EXCEPTION_BIT);
+   }
+
    return;
 
 
   case 'y':
-   registerPC_CPU=Processor_CopyFromSystemStack(300 -1);
-   registerPSW_CPU=Processor_CopyFromSystemStack(300 -2);
+   if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1) {
+    registerPC_CPU=Processor_CopyFromSystemStack(300 -1);
+    registerPSW_CPU=Processor_CopyFromSystemStack(300 -2);
+    registerAccumulator_CPU=Processor_CopyFromSystemStack(300 -3);
+   } else
+    Processor_RaiseInterrupt(EXCEPTION_BIT);
    break;
 
 
@@ -1501,6 +1525,7 @@ void Processor_ManageInterrupts() {
 
     Processor_CopyInSystemStack(300 -1, registerPC_CPU);
     Processor_CopyInSystemStack(300 -2, registerPSW_CPU);
+    Processor_CopyInSystemStack(300 -3, registerAccumulator_CPU);
 
     Processor_ActivatePSW_Bit(EXECUTION_MODE_BIT);
 
@@ -1639,15 +1664,29 @@ int Processor_GetMBR_Value(){
 }
 
 
-
-
-
+void Processor_SetAccumulator(int acc){
+  registerAccumulator_CPU=acc;
+}
 
 
 void Processor_SetPC(int pc){
   registerPC_CPU= pc;
 }
-# 401 "Processor.c"
+
+
+
+
+
+
+
+int Processor_GetAccumulator() {
+  return registerAccumulator_CPU;
+}
+
+
+
+
+
 int Processor_GetRegisterA() {
   return registerA_CPU;
 }

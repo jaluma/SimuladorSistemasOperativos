@@ -1,8 +1,9 @@
 # 1 "OperatingSystem.c"
 # 1 "<built-in>"
 # 1 "<command-line>"
+# 31 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
-# 1 "<command-line>" 2
+# 32 "<command-line>" 2
 # 1 "OperatingSystem.c"
 # 1 "OperatingSystem.h" 1
 
@@ -62,10 +63,10 @@ extern PROGRAMS_DATA *programList[20];
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef long unsigned int size_t;
 # 34 "/usr/include/stdio.h" 2 3 4
 
@@ -189,7 +190,7 @@ typedef struct _IO_FILE __FILE;
 # 31 "/usr/include/libio.h" 3 4
 # 1 "/usr/include/_G_config.h" 1 3 4
 # 15 "/usr/include/_G_config.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 16 "/usr/include/_G_config.h" 2 3 4
 
 
@@ -223,8 +224,8 @@ typedef struct
 } _G_fpos64_t;
 # 32 "/usr/include/libio.h" 2 3 4
 # 49 "/usr/include/libio.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 1 3 4
-# 40 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 1 3 4
+# 40 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 3 4
 typedef __builtin_va_list __gnuc_va_list;
 # 50 "/usr/include/libio.h" 2 3 4
 # 144 "/usr/include/libio.h" 3 4
@@ -899,6 +900,7 @@ typedef struct {
  int priority;
  int copyOfPCRegister;
  unsigned int copyOfPSWRegister;
+ int copyOfAccumulatorRegister;
  int programListIndex;
  int queueID;
 } PCB;
@@ -994,7 +996,16 @@ int Processor_GetMAR();
 void Processor_SetMAR(int);
 void Processor_GetMBR(MEMORYCELL *);
 void Processor_SetMBR(MEMORYCELL *);
-# 41 "Processor.h"
+
+
+
+
+
+void Processor_SetAccumulator(int);
+int Processor_GetAccumulator();
+
+
+
 void Processor_SetPC(int);
 
 
@@ -1034,7 +1045,7 @@ int Heap_getFirst(int[], int);
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 33 "/usr/include/string.h" 2 3 4
 
 
@@ -1424,8 +1435,8 @@ extern int toupper_l (int __c, __locale_t __l) __attribute__ ((__nothrow__ , __l
 # 9 "OperatingSystem.c" 2
 # 1 "/usr/include/stdlib.h" 1 3 4
 # 32 "/usr/include/stdlib.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 328 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 328 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef int wchar_t;
 # 33 "/usr/include/stdlib.h" 2 3 4
 
@@ -1691,7 +1702,7 @@ typedef __clockid_t clockid_t;
 typedef __timer_t timer_t;
 # 133 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 # 146 "/usr/include/x86_64-linux-gnu/sys/types.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 147 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 
 
@@ -2181,7 +2192,7 @@ extern void cfree (void *__ptr) __attribute__ ((__nothrow__ , __leaf__));
 
 # 1 "/usr/include/alloca.h" 1 3 4
 # 24 "/usr/include/alloca.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 25 "/usr/include/alloca.h" 2 3 4
 
 
@@ -2462,7 +2473,7 @@ extern int getloadavg (double __loadavg[], int __nelem)
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 38 "/usr/include/time.h" 2 3 4
 
 
@@ -2722,7 +2733,7 @@ char * statesNames [5]={"NEW","READY","EXECUTING","BLOCKED","EXIT"};
 
 void OperatingSystem_Initialize(int daemonsIndex) {
 
- int i, selectedProcess;
+ int i, selectedProcess, long_term_schreduler;
  FILE *programFile;
 
 
@@ -2742,7 +2753,11 @@ void OperatingSystem_Initialize(int daemonsIndex) {
  OperatingSystem_PrepareDaemons(daemonsIndex);
 
 
- OperatingSystem_LongTermScheduler();
+ long_term_schreduler = OperatingSystem_LongTermScheduler();
+
+ if (long_term_schreduler <= 1) {
+  OperatingSystem_ReadyToShutdown();
+ }
 
  if (strcmp(programList[processTable[sipID].programListIndex]->executableName,"SystemIdleProcess")) {
 
@@ -2793,9 +2808,9 @@ int OperatingSystem_LongTermScheduler() {
   numberOfSuccessfullyCreatedProcesses=0;
 
  for (i=0; programList[i]!=
-# 128 "OperatingSystem.c" 3 4
+# 132 "OperatingSystem.c" 3 4
                           ((void *)0) 
-# 128 "OperatingSystem.c"
+# 132 "OperatingSystem.c"
                                && i<20; i++) {
   if (programList[i]->type == (unsigned int) 1)
    PID=OperatingSystem_CreateProcess(i, 1);
@@ -2910,10 +2925,12 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
  if (programList[processPLIndex]->type == (unsigned int) 1) {
   processTable[PID].copyOfPCRegister=initialPhysicalAddress;
   processTable[PID].copyOfPSWRegister= ((unsigned int) 1) << EXECUTION_MODE_BIT;
+  processTable[PID].copyOfAccumulatorRegister=0;
  }
  else {
   processTable[PID].copyOfPCRegister=0;
   processTable[PID].copyOfPSWRegister=0;
+  processTable[PID].copyOfAccumulatorRegister=0;
  }
  processTable[PID].queueID=queueID;
 }
@@ -2925,8 +2942,8 @@ void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
  if (Heap_add(PID, readyToRunQueue[queueID] ,1 , &numberOfReadyToRunProcesses[queueID] ,4)>=0) {
   ComputerSystem_DebugMessage(110, 'p', PID, statesNames[processTable[PID].state], statesNames[1]);
   processTable[PID].state=READY;
+  OperatingSystem_PrintReadyToRunQueue();
  }
- OperatingSystem_PrintReadyToRunQueue();
 }
 
 
@@ -2962,6 +2979,7 @@ void OperatingSystem_Dispatch(int PID) {
  executingProcessID=PID;
 
  processTable[PID].state=EXECUTING;
+
  ComputerSystem_DebugMessage(110, 'p', PID, statesNames[1], statesNames[2]);
 
  OperatingSystem_RestoreContext(PID);
@@ -2971,9 +2989,10 @@ void OperatingSystem_Dispatch(int PID) {
 
 void OperatingSystem_RestoreContext(int PID) {
 
-
  Processor_CopyInSystemStack(300 -1,processTable[PID].copyOfPCRegister);
  Processor_CopyInSystemStack(300 -2,processTable[PID].copyOfPSWRegister);
+ Processor_CopyInSystemStack(300 -3,processTable[PID].copyOfAccumulatorRegister);
+ Processor_SetAccumulator(processTable[PID].copyOfAccumulatorRegister);
 
 
  MMU_SetBase(processTable[PID].initialPhysicalAddress);
@@ -3002,6 +3021,8 @@ void OperatingSystem_SaveContext(int PID) {
 
  processTable[PID].copyOfPSWRegister=Processor_CopyFromSystemStack(300 -2);
 
+
+ processTable[PID].copyOfAccumulatorRegister=Processor_CopyFromSystemStack(300 -3);
 }
 
 
@@ -3021,6 +3042,7 @@ void OperatingSystem_TerminateProcess() {
  int selectedProcess;
 
  processTable[executingProcessID].state=EXIT;
+
  ComputerSystem_DebugMessage(110, 'p', executingProcessID, statesNames[2], statesNames[4]);
 
 
@@ -3030,6 +3052,7 @@ void OperatingSystem_TerminateProcess() {
 
   OperatingSystem_ReadyToShutdown();
  }
+
 
  selectedProcess=OperatingSystem_ShortTermScheduler(0);
 
@@ -3072,9 +3095,15 @@ void OperatingSystem_HandleSystemCall() {
 
    if (processTable[oldPID].priority == processTable[pid].priority) {
     ComputerSystem_DebugMessage(115, 's', oldPID, pid);
-    OperatingSystem_ShortTermScheduler(0);
+
 
     OperatingSystem_PreemptRunningProcess();
+
+    pid = OperatingSystem_ShortTermScheduler(0);
+
+    if (pid == -1)
+     pid = OperatingSystem_ShortTermScheduler(1);
+
     OperatingSystem_Dispatch(pid);
    }
    break;
@@ -3099,25 +3128,27 @@ void OperatingSystem_InterruptLogic(int entryPoint){
   int i;
   ComputerSystem_DebugMessage(106,'s');
 
-  if (numberOfReadyToRunProcesses[0] != 0) {
-
-  ComputerSystem_DebugMessage(112,'s', "USER");
+ ComputerSystem_DebugMessage(112,'s', "USER");
+ if (numberOfReadyToRunProcesses[0] == 0) {
+  ComputerSystem_DebugMessage(113,'s');
+ } else {
   for (i = 0; i < numberOfReadyToRunProcesses[0]; i++) {
    if (i == numberOfReadyToRunProcesses[0] - 1)
     ComputerSystem_DebugMessage(107,'s', readyToRunQueue[0][i], processTable[readyToRunQueue[0][i]].priority, "\n");
    else
     ComputerSystem_DebugMessage(107,'s', readyToRunQueue[0][i], processTable[readyToRunQueue[0][i]].priority, ", ");
   }
-  }
+ }
 
- if (numberOfReadyToRunProcesses[1] != 0) {
-
-   ComputerSystem_DebugMessage(112,'s', "DAEMONS");
-   for (i = 0; i < numberOfReadyToRunProcesses[1]; i++) {
-    if (i == numberOfReadyToRunProcesses[1] - 1)
-     ComputerSystem_DebugMessage(107,'s', readyToRunQueue[1][i], processTable[readyToRunQueue[1][i]].priority, "\n");
-    else
-     ComputerSystem_DebugMessage(107,'s', readyToRunQueue[1][i], processTable[readyToRunQueue[1][i]].priority, ", ");
-    }
+ ComputerSystem_DebugMessage(112,'s', "DAEMONS");
+ if (numberOfReadyToRunProcesses[1] == 0) {
+  ComputerSystem_DebugMessage(113,'s');
+ } else {
+  for (i = 0; i < numberOfReadyToRunProcesses[1]; i++) {
+   if (i == numberOfReadyToRunProcesses[1] - 1)
+    ComputerSystem_DebugMessage(107,'s', readyToRunQueue[1][i], processTable[readyToRunQueue[1][i]].priority, "\n");
+   else
+    ComputerSystem_DebugMessage(107,'s', readyToRunQueue[1][i], processTable[readyToRunQueue[1][i]].priority, ", ");
+   }
  }
  }

@@ -183,30 +183,43 @@ void Processor_DecodeAndExecuteInstruction() {
 			MMU_readMemory();
 			// Copy the read data to the accumulator register
 			registerAccumulator_CPU= registerMBR_CPU.operand1 + registerIR_CPU.operand1;
+			Processor_CheckOverflow(registerMBR_CPU.operand1,registerIR_CPU.operand1);
 			registerPC_CPU++;
 			break;
 			
 		// Instruction HALT
 		case 'h':
-			Processor_ActivatePSW_Bit(POWEROFF_BIT);
+			if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1)
+				Processor_ActivatePSW_Bit(POWEROFF_BIT);
+			else
+				Processor_RaiseInterrupt(EXCEPTION_BIT);
 			break;
 			  
 		// Instruction OS
 		case 'o': // Make a operating system routine in entry point indicated by operand1
-			// Show final part of HARDWARE message with CPU registers
-			// Show message: " (PC: registerPC_CPU, Accumulator: registerAccumulator_CPU, PSW: registerPSW_CPU [Processor_ShowPSW()]\n
-			ComputerSystem_DebugMessage(3, HARDWARE,registerPC_CPU,registerAccumulator_CPU,registerPSW_CPU,Processor_ShowPSW());
-			// Not all operating system code is executed in simulated processor, but really must do it... 
-			OperatingSystem_InterruptLogic(registerIR_CPU.operand1);
-			registerPC_CPU++;
-			// Update PSW bits (ZERO_BIT, NEGATIVE_BIT, ...)
-			Processor_UpdatePSW();
+			if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1) {
+				// Show final part of HARDWARE message with CPU registers
+				// Show message: " (PC: registerPC_CPU, Accumulator: registerAccumulator_CPU, PSW: registerPSW_CPU [Processor_ShowPSW()]\n
+				ComputerSystem_DebugMessage(3, HARDWARE,registerPC_CPU,registerAccumulator_CPU,registerPSW_CPU,Processor_ShowPSW());
+				// Not all operating system code is executed in simulated processor, but really must do it... 
+				OperatingSystem_InterruptLogic(registerIR_CPU.operand1);
+				registerPC_CPU++;
+				// Update PSW bits (ZERO_BIT, NEGATIVE_BIT, ...)
+				Processor_UpdatePSW();
+			} else {
+				Processor_RaiseInterrupt(EXCEPTION_BIT);
+			}
+			
 			return; // Note: message show before... for operating system messages after...
 
 		// Instruction IRET
 		case 'y': // Return from a interrupt handle manager call
-			registerPC_CPU=Processor_CopyFromSystemStack(MAINMEMORYSIZE-1);
-			registerPSW_CPU=Processor_CopyFromSystemStack(MAINMEMORYSIZE-2);
+			if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1) {
+				registerPC_CPU=Processor_CopyFromSystemStack(MAINMEMORYSIZE-1);
+				registerPSW_CPU=Processor_CopyFromSystemStack(MAINMEMORYSIZE-2);
+				registerAccumulator_CPU=Processor_CopyFromSystemStack(MAINMEMORYSIZE-3);
+			} else
+				Processor_RaiseInterrupt(EXCEPTION_BIT);
 			break;		
 
 		// Unknown instruction
@@ -234,9 +247,10 @@ void Processor_ManageInterrupts() {
 			if (Processor_GetInterruptLineStatus(i)) {
 				// Deactivate interrupt
 				Processor_ACKInterrupt(i);
-				// Copy PC and PSW registers in the system stack
+				// Copy PC, PSW and Accumulator registers in the system stack
 				Processor_CopyInSystemStack(MAINMEMORYSIZE-1, registerPC_CPU);
 				Processor_CopyInSystemStack(MAINMEMORYSIZE-2, registerPSW_CPU);	
+				Processor_CopyInSystemStack(MAINMEMORYSIZE-3, registerAccumulator_CPU);	
 				// Activate protected excution mode
 				Processor_ActivatePSW_Bit(EXECUTION_MODE_BIT);
 				// Call the appropriate OS interrupt-handling routine setting PC register
@@ -375,9 +389,9 @@ int Processor_GetMBR_Value(){
 }
 
 // Setter for the Accumulator
-// void Processor_SetAccumulator(int acc){
-//   registerAccumulator_CPU=acc;
-// }
+void Processor_SetAccumulator(int acc){
+  registerAccumulator_CPU=acc;
+}
 
 // Setter for the PC
 void Processor_SetPC(int pc){
@@ -390,9 +404,9 @@ void Processor_SetPC(int pc){
 // }
 
 // Getter for the Accumulator
-// int Processor_GetAccumulator() {
-//   return registerAccumulator_CPU;
-// }
+int Processor_GetAccumulator() {
+  return registerAccumulator_CPU;
+}
 
 // int Processor_GetPC() {
 //   return registerPC_CPU;

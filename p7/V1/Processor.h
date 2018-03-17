@@ -33,8 +33,8 @@ void Processor_SetMBR(MEMORYCELL *);
 // The OS needs to access the accumulator register to restore the context of
 // the process to which the processor is being assigned and to save the context
 // of the process being preempted for another ready process
-// void Processor_SetAccumulator(int);
-// int Processor_GetAccumulator();
+void Processor_SetAccumulator(int);
+int Processor_GetAccumulator();
 
 // The OS needs to access the PC register to restore the context of
 // the process to which the processor is being assigned
