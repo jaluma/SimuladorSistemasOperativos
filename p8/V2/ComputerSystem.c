@@ -6,6 +6,7 @@
 #include "Processor.h"
 #include "Messages.h"
 #include "Asserts.h"
+#include "Clock.h"
 
 // Functions prototypes
 
@@ -44,6 +45,7 @@ void ComputerSystem_PowerOn(int argc, char *argv[]) {
 // Powers off the CS (the C program ends)
 void ComputerSystem_PowerOff() {
 	// Show message in red colour: "END of the simulation\n" 
+	ComputerSystem_ShowTime(SHUTDOWN);
 	ComputerSystem_DebugMessage(99,SHUTDOWN); 
 	exit(0);
 }
@@ -53,9 +55,15 @@ void ComputerSystem_PowerOff() {
 
 void ComputerSystem_PrintProgramList() {
 	int i;
+	ComputerSystem_ShowTime(INIT);
 	ComputerSystem_DebugMessage(101, INIT); 
 	for (i = 1; i < PROGRAMSMAXNUMBER; i++) {
 		if (programList[i] != NULL)
 			ComputerSystem_DebugMessage(102, INIT, programList[i]->executableName, programList[i]->arrivalTime); 
 	}
+}
+
+void ComputerSystem_ShowTime(char section) {
+	ComputerSystem_DebugMessage(98,section,Processor_PSW_BitState(EXECUTION_MODE_BIT)?"":"");
+	ComputerSystem_DebugMessage(Processor_PSW_BitState(EXECUTION_MODE_BIT)?5:4,section,Clock_GetTime());
 }

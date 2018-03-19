@@ -59,6 +59,7 @@ extern int sipID;
 // Functions prototypes
 void OperatingSystem_Initialize();
 void OperatingSystem_InterruptLogic(int);
+void OperatingSystem_HandleClockInterrupt();
 
 
 #endif

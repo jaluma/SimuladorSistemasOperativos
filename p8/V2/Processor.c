@@ -76,6 +76,7 @@ void Processor_FetchInstruction() {
 	  memcpy((void *) (&registerIR_CPU), (void *) (&registerMBR_CPU), sizeof(MEMORYCELL));
 	// Show initial part of HARDWARE message with Operation Code and operands
 	  // Show message: operationCode operand1 operand2
+		ComputerSystem_ShowTime(HARDWARE);
 		ComputerSystem_DebugMessage(1, HARDWARE, registerIR_CPU.operationCode, registerIR_CPU.operand1, registerIR_CPU.operand2);
 	}
 	else 
@@ -439,6 +440,8 @@ char * Processor_ShowPSW(){
 		pswmask[tam-ZERO_BIT]='Z';
 	if (Processor_PSW_BitState(POWEROFF_BIT))
 		pswmask[tam-POWEROFF_BIT]='S';
+	if (Processor_PSW_BitState(INTERRUPT_MASKED_BIT))
+		pswmask[tam-INTERRUPT_MASKED_BIT]='M';
 	return pswmask;
 }
 

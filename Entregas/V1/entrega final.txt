@@ -1,0 +1,81 @@
+// desde el directorio padre de V1 crea una copia del directorio V1 cuando estén COMPLETADOS TODOS los ejercicios 
+
+cp -r V1 V1.entregaFinal 
+
+ 
+
+// En el OperatingSystem.h del directorio V1.entregaFinal cambia los valores de las constantes siguientes a estos valores 
+
+#define PROCESSTABLEMAXSIZE 8 
+
+#define INITIALPID 7 
+
+ 
+
+// En el MainMemory.h del directorio V1.entregaFinal cambia el valor de la constante siguiente a este valor 
+
+#define MAINMEMORYSIZE 540 
+
+ 
+
+// Compila en RITCHIE el simulador del directorio  V1.entregaFinal y copia el  Simulator generado a V1-4-Simulator.UOxxxxx  (la línea siguiente lo hace, además de limpiar el directorio después). 
+
+make ; cp Simulator V1-4-Simulator.UOxxxx ; make clean 
+
+
+GRUPO 1: 
+
+ 
+ 
+
+// programa llamado: programFinalV1 
+
+20 
+
+199 
+
+ADD 1 98    
+
+JUMP 5 
+
+WRITE 14  
+
+MEMADD 11 14 
+
+WRITE 4  
+
+JUMP  3 
+
+INC 5 
+
+WRITE 7 
+
+MEMADD 6 7 
+
+WRITE 2 
+
+NOP 
+
+JUMP -5 
+
+OS -3 
+
+YRET  
+
+JUMP -2   
+
+JUMP -13 
+
+DIV 5 0 
+
+ 
+
+EJECUTA tu simulador así  ( Hay 12 nombres de programa pasados como parámetros al Simulator...) 
+
+ 
+./Simulator a programaQueNoExiste TuProgramaInvalidoPorTamanioOPrioridad TuProgramaDemasiadoGrandePorTamanio TuProgramaConDemasiadasInstrucciones programFinalV1 TuProgramaConYRET TuProgramaConOS TuProgramaConHALT TuProgramaConMemadd TuProgramaQuePruebaYield TuProgramaQuePruebaYield TuProgramaQuePruebaYield> V1-Final-UOxxxx.log 
+
+ 
+ 
+
+ 

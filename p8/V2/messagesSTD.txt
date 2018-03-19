@@ -12,6 +12,6 @@
 107,[@G%d@@,%d]%s
 110,Process [@G%d@@] moving from the [@G%s@@] state to the [@G%s@@] state\n
 111,New process [@G%d@@] moving to the [@G%s@@] state\n
-112,\t%s: 
+112,\t\t%s: 
 113,\n
 115,Process [@G%d@@] transfers control of the processor to process [@G%d@@]\n
