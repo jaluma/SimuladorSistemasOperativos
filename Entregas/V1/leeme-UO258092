@@ -8,7 +8,7 @@ Martinez Alvarez Javier
 	- TuProgramaConDemasiadasInstrucciones 		ProgramTest_MoreInst					PROGRAMA CON DEMASIADAS INTRUCCIONES
 	- TuProgramaConYRET 						ProgramTest_YRET						PROGRAMA CON UN YRET
 	- TuProgramasConOS 							ProgramTest_OS							PROGRAMA CON UN OS
-	- TuProgramaConHALT 						programVerySimple						PROGRAMA CON UN HALT
+	- TuProgramaConHALT 						ProgramTest_HALT						PROGRAMA CON UN HALT
 	- TuProgramaConPrioridadMayorQue100 		ProgramTest_LowPriority100				PROGRAMA CON UNA PRIORIDAD MUY BAJA(>100)
 	- TuProgramaQuePruebaYield 					ProgramTest_Yield1						PROGRAMA PARA PROBAR SYSCALL YIELD
 
@@ -21,3 +21,5 @@ Martinez Alvarez Javier
 	- ProgramTest_SizeNotNumber															Programa con una letra como tamaño, en vez de un número
 	- ProgramTest_Yield1 ProgramTest_Yield2 ProgramTest_Yield3							Programas para probar el uso de SYSCALL YIELD
 	- program-Final-V1-1 program-Final-V1-2 program-Final-V1-3							Programas finales para probar los asserts
+	
+./Simulator a programaQueNoExiste ProgramTest_PriorityFail ProgramTest_VeryBig ProgramTest_MoreInst programFinalV1 TuProgramaConYRET ProgramTest_OS TuProgramaConHALT ProgramTest_MEMADD ProgramTest_Yield1 ProgramTest_Yield1 ProgramTest_Yield1> V1-Final-UO258092.log

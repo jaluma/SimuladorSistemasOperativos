@@ -1,0 +1,212 @@
+27 Messages Loaded
+Asserts file unavailable
+User program list:
+	Program [programaQueNoExiste] with arrival time [0]
+	Program [ProgramTest_PriorityFail] with arrival time [0]
+	Program [ProgramTest_VeryBig] with arrival time [0]
+	Program [ProgramTest_MoreInst] with arrival time [0]
+	Program [programFinalV1] with arrival time [0]
+	Program [TuProgramaConYRET] with arrival time [0]
+	Program [ProgramTest_OS] with arrival time [0]
+	Program [TuProgramaConHALT] with arrival time [0]
+	Program [ProgramTest_MEMADD] with arrival time [0]
+	Program [ProgramTest_Yield1] with arrival time [0]
+	Program [ProgramTest_Yield1] with arrival time [0]
+	Program [ProgramTest_Yield1] with arrival time [0]
+New process [7] moving to the [NEW] state
+Process [7] created from program [SystemIdleProcess]
+Process [7] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: 
+	DAEMONS: [7,100]
+ERROR: Program [programaQueNoExiste] is not valid [--- it does not exist ---]
+ERROR: Program [ProgramTest_PriorityFail] is not valid [--- invalid priority or size ---]
+ERROR: Program [ProgramTest_VeryBig] is too big
+ERROR: Program [ProgramTest_MoreInst] is too big
+New process [0] moving to the [NEW] state
+Process [0] created from program [programFinalV1]
+Process [0] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [0,199]
+	DAEMONS: [7,100]
+ERROR: Program [TuProgramaConYRET] is not valid [--- it does not exist ---]
+New process [1] moving to the [NEW] state
+Process [1] created from program [ProgramTest_OS]
+Process [1] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [1,5], [0,199]
+	DAEMONS: [7,100]
+ERROR: Program [TuProgramaConHALT] is not valid [--- it does not exist ---]
+New process [2] moving to the [NEW] state
+Process [2] created from program [ProgramTest_MEMADD]
+Process [2] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [2,3], [0,199], [1,5]
+	DAEMONS: [7,100]
+New process [3] moving to the [NEW] state
+Process [3] created from program [ProgramTest_Yield1]
+Process [3] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [2,3], [3,5], [1,5], [0,199]
+	DAEMONS: [7,100]
+New process [4] moving to the [NEW] state
+Process [4] created from program [ProgramTest_Yield1]
+Process [4] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [2,3], [3,5], [1,5], [0,199], [4,5]
+	DAEMONS: [7,100]
+New process [5] moving to the [NEW] state
+Process [5] created from program [ProgramTest_Yield1]
+Process [5] moving from the [NEW] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [2,3], [3,5], [1,5], [0,199], [4,5], [5,5]
+	DAEMONS: [7,100]
+Process [2] moving from the [READY] state to the [EXECUTING] state
+New Tick (1)
+y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+New Tick (2)
+a 2147483600 47 (PC: 1, Accumulator: 2147483647, PSW: 0 [----------------])
+New Tick (3)
+w 50 0 (PC: 2, Accumulator: 2147483647, PSW: 0 [----------------])
+New Tick (4)
+m 1 50 (PC: 3, Accumulator: -2147483648, PSW: 12 [------------FN--])
+New Tick (5)
+w 50 0 (PC: 4, Accumulator: -2147483648, PSW: 4 [-------------N--])
+New Tick (6)
+m 0 50 (PC: 5, Accumulator: -2147483648, PSW: 4 [-------------N--])
+New Tick (7)
+h 0 0 (PC: 5, Accumulator: -2147483648, PSW: 4 [-------------N--])
+New Tick (8)
+o 6 0 (PC: 483, Accumulator: -2147483648, PSW: 132 [--------X----N--])
+New Tick (9)
+Process [2] has generated an exception and is terminating
+Process [2] moving from the [EXECUTING] state to the [EXIT] state
+Process [5] moving from the [READY] state to the [EXECUTING] state
+New Tick (10)
+y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+New Tick (11)
+a 7 0 (PC: 1, Accumulator: 7, PSW: 0 [----------------])
+New Tick (12)
+w 10 0 (PC: 2, Accumulator: 7, PSW: 0 [----------------])
+New Tick (13)
+t 4 0 (PC: 3, Accumulator: 7, PSW: 0 [----------------])
+New Tick (14)
+o 2 0 (PC: 481, Accumulator: 7, PSW: 128 [--------X-------])
+New Tick (15)
+Process [5] transfers control of the processor to process [4]
+Process [5] moving from the [EXECUTING] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [4,5], [3,5], [1,5], [0,199], [5,5]
+	DAEMONS: [7,100]
+Process [4] moving from the [READY] state to the [EXECUTING] state
+New Tick (16)
+y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+New Tick (17)
+a 7 0 (PC: 1, Accumulator: 7, PSW: 0 [----------------])
+New Tick (18)
+w 10 0 (PC: 2, Accumulator: 7, PSW: 0 [----------------])
+New Tick (19)
+t 4 0 (PC: 3, Accumulator: 7, PSW: 0 [----------------])
+New Tick (20)
+o 2 0 (PC: 481, Accumulator: 7, PSW: 128 [--------X-------])
+New Tick (21)
+Process [4] transfers control of the processor to process [5]
+Process [4] moving from the [EXECUTING] state to the [READY] state
+Ready-to-run processes queue:
+	USER: [5,5], [3,5], [1,5], [0,199], [4,5]
+	DAEMONS: [7,100]
+Process [5] moving from the [READY] state to the [EXECUTING] state
+New Tick (22)
+y 0 0 (PC: 3, Accumulator: 7, PSW: 0 [----------------])
+New Tick (23)
+m 7 10 (PC: 4, Accumulator: 14, PSW: 0 [----------------])
+New Tick (24)
+t 3 0 (PC: 5, Accumulator: 14, PSW: 0 [----------------])
+New Tick (25)
+o 2 0 (PC: 481, Accumulator: 14, PSW: 128 [--------X-------])
+New Tick (26)
+Process [5] has requested to terminate
+Process [5] moving from the [EXECUTING] state to the [EXIT] state
+Process [4] moving from the [READY] state to the [EXECUTING] state
+New Tick (27)
+y 0 0 (PC: 3, Accumulator: 7, PSW: 0 [----------------])
+New Tick (28)
+m 7 10 (PC: 4, Accumulator: 14, PSW: 0 [----------------])
+New Tick (29)
+t 3 0 (PC: 5, Accumulator: 14, PSW: 0 [----------------])
+New Tick (30)
+o 2 0 (PC: 481, Accumulator: 14, PSW: 128 [--------X-------])
+New Tick (31)
+Process [4] has requested to terminate
+Process [4] moving from the [EXECUTING] state to the [EXIT] state
+Process [1] moving from the [READY] state to the [EXECUTING] state
+New Tick (32)
+y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+New Tick (33)
+n 0 0 (PC: 1, Accumulator: 0, PSW: 2 [--------------Z-])
+New Tick (34)
+a 10 -13 (PC: 2, Accumulator: -3, PSW: 4 [-------------N--])
+New Tick (35)
+o 2 0 (PC: 2, Accumulator: -3, PSW: 4 [-------------N--])
+New Tick (36)
+o 6 0 (PC: 483, Accumulator: -3, PSW: 132 [--------X----N--])
+New Tick (37)
+Process [1] has generated an exception and is terminating
+Process [1] moving from the [EXECUTING] state to the [EXIT] state
+Process [3] moving from the [READY] state to the [EXECUTING] state
+New Tick (38)
+y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+New Tick (39)
+a 7 0 (PC: 1, Accumulator: 7, PSW: 0 [----------------])
+New Tick (40)
+w 10 0 (PC: 2, Accumulator: 7, PSW: 0 [----------------])
+New Tick (41)
+t 4 0 (PC: 3, Accumulator: 7, PSW: 0 [----------------])
+New Tick (42)
+o 2 0 (PC: 481, Accumulator: 7, PSW: 128 [--------X-------])
+New Tick (43)
+New Tick (44)
+y 0 0 (PC: 3, Accumulator: 7, PSW: 0 [----------------])
+New Tick (45)
+m 7 10 (PC: 4, Accumulator: 14, PSW: 0 [----------------])
+New Tick (46)
+t 3 0 (PC: 5, Accumulator: 14, PSW: 0 [----------------])
+New Tick (47)
+o 2 0 (PC: 481, Accumulator: 14, PSW: 128 [--------X-------])
+New Tick (48)
+Process [3] has requested to terminate
+Process [3] moving from the [EXECUTING] state to the [EXIT] state
+Process [0] moving from the [READY] state to the [EXECUTING] state
+New Tick (49)
+y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+New Tick (50)
+a 1 98 (PC: 1, Accumulator: 99, PSW: 0 [----------------])
+New Tick (51)
+j 5 0 (PC: 6, Accumulator: 99, PSW: 0 [----------------])
+New Tick (52)
+i 5 0 (PC: 7, Accumulator: 104, PSW: 0 [----------------])
+New Tick (53)
+w 7 0 (PC: 8, Accumulator: 104, PSW: 0 [----------------])
+New Tick (54)
+m 6 7 (PC: 9, Accumulator: 110, PSW: 0 [----------------])
+New Tick (55)
+w 2 0 (PC: 10, Accumulator: 110, PSW: 0 [----------------])
+New Tick (56)
+n 0 0 (PC: 11, Accumulator: 110, PSW: 0 [----------------])
+New Tick (57)
+j -5 0 (PC: 6, Accumulator: 110, PSW: 0 [----------------])
+New Tick (58)
+i 5 0 (PC: 7, Accumulator: 115, PSW: 0 [----------------])
+New Tick (59)
+h 104 104 (PC: 7, Accumulator: 115, PSW: 0 [----------------])
+New Tick (60)
+o 6 0 (PC: 483, Accumulator: 115, PSW: 128 [--------X-------])
+New Tick (61)
+Process [0] has generated an exception and is terminating
+Process [0] moving from the [EXECUTING] state to the [EXIT] state
+Process [7] moving from the [READY] state to the [EXECUTING] state
+New Tick (62)
+y 0 0 (PC: 423, Accumulator: 0, PSW: 130 [--------X-----Z-])
+New Tick (63)
+h 0 0 (PC: 423, Accumulator: 0, PSW: 131 [--------X-----ZS])
+END of the simulation
