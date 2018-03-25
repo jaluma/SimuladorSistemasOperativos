@@ -10,7 +10,6 @@
 void Processor_FetchInstruction();
 void Processor_DecodeAndExecuteInstruction();
 void Processor_ManageInterrupts();
-void Processor_RaiseInterrupt(const unsigned int);
 void Processor_ACKInterrupt(const unsigned int);
 unsigned int Processor_GetInterruptLineStatus(const unsigned int);
 void Processor_ActivatePSW_Bit(const unsigned int);
@@ -18,7 +17,7 @@ void Processor_DeactivatePSW_Bit(const unsigned int);
 void Processor_UpdatePSW();
 void Processor_CheckOverflow(int,int);
 
-// void Processor_SetRegisterA(int);
+void Processor_SetRegisterA(int);
 
 // Processor registers
 int registerPC_CPU; // Program counter
@@ -46,6 +45,7 @@ void Processor_InitializeInterruptVectorTable(int interruptVectorInitialAddress)
 
 	interruptVectorTable[SYSCALL_BIT]=interruptVectorInitialAddress;  // SYSCALL_BIT=2
 	interruptVectorTable[EXCEPTION_BIT]=interruptVectorInitialAddress+2; // EXCEPTION_BIT=6
+	interruptVectorTable[CLOCKINT_BIT]=interruptVectorInitialAddress+4; // CLOCKINT_BIT = 9
 }
 
 
@@ -57,7 +57,7 @@ void Processor_InstructionCycleLoop() {
 	while (!Processor_PSW_BitState(POWEROFF_BIT)) {
 		Processor_FetchInstruction();
 		Processor_DecodeAndExecuteInstruction();
-		if (interruptLines_CPU)
+		if (interruptLines_CPU && !Processor_PSW_BitState(INTERRUPT_MASKED_BIT))
 			Processor_ManageInterrupts();
 	}
 }
@@ -251,7 +251,9 @@ void Processor_ManageInterrupts() {
 				// Copy PC, PSW and Accumulator registers in the system stack
 				Processor_CopyInSystemStack(MAINMEMORYSIZE-1, registerPC_CPU);
 				Processor_CopyInSystemStack(MAINMEMORYSIZE-2, registerPSW_CPU);	
-				Processor_CopyInSystemStack(MAINMEMORYSIZE-3, registerAccumulator_CPU);	
+				Processor_CopyInSystemStack(MAINMEMORYSIZE-3, registerAccumulator_CPU);
+				// Activate interrupt masked 
+				Processor_ActivatePSW_Bit(INTERRUPT_MASKED_BIT);
 				// Activate protected excution mode
 				Processor_ActivatePSW_Bit(EXECUTION_MODE_BIT);
 				// Call the appropriate OS interrupt-handling routine setting PC register
@@ -400,9 +402,9 @@ void Processor_SetPC(int pc){
 }
 
 // Setter for the RegisterA
-// void Processor_SetRegisterA(int rA) {
-//   registerA_CPU=rA;
-// }
+void Processor_SetRegisterA(int rA) {
+   registerA_CPU=rA;
+}
 
 // Getter for the Accumulator
 int Processor_GetAccumulator() {

@@ -6,9 +6,9 @@ int tics=0;
 
 void Clock_Update() {
 	tics++;
-	if (tics%INTERVALBETWEENINTERRUPS==0) {
+	if (tics % INTERVALBETWEENINTERRUPS == 0) {
 		Processor_RaiseInterrupt(CLOCKINT_BIT);
-		Processor_ManageInterrupts();
+		//Processor_ManageInterrupts();
 	}
     // ComputerSystem_DebugMessage(97,CLOCK,tics);
 }

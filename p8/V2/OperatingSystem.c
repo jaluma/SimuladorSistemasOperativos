@@ -10,7 +10,7 @@
 #include <time.h>
 
 // Functions prototypes
-void OperatingSystem_PrepareDaemons();
+void OperatingSystem_PrepareDaemons(int);
 void OperatingSystem_PCBInitialization(int, int, int, int, int,int);
 void OperatingSystem_MoveToTheREADYState(int,int);
 void OperatingSystem_Dispatch(int);
@@ -23,9 +23,10 @@ int OperatingSystem_CreateProcess(int,int);
 int OperatingSystem_ObtainMainMemory(int, int);
 int OperatingSystem_ShortTermScheduler(int);
 int OperatingSystem_ExtractFromReadyToRun(int);
+int OperatingSystem_ExtractFromBlockedToRun();
 void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
-void OperatingSystem_PrintReadyToRunQueue();
+void OperatingSystem_MoveToTheBLOCKEDState(int);
 
 // The process table
 PCB processTable[PROCESSTABLEMAXSIZE];
@@ -51,6 +52,14 @@ int numberOfNotTerminatedUserProcesses=0;
 
 // Array with types states
 char * statesNames [5]={"NEW","READY","EXECUTING","BLOCKED","EXIT"};
+
+// Times clock interruptions have been executed
+int numberOfClockInterrupts = 0;
+
+// In OperatingSystem.c  Exercise 5-b of V2 
+// Heap with blocked porcesses sort by when to wakeup 
+int sleepingProcessesQueue[PROCESSTABLEMAXSIZE]; 
+int numberOfSleepingProcesses=0;
 
 // Initial set of tasks of the OS
 void OperatingSystem_Initialize(int daemonsIndex) {
@@ -258,6 +267,7 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
 		processTable[PID].copyOfAccumulatorRegister=0;
 	}
 	processTable[PID].queueID=queueID;
+	processTable[PID].whenToWakeUp=0;
 }
 
 
@@ -269,6 +279,16 @@ void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
 		ComputerSystem_DebugMessage(110, SYSPROC, PID, statesNames[processTable[PID].state], statesNames[1]);
 		processTable[PID].state=READY;
 		OperatingSystem_PrintReadyToRunQueue();
+	} 
+}
+
+// Move a process to the BLOCKED state: it will be inserted, depending on its priority, in
+// a queue of identifiers of BLOCKED processes
+void OperatingSystem_MoveToTheBLOCKEDState(int PID) {
+	if (Heap_add(PID, sleepingProcessesQueue ,QUEUE_PRIORITY , &numberOfSleepingProcesses ,PROCESSTABLEMAXSIZE)>=0) {
+		OperatingSystem_ShowTime(SYSPROC);
+		ComputerSystem_DebugMessage(110, SYSPROC, executingProcessID, statesNames[processTable[executingProcessID].state], statesNames[3]);
+		processTable[executingProcessID].state = BLOCKED;
 	} 
 }
 
@@ -292,6 +312,17 @@ int OperatingSystem_ExtractFromReadyToRun(int queueID) {
 	int selectedProcess=NOPROCESS;
 
 	selectedProcess=Heap_poll(readyToRunQueue[queueID], QUEUE_PRIORITY ,&numberOfReadyToRunProcesses[queueID]);
+
+	// Return most priority process or NOPROCESS if empty queue
+	return selectedProcess; 
+}
+
+// Return PID of more wakeUp process in the BLOCKED queue
+int OperatingSystem_ExtractFromBlockedToRun() {
+  
+	int selectedProcess=NOPROCESS;
+
+	selectedProcess=Heap_poll(sleepingProcessesQueue, QUEUE_PRIORITY ,&numberOfSleepingProcesses);
 
 	// Return most priority process or NOPROCESS if empty queue
 	return selectedProcess; 
@@ -427,8 +458,6 @@ void OperatingSystem_HandleSystemCall() {
 			if (processTable[oldPID].priority == processTable[pid].priority) {
 				OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
 				ComputerSystem_DebugMessage(115, SHORTTERMSCHEDULE, oldPID, pid);
-				//ComputerSystem_DebugMessage(110, SYSPROC, executingProcessID, statesNames[processTable[executingProcessID].state], statesNames[3]);
-				//processTable[executingProcessID].state = BLOCKED;
 				OperatingSystem_PreemptRunningProcess();
 				
 				pid = OperatingSystem_ShortTermScheduler(USERPROCESSQUEUE);
@@ -439,6 +468,21 @@ void OperatingSystem_HandleSystemCall() {
 				OperatingSystem_Dispatch(pid);
 			}
 			break;
+			
+			case SYSCALL_SLEEP:	//  SYSCALL_SLEEP=7
+				processTable[executingProcessID].whenToWakeUp = numberOfClockInterrupts + abs(Processor_GetAccumulator() + 1);
+				
+				OperatingSystem_MoveToTheBLOCKEDState(executingProcessID);
+				
+				pid = OperatingSystem_ShortTermScheduler(USERPROCESSQUEUE);
+				
+				if (pid == NOPROCESS)
+					pid = OperatingSystem_ShortTermScheduler(DAEMONSQUEUE);
+				
+				OperatingSystem_Dispatch(pid);
+				
+				OperatingSystem_PrintStatus();
+				break;
 	}
 }
 	
@@ -493,6 +537,7 @@ void OperatingSystem_InterruptLogic(int entryPoint){
  // In OperatingSystem.c Exercise 2-b of V2
 void OperatingSystem_HandleClockInterrupt(){
 	OperatingSystem_ShowTime(SYSPROC);
-	printf("HOLA");
+	numberOfClockInterrupts++;
+	ComputerSystem_DebugMessage(120,INTERRUPT, numberOfClockInterrupts);
 } 
 

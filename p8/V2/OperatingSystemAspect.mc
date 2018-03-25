@@ -1,8 +1,9 @@
 # 1 "OperatingSystem.c"
 # 1 "<built-in>"
 # 1 "<command-line>"
+# 31 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
-# 1 "<command-line>" 2
+# 32 "<command-line>" 2
 # 1 "OperatingSystem.c"
 # 1 "OperatingSystem.h" 1
 
@@ -63,10 +64,10 @@ extern PROGRAMS_DATA *programList[20];
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef long unsigned int size_t;
 # 34 "/usr/include/stdio.h" 2 3 4
 
@@ -190,7 +191,7 @@ typedef struct _IO_FILE __FILE;
 # 31 "/usr/include/libio.h" 3 4
 # 1 "/usr/include/_G_config.h" 1 3 4
 # 15 "/usr/include/_G_config.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 16 "/usr/include/_G_config.h" 2 3 4
 
 
@@ -224,8 +225,8 @@ typedef struct
 } _G_fpos64_t;
 # 32 "/usr/include/libio.h" 2 3 4
 # 49 "/usr/include/libio.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 1 3 4
-# 40 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 1 3 4
+# 40 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 3 4
 typedef __builtin_va_list __gnuc_va_list;
 # 50 "/usr/include/libio.h" 2 3 4
 # 144 "/usr/include/libio.h" 3 4
@@ -883,13 +884,13 @@ extern void funlockfile (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__)
 # 942 "/usr/include/stdio.h" 3 4
 
 # 6 "OperatingSystem.h" 2
-# 34 "OperatingSystem.h"
+# 36 "OperatingSystem.h"
 
-# 34 "OperatingSystem.h"
+# 36 "OperatingSystem.h"
 enum ProcessStates { NEW, READY, EXECUTING, BLOCKED, EXIT};
 
 
-enum SystemCallIdentifiers { SYSCALL_END=3, SYSCALL_PRINTEXECPID=5};
+enum SystemCallIdentifiers { SYSCALL_END=3, SYSCALL_YIELD=4, SYSCALL_PRINTEXECPID=5, SYSCALL_SLEEP=7};
 
 
 typedef struct {
@@ -903,6 +904,7 @@ typedef struct {
  int copyOfAccumulatorRegister;
  int programListIndex;
  int queueID;
+ int whenToWakeUp;
 } PCB;
 
 
@@ -912,7 +914,7 @@ extern int OS_address_base;
 extern int sipID;
 
 
-void OperatingSystem_Initialize();
+void OperatingSystem_Initialize(int);
 void OperatingSystem_InterruptLogic(int);
 void OperatingSystem_HandleClockInterrupt();
 # 2 "OperatingSystem.c" 2
@@ -979,19 +981,20 @@ void MainMemory_SetMBR(MEMORYCELL *);
 
 
 
-enum PSW_BITS {POWEROFF_BIT=0, ZERO_BIT=1, NEGATIVE_BIT=2, OVERFLOW_BIT=3, EXECUTION_MODE_BIT=7};
+enum PSW_BITS {POWEROFF_BIT=0, ZERO_BIT=1, NEGATIVE_BIT=2, OVERFLOW_BIT=3, EXECUTION_MODE_BIT=7, INTERRUPT_MASKED_BIT=15};
 
 
 
-enum INT_BITS {SYSCALL_BIT=2, EXCEPTION_BIT=6, SYSCALL_YIELD=4, CLOCKINT_BIT=9};
+enum INT_BITS {SYSCALL_BIT=2, EXCEPTION_BIT=6, CLOCKINT_BIT=9};
 
 
-void Processor_InitializeInterruptVectorTable();
+void Processor_InitializeInterruptVectorTable(int);
 void Processor_InstructionCycleLoop();
 void Processor_CopyInSystemStack(int, int);
 int Processor_CopyFromSystemStack(int);
 unsigned int Processor_PSW_BitState(const unsigned int);
 char * Processor_ShowPSW();
+void Processor_RaiseInterrupt(const unsigned int);
 
 
 
@@ -1063,7 +1066,7 @@ int Heap_getFirst(int[], int);
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 33 "/usr/include/string.h" 2 3 4
 
 
@@ -1453,8 +1456,8 @@ extern int toupper_l (int __c, __locale_t __l) __attribute__ ((__nothrow__ , __l
 # 9 "OperatingSystem.c" 2
 # 1 "/usr/include/stdlib.h" 1 3 4
 # 32 "/usr/include/stdlib.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 328 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 328 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef int wchar_t;
 # 33 "/usr/include/stdlib.h" 2 3 4
 
@@ -1720,7 +1723,7 @@ typedef __clockid_t clockid_t;
 typedef __timer_t timer_t;
 # 133 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 # 146 "/usr/include/x86_64-linux-gnu/sys/types.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 147 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 
 
@@ -2210,7 +2213,7 @@ extern void cfree (void *__ptr) __attribute__ ((__nothrow__ , __leaf__));
 
 # 1 "/usr/include/alloca.h" 1 3 4
 # 24 "/usr/include/alloca.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 25 "/usr/include/alloca.h" 2 3 4
 
 
@@ -2491,7 +2494,7 @@ extern int getloadavg (double __loadavg[], int __nelem)
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 38 "/usr/include/time.h" 2 3 4
 
 
@@ -2706,7 +2709,7 @@ extern int timespec_get (struct timespec *__ts, int __base)
 
 
 # 13 "OperatingSystem.c"
-void OperatingSystem_PrepareDaemons();
+void OperatingSystem_PrepareDaemons(int);
 void OperatingSystem_PCBInitialization(int, int, int, int, int,int);
 void OperatingSystem_MoveToTheREADYState(int,int);
 void OperatingSystem_Dispatch(int);
@@ -2719,9 +2722,10 @@ int OperatingSystem_CreateProcess(int,int);
 int OperatingSystem_ObtainMainMemory(int, int);
 int OperatingSystem_ShortTermScheduler(int);
 int OperatingSystem_ExtractFromReadyToRun(int);
+int OperatingSystem_ExtractFromBlockedToRun();
 void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
-void OperatingSystem_PrintReadyToRunQueue();
+void OperatingSystem_MoveToTheBLOCKEDState(int);
 
 
 PCB processTable[4];
@@ -2747,6 +2751,14 @@ int numberOfNotTerminatedUserProcesses=0;
 
 
 char * statesNames [5]={"NEW","READY","EXECUTING","BLOCKED","EXIT"};
+
+
+int numberOfClockInterrupts = 0;
+
+
+
+int sleepingProcessesQueue[4];
+int numberOfSleepingProcesses=0;
 
 
 void OperatingSystem_Initialize(int daemonsIndex) {
@@ -2826,9 +2838,9 @@ int OperatingSystem_LongTermScheduler() {
   numberOfSuccessfullyCreatedProcesses=0;
 
  for (i=0; programList[i]!=
-# 132 "OperatingSystem.c" 3 4
+# 141 "OperatingSystem.c" 3 4
                           ((void *)0) 
-# 132 "OperatingSystem.c"
+# 141 "OperatingSystem.c"
                                && i<20; i++) {
   if (programList[i]->type == (unsigned int) 1)
    PID=OperatingSystem_CreateProcess(i, 1);
@@ -2958,6 +2970,7 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
   processTable[PID].copyOfAccumulatorRegister=0;
  }
  processTable[PID].queueID=queueID;
+ processTable[PID].whenToWakeUp=0;
 }
 
 
@@ -2969,6 +2982,16 @@ void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
   ComputerSystem_DebugMessage(110, 'p', PID, statesNames[processTable[PID].state], statesNames[1]);
   processTable[PID].state=READY;
   OperatingSystem_PrintReadyToRunQueue();
+ }
+}
+
+
+
+void OperatingSystem_MoveToTheBLOCKEDState(int PID) {
+ if (Heap_add(PID, sleepingProcessesQueue ,1 , &numberOfSleepingProcesses ,4)>=0) {
+  OperatingSystem_ShowTime('p');
+  ComputerSystem_DebugMessage(110, 'p', executingProcessID, statesNames[processTable[executingProcessID].state], statesNames[3]);
+  processTable[executingProcessID].state = BLOCKED;
  }
 }
 
@@ -2992,6 +3015,17 @@ int OperatingSystem_ExtractFromReadyToRun(int queueID) {
  int selectedProcess=-1;
 
  selectedProcess=Heap_poll(readyToRunQueue[queueID], 1 ,&numberOfReadyToRunProcesses[queueID]);
+
+
+ return selectedProcess;
+}
+
+
+int OperatingSystem_ExtractFromBlockedToRun() {
+
+ int selectedProcess=-1;
+
+ selectedProcess=Heap_poll(sleepingProcessesQueue, 1 ,&numberOfSleepingProcesses);
 
 
  return selectedProcess;
@@ -3127,8 +3161,6 @@ void OperatingSystem_HandleSystemCall() {
    if (processTable[oldPID].priority == processTable[pid].priority) {
     OperatingSystem_ShowTime('s');
     ComputerSystem_DebugMessage(115, 's', oldPID, pid);
-
-
     OperatingSystem_PreemptRunningProcess();
 
     pid = OperatingSystem_ShortTermScheduler(0);
@@ -3139,6 +3171,21 @@ void OperatingSystem_HandleSystemCall() {
     OperatingSystem_Dispatch(pid);
    }
    break;
+
+   case SYSCALL_SLEEP:
+    processTable[executingProcessID].whenToWakeUp = numberOfClockInterrupts + abs(Processor_GetAccumulator() + 1);
+
+    OperatingSystem_MoveToTheBLOCKEDState(executingProcessID);
+
+    pid = OperatingSystem_ShortTermScheduler(0);
+
+    if (pid == -1)
+     pid = OperatingSystem_ShortTermScheduler(1);
+
+    OperatingSystem_Dispatch(pid);
+
+    OperatingSystem_PrintStatus();
+    break;
  }
 }
 
@@ -3193,5 +3240,6 @@ void OperatingSystem_InterruptLogic(int entryPoint){
 
 void OperatingSystem_HandleClockInterrupt(){
  OperatingSystem_ShowTime('p');
- printf("HOLA");
+ numberOfClockInterrupts++;
+ ComputerSystem_DebugMessage(120,'i', numberOfClockInterrupts);
 }

@@ -1,8 +1,9 @@
 # 1 "Processor.c"
 # 1 "<built-in>"
 # 1 "<command-line>"
+# 31 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
-# 1 "<command-line>" 2
+# 32 "<command-line>" 2
 # 1 "Processor.c"
 # 1 "Processor.h" 1
 
@@ -30,19 +31,20 @@ void MainMemory_SetMBR(MEMORYCELL *);
 
 
 
-enum PSW_BITS {POWEROFF_BIT=0, ZERO_BIT=1, NEGATIVE_BIT=2, OVERFLOW_BIT=3, EXECUTION_MODE_BIT=7};
+enum PSW_BITS {POWEROFF_BIT=0, ZERO_BIT=1, NEGATIVE_BIT=2, OVERFLOW_BIT=3, EXECUTION_MODE_BIT=7, INTERRUPT_MASKED_BIT=15};
 
 
 
-enum INT_BITS {SYSCALL_BIT=2, EXCEPTION_BIT=6, SYSCALL_YIELD=4, CLOCKINT_BIT=9};
+enum INT_BITS {SYSCALL_BIT=2, EXCEPTION_BIT=6, CLOCKINT_BIT=9};
 
 
-void Processor_InitializeInterruptVectorTable();
+void Processor_InitializeInterruptVectorTable(int);
 void Processor_InstructionCycleLoop();
 void Processor_CopyInSystemStack(int, int);
 int Processor_CopyFromSystemStack(int);
 unsigned int Processor_PSW_BitState(const unsigned int);
 char * Processor_ShowPSW();
+void Processor_RaiseInterrupt(const unsigned int);
 
 
 
@@ -132,10 +134,10 @@ extern PROGRAMS_DATA *programList[20];
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef long unsigned int size_t;
 # 34 "/usr/include/stdio.h" 2 3 4
 
@@ -259,7 +261,7 @@ typedef struct _IO_FILE __FILE;
 # 31 "/usr/include/libio.h" 3 4
 # 1 "/usr/include/_G_config.h" 1 3 4
 # 15 "/usr/include/_G_config.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 16 "/usr/include/_G_config.h" 2 3 4
 
 
@@ -293,8 +295,8 @@ typedef struct
 } _G_fpos64_t;
 # 32 "/usr/include/libio.h" 2 3 4
 # 49 "/usr/include/libio.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 1 3 4
-# 40 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 1 3 4
+# 40 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 3 4
 typedef __builtin_va_list __gnuc_va_list;
 # 50 "/usr/include/libio.h" 2 3 4
 # 144 "/usr/include/libio.h" 3 4
@@ -952,13 +954,13 @@ extern void funlockfile (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__)
 # 942 "/usr/include/stdio.h" 3 4
 
 # 6 "OperatingSystem.h" 2
-# 34 "OperatingSystem.h"
+# 36 "OperatingSystem.h"
 
-# 34 "OperatingSystem.h"
+# 36 "OperatingSystem.h"
 enum ProcessStates { NEW, READY, EXECUTING, BLOCKED, EXIT};
 
 
-enum SystemCallIdentifiers { SYSCALL_END=3, SYSCALL_PRINTEXECPID=5};
+enum SystemCallIdentifiers { SYSCALL_END=3, SYSCALL_YIELD=4, SYSCALL_PRINTEXECPID=5, SYSCALL_SLEEP=7};
 
 
 typedef struct {
@@ -972,6 +974,7 @@ typedef struct {
  int copyOfAccumulatorRegister;
  int programListIndex;
  int queueID;
+ int whenToWakeUp;
 } PCB;
 
 
@@ -981,7 +984,7 @@ extern int OS_address_base;
 extern int sipID;
 
 
-void OperatingSystem_Initialize();
+void OperatingSystem_Initialize(int);
 void OperatingSystem_InterruptLogic(int);
 void OperatingSystem_HandleClockInterrupt();
 # 3 "Processor.c" 2
@@ -1026,7 +1029,7 @@ int MMU_GetLimit();
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 33 "/usr/include/string.h" 2 3 4
 
 
@@ -1286,7 +1289,6 @@ extern char *stpncpy (char *__restrict __dest,
 void Processor_FetchInstruction();
 void Processor_DecodeAndExecuteInstruction();
 void Processor_ManageInterrupts();
-void Processor_RaiseInterrupt(const unsigned int);
 void Processor_ACKInterrupt(const unsigned int);
 unsigned int Processor_GetInterruptLineStatus(const unsigned int);
 void Processor_ActivatePSW_Bit(const unsigned int);
@@ -1294,7 +1296,7 @@ void Processor_DeactivatePSW_Bit(const unsigned int);
 void Processor_UpdatePSW();
 void Processor_CheckOverflow(int,int);
 
-
+void Processor_SetRegisterA(int);
 
 
 int registerPC_CPU;
@@ -1322,6 +1324,7 @@ void Processor_InitializeInterruptVectorTable(int interruptVectorInitialAddress)
 
  interruptVectorTable[SYSCALL_BIT]=interruptVectorInitialAddress;
  interruptVectorTable[EXCEPTION_BIT]=interruptVectorInitialAddress+2;
+ interruptVectorTable[CLOCKINT_BIT]=interruptVectorInitialAddress+4;
 }
 
 
@@ -1333,7 +1336,7 @@ void Processor_InstructionCycleLoop() {
  while (!Processor_PSW_BitState(POWEROFF_BIT)) {
   Processor_FetchInstruction();
   Processor_DecodeAndExecuteInstruction();
-  if (interruptLines_CPU)
+  if (interruptLines_CPU && !Processor_PSW_BitState(INTERRUPT_MASKED_BIT))
    Processor_ManageInterrupts();
  }
 }
@@ -1529,6 +1532,8 @@ void Processor_ManageInterrupts() {
     Processor_CopyInSystemStack(300 -2, registerPSW_CPU);
     Processor_CopyInSystemStack(300 -3, registerAccumulator_CPU);
 
+    Processor_ActivatePSW_Bit(INTERRUPT_MASKED_BIT);
+
     Processor_ActivatePSW_Bit(EXECUTION_MODE_BIT);
 
     registerPC_CPU=interruptVectorTable[i];
@@ -1676,9 +1681,9 @@ void Processor_SetPC(int pc){
 }
 
 
-
-
-
+void Processor_SetRegisterA(int rA) {
+   registerA_CPU=rA;
+}
 
 
 int Processor_GetAccumulator() {
@@ -1716,5 +1721,7 @@ char * Processor_ShowPSW(){
   pswmask[tam-ZERO_BIT]='Z';
  if (Processor_PSW_BitState(POWEROFF_BIT))
   pswmask[tam-POWEROFF_BIT]='S';
+ if (Processor_PSW_BitState(INTERRUPT_MASKED_BIT))
+  pswmask[tam-INTERRUPT_MASKED_BIT]='M';
  return pswmask;
 }

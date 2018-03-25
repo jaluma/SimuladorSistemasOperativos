@@ -197,10 +197,10 @@ void Processor_DecodeAndExecuteInstruction() {
 			  
 		// Instruction OS
 		case 'o': // Make a operating system routine in entry point indicated by operand1
+			// Show final part of HARDWARE message with CPU registers
+			// Show message: " (PC: registerPC_CPU, Accumulator: registerAccumulator_CPU, PSW: registerPSW_CPU [Processor_ShowPSW()]\n
+			ComputerSystem_DebugMessage(3, HARDWARE,registerPC_CPU,registerAccumulator_CPU,registerPSW_CPU,Processor_ShowPSW());
 			if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1) {
-				// Show final part of HARDWARE message with CPU registers
-				// Show message: " (PC: registerPC_CPU, Accumulator: registerAccumulator_CPU, PSW: registerPSW_CPU [Processor_ShowPSW()]\n
-				ComputerSystem_DebugMessage(3, HARDWARE,registerPC_CPU,registerAccumulator_CPU,registerPSW_CPU,Processor_ShowPSW());
 				// Not all operating system code is executed in simulated processor, but really must do it... 
 				OperatingSystem_InterruptLogic(registerIR_CPU.operand1);
 				registerPC_CPU++;
