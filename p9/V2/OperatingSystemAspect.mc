@@ -2796,10 +2796,7 @@ void OperatingSystem_Initialize(int daemonsIndex) {
 
 
 
- selectedProcess=OperatingSystem_ShortTermScheduler(0);
-
- if (selectedProcess == -1)
-  selectedProcess=OperatingSystem_ShortTermScheduler(1);
+ selectedProcess=OperatingSystem_ShortTermScheduler();
 
 
  OperatingSystem_Dispatch(selectedProcess);
@@ -2837,9 +2834,9 @@ int OperatingSystem_LongTermScheduler() {
   numberOfSuccessfullyCreatedProcesses=0;
 
  for (i=0; programList[i]!=
-# 141 "OperatingSystem.c" 3 4
+# 138 "OperatingSystem.c" 3 4
                           ((void *)0) 
-# 141 "OperatingSystem.c"
+# 138 "OperatingSystem.c"
                                && i<20; i++) {
   if (programList[i]->type == (unsigned int) 1)
    PID=OperatingSystem_CreateProcess(i, 1);
@@ -2865,8 +2862,6 @@ int OperatingSystem_LongTermScheduler() {
    if (programList[i]->type == (unsigned int) 0) {
     numberOfNotTerminatedUserProcesses++;
     OperatingSystem_MoveToTheREADYState(PID, 0);
-   } else {
-    OperatingSystem_MoveToTheREADYState(PID, 1);
    }
   }
  }
@@ -3005,7 +3000,7 @@ int OperatingSystem_ShortTermScheduler() {
  selectedProcess=OperatingSystem_ExtractFromReadyToRun(0);
 
  if (selectedProcess == -1)
-  selectedProcess=OperatingSystem_ShortTermScheduler(1);
+  selectedProcess=OperatingSystem_ExtractFromReadyToRun(1);
 
  return selectedProcess;
 }
@@ -3119,10 +3114,7 @@ void OperatingSystem_TerminateProcess() {
  }
 
 
- selectedProcess=OperatingSystem_ShortTermScheduler(0);
-
- if (selectedProcess == -1)
-  selectedProcess=OperatingSystem_ShortTermScheduler(1);
+ selectedProcess=OperatingSystem_ShortTermScheduler();
 
 
  OperatingSystem_Dispatch(selectedProcess);
@@ -3165,10 +3157,7 @@ void OperatingSystem_HandleSystemCall() {
     ComputerSystem_DebugMessage(115, 's', oldPID, pid);
     OperatingSystem_PreemptRunningProcess();
 
-    pid = OperatingSystem_ShortTermScheduler(0);
-
-    if (pid == -1)
-     pid = OperatingSystem_ShortTermScheduler(1);
+    pid = OperatingSystem_ShortTermScheduler();
 
     OperatingSystem_Dispatch(pid);
    }
@@ -3179,10 +3168,7 @@ void OperatingSystem_HandleSystemCall() {
 
     OperatingSystem_MoveToTheBLOCKEDState(executingProcessID);
 
-    pid = OperatingSystem_ShortTermScheduler(0);
-
-    if (pid == -1)
-     pid = OperatingSystem_ShortTermScheduler(1);
+    pid = OperatingSystem_ShortTermScheduler();
 
     OperatingSystem_Dispatch(pid);
 
@@ -3237,6 +3223,8 @@ void OperatingSystem_HandleClockInterrupt(){
    OperatingSystem_ShowTime('s');
    ComputerSystem_DebugMessage(121, 's', executingProcessID, PID);
 
+   OperatingSystem_MoveToTheBLOCKEDState(executingProcessID);
+   OperatingSystem_Dispatch(first);
    OperatingSystem_PrintStatus();
  }
 

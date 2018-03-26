@@ -521,6 +521,8 @@ void OperatingSystem_HandleClockInterrupt(){
 		 OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
 		 ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, PID);
 		 // codigo a implementar
+		 OperatingSystem_MoveToTheBLOCKEDState(executingProcessID);
+		 OperatingSystem_Dispatch(first);
 		 OperatingSystem_PrintStatus();
 	}
 
