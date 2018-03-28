@@ -1,0 +1,195 @@
+38 Messages Loaded
+Asserts file unavailable
+[0] User program list:
+	Program [programaEntrega-V2-1] with arrival time [0]
+	Program [programFinalV1] with arrival time [0]
+	[0] New process [3] moving to the [NEW] state
+	[0] Process [3] created from program [SystemIdleProcess]
+	[0] Process [3] moving from the [NEW] state to the [READY] state
+	[0] New process [0] moving to the [NEW] state
+	[0] Process [0] created from program [programaEntrega-V2-1]
+	[0] Process [0] moving from the [NEW] state to the [READY] state
+	[0] New process [1] moving to the [NEW] state
+	[0] Process [1] created from program [programFinalV1]
+	[0] Process [1] moving from the [NEW] state to the [READY] state
+	[0] Running Process Information: [PID: -1, Priority: 1, WakeUp: 0, Queue: USER]
+	[0] Ready-to-run processes queue:
+		USER: [0,123], [1,199]
+		DAEMONS: [3,100]
+	[0] SLEEPING Queue: 
+	[0] PID association with program's name:
+		PID: 0 -> programaEntrega-V2-1
+		PID: 1 -> programFinalV1
+		PID: 3 -> SystemIdleProcess
+	[0] Process [0] moving from the [READY] state to the [EXECUTING] state
+[1] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[2] a 5 1 (PC: 1, Accumulator: 6, PSW: 0 [----------------])
+[3] t 7 0 (PC: 2, Accumulator: 6, PSW: 0 [----------------])
+[4] o 2 0 (PC: 241, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[5] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[5] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[5] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[5] Running Process Information: [PID: 0, Priority: 123, WakeUp: 7, Queue: USER]
+	[5] Ready-to-run processes queue:
+		USER: [1,199]
+		DAEMONS: [3,100]
+	[5] SLEEPING Queue: [0, 123, 7]
+	[5] PID association with program's name:
+		PID: 0 -> programaEntrega-V2-1
+		PID: 1 -> programFinalV1
+		PID: 3 -> SystemIdleProcess
+[6] y 0 0 (PC: 2, Accumulator: 6, PSW: 0 [----------------])
+[7] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[8] Clock interrupt number [1] has occurred
+[9] y 0 0 (PC: 2, Accumulator: 6, PSW: 0 [----------------])
+[10] t 4 0 (PC: 3, Accumulator: 6, PSW: 0 [----------------])
+[11] o 2 0 (PC: 241, Accumulator: 6, PSW: 32896 [M-------X-------])
+[13] y 0 0 (PC: 3, Accumulator: 6, PSW: 0 [----------------])
+[14] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[15] Clock interrupt number [2] has occurred
+[16] y 0 0 (PC: 3, Accumulator: 6, PSW: 0 [----------------])
+[17] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[18] Clock interrupt number [3] has occurred
+[19] y 0 0 (PC: 3, Accumulator: 6, PSW: 0 [----------------])
+[20] t 7 0 (PC: 4, Accumulator: 6, PSW: 0 [----------------])
+[21] o 2 0 (PC: 241, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[22] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[22] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[22] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[22] Running Process Information: [PID: 0, Priority: 123, WakeUp: 10, Queue: USER]
+	[22] Ready-to-run processes queue:
+		USER: [1,199]
+		DAEMONS: [3,100]
+	[22] SLEEPING Queue: [0, 123, 10], [0, 123, 10]
+	[22] PID association with program's name:
+		PID: 0 -> programaEntrega-V2-1
+		PID: 1 -> programFinalV1
+		PID: 3 -> SystemIdleProcess
+[23] y 0 0 (PC: 4, Accumulator: 6, PSW: 0 [----------------])
+[24] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[25] Clock interrupt number [4] has occurred
+[26] y 0 0 (PC: 4, Accumulator: 6, PSW: 0 [----------------])
+[27] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[28] Clock interrupt number [5] has occurred
+[29] y 0 0 (PC: 4, Accumulator: 6, PSW: 0 [----------------])
+[30] t 4 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[31] o 2 0 (PC: 241, Accumulator: 6, PSW: 32896 [M-------X-------])
+[33] y 0 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[34] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[35] Clock interrupt number [6] has occurred
+[36] y 0 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[37] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[38] Clock interrupt number [7] has occurred
+[39] y 0 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[40] t 3 0 (PC: 6, Accumulator: 6, PSW: 0 [----------------])
+[41] o 2 0 (PC: 241, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[42] Process [0] has requested to terminate
+	[42] Process [0] moving from the [EXECUTING] state to the [EXIT] state
+	[42] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[42] Running Process Information: [PID: 1, Priority: 199, WakeUp: 0, Queue: USER]
+	[42] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[42] SLEEPING Queue: [0, 123, 10], [0, 123, 10]
+	[42] PID association with program's name:
+		PID: 0 -> programaEntrega-V2-1
+		PID: 1 -> programFinalV1
+		PID: 3 -> SystemIdleProcess
+[43] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[44] o 9 0 (PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[45] Clock interrupt number [8] has occurred
+[46] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[47] o 9 0 (PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[48] Clock interrupt number [9] has occurred
+[49] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[50] a 1 98 (PC: 1, Accumulator: 99, PSW: 0 [----------------])
+[51] o 9 0 (PC: 245, Accumulator: 99, PSW: 32896 [M-------X-------])
+	[52] Clock interrupt number [10] has occurred
+	[52] Process [0] moving from the [EXIT] state to the [READY] state
+	[52] Running Process Information: [PID: 1, Priority: 199, WakeUp: 0, Queue: USER]
+	[52] Ready-to-run processes queue:
+		USER: [0,123]
+		DAEMONS: [3,100]
+	[52] SLEEPING Queue: [0, 123, 10]
+	[52] PID association with program's name:
+		PID: 0 -> programaEntrega-V2-1
+		PID: 1 -> programFinalV1
+		PID: 3 -> SystemIdleProcess
+	[52] Process [1] is thrown out of the processor by process [0]
+	[52] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[52] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[52] Running Process Information: [PID: 0, Priority: 123, WakeUp: 10, Queue: USER]
+	[52] Ready-to-run processes queue:
+		USER: [0,123]
+		DAEMONS: [3,100]
+	[52] SLEEPING Queue: [0, 123, 10], [1, 199, 0]
+	[52] PID association with program's name:
+		PID: 0 -> programaEntrega-V2-1
+		PID: 1 -> programFinalV1
+		PID: 3 -> SystemIdleProcess
+[53] y 0 0 (PC: 4, Accumulator: 6, PSW: 0 [----------------])
+[54] t 4 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[55] o 2 0 (PC: 241, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[56] Process [0] transfers control of the processor to process [0]
+	[56] Process [0] moving from the [EXECUTING] state to the [READY] state
+	[56] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[56] Running Process Information: [PID: 0, Priority: 123, WakeUp: 10, Queue: USER]
+	[56] Ready-to-run processes queue:
+		USER: [0,123]
+		DAEMONS: [3,100]
+	[56] SLEEPING Queue: [0, 123, 10], [1, 199, 0]
+	[56] PID association with program's name:
+		PID: 0 -> programaEntrega-V2-1
+		PID: 1 -> programFinalV1
+		PID: 3 -> SystemIdleProcess
+[57] y 0 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[58] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[59] Clock interrupt number [11] has occurred
+[60] y 0 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[61] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[62] Clock interrupt number [12] has occurred
+[63] y 0 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[64] t 3 0 (PC: 6, Accumulator: 6, PSW: 0 [----------------])
+[65] o 2 0 (PC: 241, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[66] Process [0] has requested to terminate
+	[66] Process [0] moving from the [EXECUTING] state to the [EXIT] state
+	[66] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[66] Running Process Information: [PID: 0, Priority: 123, WakeUp: 10, Queue: USER]
+	[66] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[66] SLEEPING Queue: [0, 123, 10], [1, 199, 0]
+	[66] PID association with program's name:
+		PID: 0 -> programaEntrega-V2-1
+		PID: 1 -> programFinalV1
+		PID: 3 -> SystemIdleProcess
+[67] y 0 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[68] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[69] Clock interrupt number [13] has occurred
+[70] y 0 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[71] o 9 0 (PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[72] Clock interrupt number [14] has occurred
+[73] y 0 0 (PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[74] t 3 0 (PC: 6, Accumulator: 6, PSW: 0 [----------------])
+[75] o 2 0 (PC: 241, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[76] Process [0] has requested to terminate
+	[76] Process [0] moving from the [EXECUTING] state to the [EXIT] state
+	[76] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[76] Running Process Information: [PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[76] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[76] SLEEPING Queue: [0, 123, 10], [1, 199, 0]
+	[76] PID association with program's name:
+		PID: 0 -> programaEntrega-V2-1
+		PID: 1 -> programFinalV1
+		PID: 3 -> SystemIdleProcess
+[77] y 0 0 (PC: 183, Accumulator: 0, PSW: 130 [--------X-----Z-])
+[78] o 9 0 (PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[79] Clock interrupt number [15] has occurred
+[80] y 0 0 (PC: 183, Accumulator: 0, PSW: 130 [--------X-----Z-])
+[81] o 9 0 (PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[82] Clock interrupt number [16] has occurred
+[83] y 0 0 (PC: 183, Accumulator: 0, PSW: 130 [--------X-----Z-])
+[84] h 0 0 (PC: 183, Accumulator: 0, PSW: 131 [--------X-----ZS])
+[84] END of the simulation

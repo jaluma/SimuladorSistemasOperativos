@@ -159,10 +159,17 @@ int OperatingSystem_LongTermScheduler() {
 			// Move process to the ready state
 			if (programList[i]->type == USERPROGRAM) {
 				numberOfNotTerminatedUserProcesses++;
+			}
+			
+			if (programList[i]->type == DAEMONPROGRAM)
+				OperatingSystem_MoveToTheREADYState(PID, DAEMONSQUEUE);
+			else
 				OperatingSystem_MoveToTheREADYState(PID, USERPROCESSQUEUE);
-			} 
 		}
 	}
+	
+	if (numberOfSuccessfullyCreatedProcesses > 1)		// revisar
+		OperatingSystem_PrintStatus();
 
 	// Return the number of succesfully created processes
 	return numberOfSuccessfullyCreatedProcesses;
@@ -273,14 +280,14 @@ void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
 		OperatingSystem_ShowTime(SYSPROC);
 		ComputerSystem_DebugMessage(110, SYSPROC, PID, statesNames[processTable[PID].state], statesNames[1]);
 		processTable[PID].state=READY;
-		OperatingSystem_PrintReadyToRunQueue();
+		//OperatingSystem_PrintReadyToRunQueue();
 	} 
 }
 
 // Move a process to the BLOCKED state: it will be inserted, depending on its priority, in
 // a queue of identifiers of BLOCKED processes
 void OperatingSystem_MoveToTheBLOCKEDState(int PID) {
-	if (Heap_add(PID, sleepingProcessesQueue ,QUEUE_PRIORITY , &numberOfSleepingProcesses ,PROCESSTABLEMAXSIZE)>=0) {
+	if (Heap_add(PID, sleepingProcessesQueue, QUEUE_PRIORITY, &numberOfSleepingProcesses, PROCESSTABLEMAXSIZE)>=0) {
 		OperatingSystem_ShowTime(SYSPROC);
 		ComputerSystem_DebugMessage(110, SYSPROC, executingProcessID, statesNames[processTable[executingProcessID].state], statesNames[3]);
 		processTable[executingProcessID].state = BLOCKED;
@@ -367,6 +374,17 @@ void OperatingSystem_PreemptRunningProcess() {
 	executingProcessID=NOPROCESS;
 }
 
+// Function invoked when the executing process leaves the CPU 
+void OperatingSystem_PreemptRunningProcessToBlock() {
+
+	// Save in the process' PCB essential values stored in hardware registers and the system stack
+	OperatingSystem_SaveContext(executingProcessID);
+	// Change the process' state
+	OperatingSystem_MoveToTheBLOCKEDState(executingProcessID);
+	// The processor is not assigned until the OS selects another process
+	executingProcessID=NOPROCESS;
+}
+
 
 // Save in the process' PCB essential values stored in hardware registers and the system stack
 void OperatingSystem_SaveContext(int PID) {
@@ -390,6 +408,7 @@ void OperatingSystem_HandleException() {
 	ComputerSystem_DebugMessage(23,SYSPROC,executingProcessID);
 	
 	OperatingSystem_TerminateProcess();
+	OperatingSystem_PrintStatus();
 }
 
 
@@ -441,6 +460,7 @@ void OperatingSystem_HandleSystemCall() {
 			OperatingSystem_ShowTime(SYSPROC);
 			ComputerSystem_DebugMessage(25,SYSPROC,executingProcessID);
 			OperatingSystem_TerminateProcess();
+			OperatingSystem_PrintStatus();
 			break;
 			
 		case SYSCALL_YIELD: //  SYSCALL_YIELD=4
@@ -458,16 +478,18 @@ void OperatingSystem_HandleSystemCall() {
 				pid = OperatingSystem_ShortTermScheduler();
 				
 				OperatingSystem_Dispatch(pid);
+				
+				OperatingSystem_PrintStatus();
 			}
 			break;
 			
 			case SYSCALL_SLEEP:	//  SYSCALL_SLEEP=7
 				processTable[executingProcessID].whenToWakeUp = numberOfClockInterrupts + abs(Processor_GetAccumulator()) + 1;
 				
-				OperatingSystem_MoveToTheBLOCKEDState(executingProcessID);
+				//OperatingSystem_PreemptRunningProcess();
+				OperatingSystem_PreemptRunningProcessToBlock();
 				
 				pid = OperatingSystem_ShortTermScheduler();
-				
 				OperatingSystem_Dispatch(pid);
 				
 				OperatingSystem_PrintStatus();
@@ -509,21 +531,22 @@ void OperatingSystem_HandleClockInterrupt(){
 		}
 	}
 	
-	if (sleepTrue)
-		 OperatingSystem_PrintStatus();
-	
-	first = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);
+	if (sleepTrue) {
+		OperatingSystem_PrintStatus();
+		 
+		first = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);
 			
-	if (first == NOPROCESS)
+		if (first == NOPROCESS)
 			first = Heap_getFirst(readyToRunQueue[DAEMONSQUEUE], numberOfReadyToRunProcesses[DAEMONSQUEUE]);
 			
-	if (processTable[executingProcessID].priority < processTable[first].priority) {
-		 OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
-		 ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, PID);
-		 // codigo a implementar
-		 OperatingSystem_MoveToTheBLOCKEDState(executingProcessID);
-		 OperatingSystem_Dispatch(first);
-		 OperatingSystem_PrintStatus();
+		if (processTable[executingProcessID].priority < processTable[first].priority) {
+			OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
+			ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, PID);
+			OperatingSystem_MoveToTheREADYState(executingProcessID, processTable[executingProcessID].queueID);
+			OperatingSystem_ShortTermScheduler();
+			OperatingSystem_Dispatch(first);
+			OperatingSystem_PrintStatus();
+		}
 	}
 
 } 
