@@ -27,7 +27,6 @@ int OperatingSystem_ExtractFromBlockedToReady();
 void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
 void OperatingSystem_MoveToTheBLOCKEDState(int);
- int OperatingSystem_GetFirstPID(int** heap, int* numberOfElements);
 
 // The process table
 PCB processTable[PROCESSTABLEMAXSIZE];
@@ -389,7 +388,7 @@ void OperatingSystem_PreemptRunningProcessToBlock() {
 
 // Save in the process' PCB essential values stored in hardware registers and the system stack
 void OperatingSystem_SaveContext(int PID) {
-	//printf("PID: %d\n", executingProcessID);
+
 	// Load PC saved for interrupt manager
 	processTable[PID].copyOfPCRegister=Processor_CopyFromSystemStack(MAINMEMORYSIZE-1);
 	

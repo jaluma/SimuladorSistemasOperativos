@@ -2726,7 +2726,6 @@ int OperatingSystem_ExtractFromBlockedToReady();
 void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
 void OperatingSystem_MoveToTheBLOCKEDState(int);
- int OperatingSystem_GetFirstPID(int** heap, int* numberOfElements);
 
 
 PCB processTable[4];
@@ -2836,9 +2835,9 @@ int OperatingSystem_LongTermScheduler() {
   numberOfSuccessfullyCreatedProcesses=0;
 
  for (i=0; programList[i]!=
-# 139 "OperatingSystem.c" 3 4
+# 138 "OperatingSystem.c" 3 4
                           ((void *)0) 
-# 139 "OperatingSystem.c"
+# 138 "OperatingSystem.c"
                                && i<20; i++) {
   if (programList[i]->type == (unsigned int) 1)
    PID=OperatingSystem_CreateProcess(i, 1);
