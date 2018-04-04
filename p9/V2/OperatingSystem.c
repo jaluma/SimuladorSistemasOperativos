@@ -23,10 +23,11 @@ int OperatingSystem_CreateProcess(int,int);
 int OperatingSystem_ObtainMainMemory(int, int);
 int OperatingSystem_ShortTermScheduler();
 int OperatingSystem_ExtractFromReadyToRun(int);
-int OperatingSystem_ExtractFromBlockedToRun();
+int OperatingSystem_ExtractFromBlockedToReady();
 void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
 void OperatingSystem_MoveToTheBLOCKEDState(int);
+ int OperatingSystem_GetFirstPID(int** heap, int* numberOfElements);
 
 // The process table
 PCB processTable[PROCESSTABLEMAXSIZE];
@@ -276,10 +277,10 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
 // Move a process to the READY state: it will be inserted, depending on its priority, in
 // a queue of identifiers of READY processes
 void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
-	if (Heap_add(PID, readyToRunQueue[queueID] ,QUEUE_PRIORITY , &numberOfReadyToRunProcesses[queueID] ,PROCESSTABLEMAXSIZE)>=0) {
+	if (Heap_add(PID, readyToRunQueue[queueID], QUEUE_PRIORITY, &numberOfReadyToRunProcesses[queueID], PROCESSTABLEMAXSIZE)>=0) {
 		OperatingSystem_ShowTime(SYSPROC);
 		ComputerSystem_DebugMessage(110, SYSPROC, PID, statesNames[processTable[PID].state], statesNames[1]);
-		processTable[PID].state=READY;
+		processTable[PID].state = READY;
 		//OperatingSystem_PrintReadyToRunQueue();
 	} 
 }
@@ -323,7 +324,7 @@ int OperatingSystem_ExtractFromReadyToRun(int queueID) {
 }
 
 // Return PID of more wakeUp process in the BLOCKED queue
-int OperatingSystem_ExtractFromBlockedToRun() {
+int OperatingSystem_ExtractFromBlockedToReady() {
   
 	int selectedProcess=NOPROCESS;
 
@@ -388,7 +389,7 @@ void OperatingSystem_PreemptRunningProcessToBlock() {
 
 // Save in the process' PCB essential values stored in hardware registers and the system stack
 void OperatingSystem_SaveContext(int PID) {
-	
+	//printf("PID: %d\n", executingProcessID);
 	// Load PC saved for interrupt manager
 	processTable[PID].copyOfPCRegister=Processor_CopyFromSystemStack(MAINMEMORYSIZE-1);
 	
@@ -442,7 +443,7 @@ void OperatingSystem_TerminateProcess() {
 void OperatingSystem_HandleSystemCall() {
   
 	int systemCallID;
-	int pid;
+	int PID;
 	int oldPID;
 
 	// Register A contains the identifier of the issued system call
@@ -459,25 +460,25 @@ void OperatingSystem_HandleSystemCall() {
 			// Show message: "Process [executingProcessID] has requested to terminate\n"
 			OperatingSystem_ShowTime(SYSPROC);
 			ComputerSystem_DebugMessage(25,SYSPROC,executingProcessID);
+
 			OperatingSystem_TerminateProcess();
 			OperatingSystem_PrintStatus();
 			break;
 			
 		case SYSCALL_YIELD: //  SYSCALL_YIELD=4
 			oldPID = executingProcessID;
-			pid = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);
+			PID = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);
 			
-			if (pid == NOPROCESS)
-				pid = Heap_getFirst(readyToRunQueue[DAEMONSQUEUE], numberOfReadyToRunProcesses[DAEMONSQUEUE]);
+			if (PID == NOPROCESS)
+				PID = Heap_getFirst(readyToRunQueue[DAEMONSQUEUE], numberOfReadyToRunProcesses[DAEMONSQUEUE]);
 			
-			if (processTable[oldPID].priority == processTable[pid].priority) {
+			if (processTable[oldPID].priority == processTable[PID].priority) {
 				OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
-				ComputerSystem_DebugMessage(115, SHORTTERMSCHEDULE, oldPID, pid);
+				ComputerSystem_DebugMessage(115, SHORTTERMSCHEDULE, oldPID, PID);
+				
 				OperatingSystem_PreemptRunningProcess();
-				
-				pid = OperatingSystem_ShortTermScheduler();
-				
-				OperatingSystem_Dispatch(pid);
+				PID = OperatingSystem_ShortTermScheduler();
+				OperatingSystem_Dispatch(PID);
 				
 				OperatingSystem_PrintStatus();
 			}
@@ -488,9 +489,8 @@ void OperatingSystem_HandleSystemCall() {
 				
 				//OperatingSystem_PreemptRunningProcess();
 				OperatingSystem_PreemptRunningProcessToBlock();
-				
-				pid = OperatingSystem_ShortTermScheduler();
-				OperatingSystem_Dispatch(pid);
+				PID = OperatingSystem_ShortTermScheduler();
+				OperatingSystem_Dispatch(PID);
 				
 				OperatingSystem_PrintStatus();
 				break;
@@ -521,30 +521,32 @@ void OperatingSystem_HandleClockInterrupt(){
 	numberOfClockInterrupts++;
 	ComputerSystem_DebugMessage(120,INTERRUPT, numberOfClockInterrupts);
 	
-	int i, PID, first, sleepTrue;
+	int i, PID, FirstPIDInHeap, TrueIfThereIsAnyPIDToWakeUp = 0;
 	
 	for (i = 0; i < numberOfSleepingProcesses; i++) {
 		if (processTable[sleepingProcessesQueue[i]].whenToWakeUp == numberOfClockInterrupts) {
-			PID = OperatingSystem_ExtractFromBlockedToRun();
+			PID = OperatingSystem_ExtractFromBlockedToReady();
 			OperatingSystem_MoveToTheREADYState(PID, processTable[PID].queueID);
-			sleepTrue = 1;
+			TrueIfThereIsAnyPIDToWakeUp = 1;
 		}
 	}
 	
-	if (sleepTrue) {
+	if (TrueIfThereIsAnyPIDToWakeUp) {
 		OperatingSystem_PrintStatus();
 		 
-		first = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);
-			
-		if (first == NOPROCESS)
-			first = Heap_getFirst(readyToRunQueue[DAEMONSQUEUE], numberOfReadyToRunProcesses[DAEMONSQUEUE]);
-			
-		if (processTable[executingProcessID].priority < processTable[first].priority) {
+		FirstPIDInHeap = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);			
+		if (FirstPIDInHeap == NOPROCESS)
+			FirstPIDInHeap = Heap_getFirst(readyToRunQueue[DAEMONSQUEUE], numberOfReadyToRunProcesses[DAEMONSQUEUE]);
+
+		
+		if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority) {
 			OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
 			ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, PID);
-			OperatingSystem_MoveToTheREADYState(executingProcessID, processTable[executingProcessID].queueID);
+
+			OperatingSystem_PreemptRunningProcess();
 			OperatingSystem_ShortTermScheduler();
-			OperatingSystem_Dispatch(first);
+			OperatingSystem_Dispatch(FirstPIDInHeap);
+			
 			OperatingSystem_PrintStatus();
 		}
 	}

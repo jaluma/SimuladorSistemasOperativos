@@ -2722,10 +2722,11 @@ int OperatingSystem_CreateProcess(int,int);
 int OperatingSystem_ObtainMainMemory(int, int);
 int OperatingSystem_ShortTermScheduler();
 int OperatingSystem_ExtractFromReadyToRun(int);
-int OperatingSystem_ExtractFromBlockedToRun();
+int OperatingSystem_ExtractFromBlockedToReady();
 void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
 void OperatingSystem_MoveToTheBLOCKEDState(int);
+ int OperatingSystem_GetFirstPID(int** heap, int* numberOfElements);
 
 
 PCB processTable[4];
@@ -2835,9 +2836,9 @@ int OperatingSystem_LongTermScheduler() {
   numberOfSuccessfullyCreatedProcesses=0;
 
  for (i=0; programList[i]!=
-# 138 "OperatingSystem.c" 3 4
+# 139 "OperatingSystem.c" 3 4
                           ((void *)0) 
-# 138 "OperatingSystem.c"
+# 139 "OperatingSystem.c"
                                && i<20; i++) {
   if (programList[i]->type == (unsigned int) 1)
    PID=OperatingSystem_CreateProcess(i, 1);
@@ -2979,10 +2980,10 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
 
 
 void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
- if (Heap_add(PID, readyToRunQueue[queueID] ,1 , &numberOfReadyToRunProcesses[queueID] ,4)>=0) {
+ if (Heap_add(PID, readyToRunQueue[queueID], 1, &numberOfReadyToRunProcesses[queueID], 4)>=0) {
   OperatingSystem_ShowTime('p');
   ComputerSystem_DebugMessage(110, 'p', PID, statesNames[processTable[PID].state], statesNames[1]);
-  processTable[PID].state=READY;
+  processTable[PID].state = READY;
 
  }
 }
@@ -3026,7 +3027,7 @@ int OperatingSystem_ExtractFromReadyToRun(int queueID) {
 }
 
 
-int OperatingSystem_ExtractFromBlockedToRun() {
+int OperatingSystem_ExtractFromBlockedToReady() {
 
  int selectedProcess=-1;
 
@@ -3145,7 +3146,7 @@ void OperatingSystem_TerminateProcess() {
 void OperatingSystem_HandleSystemCall() {
 
  int systemCallID;
- int pid;
+ int PID;
  int oldPID;
 
 
@@ -3162,25 +3163,25 @@ void OperatingSystem_HandleSystemCall() {
 
    OperatingSystem_ShowTime('p');
    ComputerSystem_DebugMessage(25,'p',executingProcessID);
+
    OperatingSystem_TerminateProcess();
    OperatingSystem_PrintStatus();
    break;
 
   case SYSCALL_YIELD:
    oldPID = executingProcessID;
-   pid = Heap_getFirst(readyToRunQueue[0], numberOfReadyToRunProcesses[0]);
+   PID = Heap_getFirst(readyToRunQueue[0], numberOfReadyToRunProcesses[0]);
 
-   if (pid == -1)
-    pid = Heap_getFirst(readyToRunQueue[1], numberOfReadyToRunProcesses[1]);
+   if (PID == -1)
+    PID = Heap_getFirst(readyToRunQueue[1], numberOfReadyToRunProcesses[1]);
 
-   if (processTable[oldPID].priority == processTable[pid].priority) {
+   if (processTable[oldPID].priority == processTable[PID].priority) {
     OperatingSystem_ShowTime('s');
-    ComputerSystem_DebugMessage(115, 's', oldPID, pid);
+    ComputerSystem_DebugMessage(115, 's', oldPID, PID);
+
     OperatingSystem_PreemptRunningProcess();
-
-    pid = OperatingSystem_ShortTermScheduler();
-
-    OperatingSystem_Dispatch(pid);
+    PID = OperatingSystem_ShortTermScheduler();
+    OperatingSystem_Dispatch(PID);
 
     OperatingSystem_PrintStatus();
    }
@@ -3191,9 +3192,8 @@ void OperatingSystem_HandleSystemCall() {
 
 
     OperatingSystem_PreemptRunningProcessToBlock();
-
-    pid = OperatingSystem_ShortTermScheduler();
-    OperatingSystem_Dispatch(pid);
+    PID = OperatingSystem_ShortTermScheduler();
+    OperatingSystem_Dispatch(PID);
 
     OperatingSystem_PrintStatus();
     break;
@@ -3224,30 +3224,32 @@ void OperatingSystem_HandleClockInterrupt(){
  numberOfClockInterrupts++;
  ComputerSystem_DebugMessage(120,'i', numberOfClockInterrupts);
 
- int i, PID, first, sleepTrue;
+ int i, PID, FirstPIDInHeap, TrueIfThereIsAnyPIDToWakeUp = 0;
 
  for (i = 0; i < numberOfSleepingProcesses; i++) {
   if (processTable[sleepingProcessesQueue[i]].whenToWakeUp == numberOfClockInterrupts) {
-   PID = OperatingSystem_ExtractFromBlockedToRun();
+   PID = OperatingSystem_ExtractFromBlockedToReady();
    OperatingSystem_MoveToTheREADYState(PID, processTable[PID].queueID);
-   sleepTrue = 1;
+   TrueIfThereIsAnyPIDToWakeUp = 1;
   }
  }
 
- if (sleepTrue) {
+ if (TrueIfThereIsAnyPIDToWakeUp) {
   OperatingSystem_PrintStatus();
 
-  first = Heap_getFirst(readyToRunQueue[0], numberOfReadyToRunProcesses[0]);
+  FirstPIDInHeap = Heap_getFirst(readyToRunQueue[0], numberOfReadyToRunProcesses[0]);
+  if (FirstPIDInHeap == -1)
+   FirstPIDInHeap = Heap_getFirst(readyToRunQueue[1], numberOfReadyToRunProcesses[1]);
 
-  if (first == -1)
-   first = Heap_getFirst(readyToRunQueue[1], numberOfReadyToRunProcesses[1]);
 
-  if (processTable[executingProcessID].priority < processTable[first].priority) {
+  if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority) {
    OperatingSystem_ShowTime('s');
    ComputerSystem_DebugMessage(121, 's', executingProcessID, PID);
-   OperatingSystem_MoveToTheREADYState(executingProcessID, processTable[executingProcessID].queueID);
+
+   OperatingSystem_PreemptRunningProcess();
    OperatingSystem_ShortTermScheduler();
-   OperatingSystem_Dispatch(first);
+   OperatingSystem_Dispatch(FirstPIDInHeap);
+
    OperatingSystem_PrintStatus();
   }
  }
