@@ -1,0 +1,139 @@
+38 Messages Loaded
+Asserts file unavailable
+[0] User program list:
+	Program [programaQueNoExiste] with arrival time [0]
+	Program [ProgramTest_PriorityFail] with arrival time [0]
+	Program [ProgramTest_VeryBig] with arrival time [0]
+	Program [ProgramTest_MoreInst] with arrival time [0]
+	Program [programFinalV1] with arrival time [0]
+	Program [ProgramTest_YRET] with arrival time [0]
+	Program [ProgramTest_OS] with arrival time [0]
+	Program [ProgramTest_HALT] with arrival time [0]
+	Program [ProgramTest_MEMADD] with arrival time [0]
+	Program [ProgramTest_Yield1] with arrival time [0]
+	Program [ProgramTest_Yield1] with arrival time [0]
+	Program [ProgramTest_Yield1] with arrival time [0]
+	[0] New process [3] moving to the [NEW] state
+	[0] Process [3] created from program [SystemIdleProcess]
+	[0] Process [3] moving from the [NEW] state to the [READY] state
+	[0] ERROR: Program [programaQueNoExiste] is not valid [--- it does not exist ---]
+	[0] ERROR: Program [ProgramTest_PriorityFail] is not valid [--- invalid priority or size ---]
+	[0] ERROR: Program [ProgramTest_VeryBig] is too big
+	[0] ERROR: Program [ProgramTest_MoreInst] is too big
+	[0] New process [0] moving to the [NEW] state
+	[0] Process [0] created from program [programFinalV1]
+	[0] Process [0] moving from the [NEW] state to the [READY] state
+	[0] New process [1] moving to the [NEW] state
+	[0] Process [1] created from program [ProgramTest_YRET]
+	[0] Process [1] moving from the [NEW] state to the [READY] state
+	[0] New process [2] moving to the [NEW] state
+	[0] Process [2] created from program [ProgramTest_OS]
+	[0] Process [2] moving from the [NEW] state to the [READY] state
+	[0] ERROR: There are not free entries in the process table for the program [ProgramTest_HALT]
+	[0] ERROR: There are not free entries in the process table for the program [ProgramTest_MEMADD]
+	[0] ERROR: There are not free entries in the process table for the program [ProgramTest_Yield1]
+	[0] ERROR: There are not free entries in the process table for the program [ProgramTest_Yield1]
+	[0] ERROR: There are not free entries in the process table for the program [ProgramTest_Yield1]
+	[0] Running Process Information: [PID: -1, Priority: 0, WakeUp: 0, Queue: USER]
+	[0] Ready-to-run processes queue:
+		USER: [2,5], [0,199], [1,10]
+		DAEMONS: [3,100]
+	[0] SLEEPING Queue: 
+	[0] PID association with program's name:
+		PID: 0 -> programFinalV1
+		PID: 1 -> ProgramTest_YRET
+		PID: 2 -> ProgramTest_OS
+		PID: 3 -> SystemIdleProcess
+	[0] Process [2] moving from the [READY] state to the [EXECUTING] state
+[1] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[2] n 0 0 (PC: 1, Accumulator: 0, PSW: 2 [--------------Z-])
+[3] a 10 -13 (PC: 2, Accumulator: -3, PSW: 4 [-------------N--])
+[4] o 2 0 (PC: 2, Accumulator: -3, PSW: 4 [-------------N--])
+[5] o 6 0 (PC: 243, Accumulator: -3, PSW: 32900 [M-------X----N--])
+	[6] Process [2] has generated an exception and is terminating
+	[6] Process [2] moving from the [EXECUTING] state to the [EXIT] state
+	[6] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[6] Running Process Information: [PID: 1, Priority: 10, WakeUp: 0, Queue: USER]
+	[6] Ready-to-run processes queue:
+		USER: [0,199]
+		DAEMONS: [3,100]
+	[6] SLEEPING Queue: 
+	[6] PID association with program's name:
+		PID: 0 -> programFinalV1
+		PID: 1 -> ProgramTest_YRET
+		PID: 2 -> ProgramTest_OS
+		PID: 3 -> SystemIdleProcess
+[7] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[8] o 9 0 (PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[9] Clock interrupt number [1] has occurred
+[10] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[11] o 9 0 (PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[12] Clock interrupt number [2] has occurred
+[13] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[14] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[15] o 6 0 (PC: 243, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[16] Process [1] has generated an exception and is terminating
+	[16] Process [1] moving from the [EXECUTING] state to the [EXIT] state
+	[16] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[16] Running Process Information: [PID: 0, Priority: 199, WakeUp: 0, Queue: USER]
+	[16] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[16] SLEEPING Queue: 
+	[16] PID association with program's name:
+		PID: 0 -> programFinalV1
+		PID: 1 -> ProgramTest_YRET
+		PID: 2 -> ProgramTest_OS
+		PID: 3 -> SystemIdleProcess
+[17] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[18] o 9 0 (PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[19] Clock interrupt number [3] has occurred
+[20] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[21] o 9 0 (PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[22] Clock interrupt number [4] has occurred
+[23] y 0 0 (PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[24] a 1 98 (PC: 1, Accumulator: 99, PSW: 0 [----------------])
+[25] j 5 0 (PC: 6, Accumulator: 99, PSW: 0 [----------------])
+[26] o 9 0 (PC: 245, Accumulator: 99, PSW: 32896 [M-------X-------])
+	[27] Clock interrupt number [5] has occurred
+[28] y 0 0 (PC: 6, Accumulator: 99, PSW: 0 [----------------])
+[29] i 5 0 (PC: 7, Accumulator: 104, PSW: 0 [----------------])
+[30] w 7 0 (PC: 8, Accumulator: 104, PSW: 0 [----------------])
+[31] o 9 0 (PC: 245, Accumulator: 104, PSW: 32896 [M-------X-------])
+	[32] Clock interrupt number [6] has occurred
+[33] y 0 0 (PC: 8, Accumulator: 104, PSW: 0 [----------------])
+[34] m 6 7 (PC: 9, Accumulator: 110, PSW: 0 [----------------])
+[35] w 2 0 (PC: 10, Accumulator: 110, PSW: 0 [----------------])
+[36] o 9 0 (PC: 245, Accumulator: 110, PSW: 32896 [M-------X-------])
+	[37] Clock interrupt number [7] has occurred
+[38] y 0 0 (PC: 10, Accumulator: 110, PSW: 0 [----------------])
+[39] n 0 0 (PC: 11, Accumulator: 110, PSW: 0 [----------------])
+[40] j -5 0 (PC: 6, Accumulator: 110, PSW: 0 [----------------])
+[41] o 9 0 (PC: 245, Accumulator: 110, PSW: 32896 [M-------X-------])
+	[42] Clock interrupt number [8] has occurred
+[43] y 0 0 (PC: 6, Accumulator: 110, PSW: 0 [----------------])
+[44] i 5 0 (PC: 7, Accumulator: 115, PSW: 0 [----------------])
+[45] h 104 104 (PC: 7, Accumulator: 115, PSW: 0 [----------------])
+[46] o 6 0 (PC: 243, Accumulator: 115, PSW: 32896 [M-------X-------])
+	[47] Process [0] has generated an exception and is terminating
+	[47] Process [0] moving from the [EXECUTING] state to the [EXIT] state
+	[47] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[47] Running Process Information: [PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[47] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[47] SLEEPING Queue: 
+	[47] PID association with program's name:
+		PID: 0 -> programFinalV1
+		PID: 1 -> ProgramTest_YRET
+		PID: 2 -> ProgramTest_OS
+		PID: 3 -> SystemIdleProcess
+[48] y 0 0 (PC: 183, Accumulator: 0, PSW: 130 [--------X-----Z-])
+[49] o 9 0 (PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[50] Clock interrupt number [9] has occurred
+[51] y 0 0 (PC: 183, Accumulator: 0, PSW: 130 [--------X-----Z-])
+[52] o 9 0 (PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[53] Clock interrupt number [10] has occurred
+[54] y 0 0 (PC: 183, Accumulator: 0, PSW: 130 [--------X-----Z-])
+[55] h 0 0 (PC: 183, Accumulator: 0, PSW: 131 [--------X-----ZS])
+[55] END of the simulation

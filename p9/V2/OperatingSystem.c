@@ -152,7 +152,6 @@ int OperatingSystem_LongTermScheduler() {
 			ComputerSystem_DebugMessage(104,ERROR,programList[i]->executableName, "--- invalid priority or size ---");
 		} else if (PID == TOOBIGPROCESS) {
 			OperatingSystem_ShowTime(ERROR);
-			OperatingSystem_ShowTime(ERROR);
 			ComputerSystem_DebugMessage(105,ERROR,programList[i]->executableName);
 		} else {
 			numberOfSuccessfullyCreatedProcesses++;
@@ -289,8 +288,8 @@ void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
 void OperatingSystem_MoveToTheBLOCKEDState(int PID) {
 	if (Heap_add(PID, sleepingProcessesQueue, QUEUE_PRIORITY, &numberOfSleepingProcesses, PROCESSTABLEMAXSIZE)>=0) {
 		OperatingSystem_ShowTime(SYSPROC);
-		ComputerSystem_DebugMessage(110, SYSPROC, executingProcessID, statesNames[processTable[executingProcessID].state], statesNames[3]);
-		processTable[executingProcessID].state = BLOCKED;
+		ComputerSystem_DebugMessage(110, SYSPROC, executingProcessID, statesNames[processTable[PID].state], statesNames[3]);
+		processTable[PID].state = BLOCKED;
 	} 
 }
 
@@ -329,7 +328,7 @@ int OperatingSystem_ExtractFromBlockedToReady() {
 
 	selectedProcess=Heap_poll(sleepingProcessesQueue, QUEUE_PRIORITY ,&numberOfSleepingProcesses);
 
-	// Return most priority process or NOPROCESS if empty queue
+	// Return most wakeUp process or NOPROCESS if empty queue
 	return selectedProcess; 
 }
 
@@ -468,10 +467,7 @@ void OperatingSystem_HandleSystemCall() {
 			oldPID = executingProcessID;
 			PID = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);
 			
-			if (PID == NOPROCESS)
-				PID = Heap_getFirst(readyToRunQueue[DAEMONSQUEUE], numberOfReadyToRunProcesses[DAEMONSQUEUE]);
-			
-			if (processTable[oldPID].priority == processTable[PID].priority) {
+			if (PID != -1 && processTable[oldPID].priority == processTable[PID].priority) {
 				OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
 				ComputerSystem_DebugMessage(115, SHORTTERMSCHEDULE, oldPID, PID);
 				
@@ -526,19 +522,16 @@ void OperatingSystem_HandleClockInterrupt(){
 		if (processTable[sleepingProcessesQueue[i]].whenToWakeUp == numberOfClockInterrupts) {
 			PID = OperatingSystem_ExtractFromBlockedToReady();
 			OperatingSystem_MoveToTheREADYState(PID, processTable[PID].queueID);
-			TrueIfThereIsAnyPIDToWakeUp = 1;
+			TrueIfThereIsAnyPIDToWakeUp++;
 		}
 	}
 	
-	if (TrueIfThereIsAnyPIDToWakeUp) {
+	if (TrueIfThereIsAnyPIDToWakeUp > 0) {
 		OperatingSystem_PrintStatus();
 		 
 		FirstPIDInHeap = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);			
-		if (FirstPIDInHeap == NOPROCESS)
-			FirstPIDInHeap = Heap_getFirst(readyToRunQueue[DAEMONSQUEUE], numberOfReadyToRunProcesses[DAEMONSQUEUE]);
-
 		
-		if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority) {
+		if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority || processTable[executingProcessID].queueID == DAEMONSQUEUE) {
 			OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
 			ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, PID);
 

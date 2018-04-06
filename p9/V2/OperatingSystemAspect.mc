@@ -2855,7 +2855,6 @@ int OperatingSystem_LongTermScheduler() {
    ComputerSystem_DebugMessage(104,'e',programList[i]->executableName, "--- invalid priority or size ---");
   } else if (PID == -4) {
    OperatingSystem_ShowTime('e');
-   OperatingSystem_ShowTime('e');
    ComputerSystem_DebugMessage(105,'e',programList[i]->executableName);
   } else {
    numberOfSuccessfullyCreatedProcesses++;
@@ -2992,8 +2991,8 @@ void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
 void OperatingSystem_MoveToTheBLOCKEDState(int PID) {
  if (Heap_add(PID, sleepingProcessesQueue, 1, &numberOfSleepingProcesses, 4)>=0) {
   OperatingSystem_ShowTime('p');
-  ComputerSystem_DebugMessage(110, 'p', executingProcessID, statesNames[processTable[executingProcessID].state], statesNames[3]);
-  processTable[executingProcessID].state = BLOCKED;
+  ComputerSystem_DebugMessage(110, 'p', executingProcessID, statesNames[processTable[PID].state], statesNames[3]);
+  processTable[PID].state = BLOCKED;
  }
 }
 
@@ -3171,10 +3170,7 @@ void OperatingSystem_HandleSystemCall() {
    oldPID = executingProcessID;
    PID = Heap_getFirst(readyToRunQueue[0], numberOfReadyToRunProcesses[0]);
 
-   if (PID == -1)
-    PID = Heap_getFirst(readyToRunQueue[1], numberOfReadyToRunProcesses[1]);
-
-   if (processTable[oldPID].priority == processTable[PID].priority) {
+   if (PID != -1 && processTable[oldPID].priority == processTable[PID].priority) {
     OperatingSystem_ShowTime('s');
     ComputerSystem_DebugMessage(115, 's', oldPID, PID);
 
@@ -3229,19 +3225,16 @@ void OperatingSystem_HandleClockInterrupt(){
   if (processTable[sleepingProcessesQueue[i]].whenToWakeUp == numberOfClockInterrupts) {
    PID = OperatingSystem_ExtractFromBlockedToReady();
    OperatingSystem_MoveToTheREADYState(PID, processTable[PID].queueID);
-   TrueIfThereIsAnyPIDToWakeUp = 1;
+   TrueIfThereIsAnyPIDToWakeUp++;
   }
  }
 
- if (TrueIfThereIsAnyPIDToWakeUp) {
+ if (TrueIfThereIsAnyPIDToWakeUp > 0) {
   OperatingSystem_PrintStatus();
 
   FirstPIDInHeap = Heap_getFirst(readyToRunQueue[0], numberOfReadyToRunProcesses[0]);
-  if (FirstPIDInHeap == -1)
-   FirstPIDInHeap = Heap_getFirst(readyToRunQueue[1], numberOfReadyToRunProcesses[1]);
 
-
-  if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority) {
+  if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority || processTable[executingProcessID].queueID == 1) {
    OperatingSystem_ShowTime('s');
    ComputerSystem_DebugMessage(121, 's', executingProcessID, PID);
 
