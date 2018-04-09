@@ -22,3 +22,5 @@ Martinez Alvarez Javier
 	- ProgramTest_Yield1 ProgramTest_Yield2 ProgramTest_Yield3							Programas para probar el uso de SYSCALL YIELD
 	- program-Final-V1-1 program-Final-V1-2 program-Final-V1-3							Programas finales para probar los asserts
 	- ProgramTest_Sleep																	Programa para probar la SYSCALL SLEEP
+	- ProgramTest_Sleep1																Programa para probar la SYSCALL SLEEP
+	- ProgramTest_Sleep2																Programa para probar la SYSCALL SLEEP
