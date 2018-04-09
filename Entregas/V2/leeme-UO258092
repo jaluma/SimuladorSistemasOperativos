@@ -1,5 +1,5 @@
 Martinez Alvarez Javier
- - He completado hasta la V1 completa, es decir, ejercicio 15
+ - He completado hasta la V2 completa, es decir, ejercicio 8
  - Ejercicios:
 	- TuProgramaConMEMADD 						ProgramTest_MEMADD						MEMADD
 	- newProgramVerySimple						newProgramVerySimple					PROGRAMA QUE ACABA CON TRAP 3
@@ -21,5 +21,4 @@ Martinez Alvarez Javier
 	- ProgramTest_SizeNotNumber															Programa con una letra como tamaño, en vez de un número
 	- ProgramTest_Yield1 ProgramTest_Yield2 ProgramTest_Yield3							Programas para probar el uso de SYSCALL YIELD
 	- program-Final-V1-1 program-Final-V1-2 program-Final-V1-3							Programas finales para probar los asserts
-	
-./Simulator a programaQueNoExiste ProgramTest_PriorityFail ProgramTest_VeryBig ProgramTest_MoreInst programFinalV1 ProgramTest_YRET ProgramTest_OS ProgramTest_HALT ProgramTest_MEMADD ProgramTest_Yield1 ProgramTest_Yield1 ProgramTest_Yield1> V1-Final-UO258092.log
+	- ProgramTest_Sleep																	Programa para probar la SYSCALL SLEEP

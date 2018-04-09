@@ -523,7 +523,6 @@ void OperatingSystem_HandleClockInterrupt(){
 			PID = OperatingSystem_ExtractFromBlockedToReady();
 			OperatingSystem_MoveToTheREADYState(PID, processTable[PID].queueID);
 			TrueIfThereIsAnyPIDToWakeUp++;
-			i--;
 		}
 	}
 	

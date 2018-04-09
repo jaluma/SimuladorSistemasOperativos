@@ -2427,7 +2427,7 @@ ComputerSystem_DebugMessage(120, 'i', numberOfClockInterrupts);
 int i,PID,FirstPIDInHeap,TrueIfThereIsAnyPIDToWakeUp = 0;
 #line 521 "OperatingSystem.c"
 for(i = 0;i < numberOfSleepingProcesses;i++) { { 
-#line 527 "OperatingSystem.c"
+#line 528 "OperatingSystem.c"
 if (processTable[sleepingProcessesQueue[i]].whenToWakeUp == numberOfClockInterrupts){
 { 
 #line 523 "OperatingSystem.c"
@@ -2435,88 +2435,90 @@ PID = OperatingSystem_ExtractFromBlockedToReady();
 #line 524 "OperatingSystem.c"
 OperatingSystem_MoveToTheREADYState(PID, processTable[PID].queueID); 
 #line 525 "OperatingSystem.c"
-TrueIfThereIsAnyPIDToWakeUp++; } }} } 
-#line 529 "OperatingSystem.c"
+TrueIfThereIsAnyPIDToWakeUp++; 
+#line 526 "OperatingSystem.c"
+i--; } }} } 
+#line 530 "OperatingSystem.c"
 if (TrueIfThereIsAnyPIDToWakeUp > 0){
 { 
-#line 530 "OperatingSystem.c"
+#line 531 "OperatingSystem.c"
 OperatingSystem_PrintStatus(); 
-#line 532 "OperatingSystem.c"
+#line 533 "OperatingSystem.c"
 FirstPIDInHeap = Heap_getFirst(readyToRunQueue[0], numberOfReadyToRunProcesses[0]); 
-#line 534 "OperatingSystem.c"
+#line 535 "OperatingSystem.c"
 if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority || processTable[executingProcessID].queueID == 1){
 { 
-#line 535 "OperatingSystem.c"
-OperatingSystem_ShowTime('s'); 
 #line 536 "OperatingSystem.c"
+OperatingSystem_ShowTime('s'); 
+#line 537 "OperatingSystem.c"
 ComputerSystem_DebugMessage(121, 's', executingProcessID, PID); 
-#line 538 "OperatingSystem.c"
-OperatingSystem_PreemptRunningProcess(); 
 #line 539 "OperatingSystem.c"
-OperatingSystem_ShortTermScheduler(); 
+OperatingSystem_PreemptRunningProcess(); 
 #line 540 "OperatingSystem.c"
+OperatingSystem_ShortTermScheduler(); 
+#line 541 "OperatingSystem.c"
 OperatingSystem_Dispatch(FirstPIDInHeap); 
-#line 542 "OperatingSystem.c"
+#line 543 "OperatingSystem.c"
 OperatingSystem_PrintStatus(); } }} }
-# 2462 "OperatingSystemAspect.c"
+# 2464 "OperatingSystemAspect.c"
 
 }
 
-# 2466 "OperatingSystemAspect.c"
+# 2468 "OperatingSystemAspect.c"
 
 }
  
-#line 548 "OperatingSystem.c"
+#line 549 "OperatingSystem.c"
 void OperatingSystem_PrintReadyToRunQueue()  
-# 2472 "OperatingSystemAspect.c"
+# 2474 "OperatingSystemAspect.c"
 {
 
 
 
-# 2477 "OperatingSystemAspect.c"
+# 2479 "OperatingSystemAspect.c"
 {
 
-#line 549 "OperatingSystem.c"
-
-#line 549 "OperatingSystem.c"
-int i;
 #line 550 "OperatingSystem.c"
-OperatingSystem_ShowTime('s'); 
+
+#line 550 "OperatingSystem.c"
+int i;
 #line 551 "OperatingSystem.c"
+OperatingSystem_ShowTime('s'); 
+#line 552 "OperatingSystem.c"
 ComputerSystem_DebugMessage(106, 's'); 
-#line 553 "OperatingSystem.c"
-ComputerSystem_DebugMessage(112, 's', "USER"); 
 #line 554 "OperatingSystem.c"
+ComputerSystem_DebugMessage(112, 's', "USER"); 
+#line 555 "OperatingSystem.c"
 if (numberOfReadyToRunProcesses[0] == 0){
 { 
-#line 555 "OperatingSystem.c"
+#line 556 "OperatingSystem.c"
 ComputerSystem_DebugMessage(113, 's'); } }else{
 { 
-#line 562 "OperatingSystem.c"
+#line 563 "OperatingSystem.c"
 for(i = 0;i < numberOfReadyToRunProcesses[0];i++) { { 
-#line 561 "OperatingSystem.c"
+#line 562 "OperatingSystem.c"
 if (i == numberOfReadyToRunProcesses[0] - 1){
 ComputerSystem_DebugMessage(107, 's', readyToRunQueue[0][i], processTable[readyToRunQueue[0][i]].priority, "\n"); }else{
 ComputerSystem_DebugMessage(107, 's', readyToRunQueue[0][i], processTable[readyToRunQueue[0][i]].priority, ", "); }} } } }
-#line 565 "OperatingSystem.c"
-ComputerSystem_DebugMessage(112, 's', "DAEMONS"); 
 #line 566 "OperatingSystem.c"
+ComputerSystem_DebugMessage(112, 's', "DAEMONS"); 
+#line 567 "OperatingSystem.c"
 if (numberOfReadyToRunProcesses[1] == 0){
 { 
-#line 567 "OperatingSystem.c"
+#line 568 "OperatingSystem.c"
 ComputerSystem_DebugMessage(113, 's'); } }else{
 { 
-#line 574 "OperatingSystem.c"
+#line 575 "OperatingSystem.c"
 for(i = 0;i < numberOfReadyToRunProcesses[1];i++) { { 
-#line 573 "OperatingSystem.c"
+#line 574 "OperatingSystem.c"
 if (i == numberOfReadyToRunProcesses[1] - 1){
 ComputerSystem_DebugMessage(107, 's', readyToRunQueue[1][i], processTable[readyToRunQueue[1][i]].priority, "\n"); }else{
 ComputerSystem_DebugMessage(107, 's', readyToRunQueue[1][i], processTable[readyToRunQueue[1][i]].priority, ", "); }} } } }
-# 2516 "OperatingSystemAspect.c"
+# 2518 "OperatingSystemAspect.c"
 
 }
 
-# 2520 "OperatingSystemAspect.c"
+# 2522 "OperatingSystemAspect.c"
 
 }
  

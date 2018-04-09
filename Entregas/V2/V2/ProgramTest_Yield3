@@ -1,0 +1,5 @@
+15
+6
+ADD 10 0
+WRITE 10
+TRAP 3
