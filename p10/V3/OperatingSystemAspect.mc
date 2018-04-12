@@ -1,8 +1,9 @@
 # 1 "OperatingSystem.c"
 # 1 "<built-in>"
 # 1 "<command-line>"
+# 31 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
-# 1 "<command-line>" 2
+# 32 "<command-line>" 2
 # 1 "OperatingSystem.c"
 # 1 "OperatingSystem.h" 1
 
@@ -73,10 +74,10 @@ extern PROGRAMS_DATA *programList[30];
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef long unsigned int size_t;
 # 34 "/usr/include/stdio.h" 2 3 4
 
@@ -200,7 +201,7 @@ typedef struct _IO_FILE __FILE;
 # 31 "/usr/include/libio.h" 3 4
 # 1 "/usr/include/_G_config.h" 1 3 4
 # 15 "/usr/include/_G_config.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 16 "/usr/include/_G_config.h" 2 3 4
 
 
@@ -234,8 +235,8 @@ typedef struct
 } _G_fpos64_t;
 # 32 "/usr/include/libio.h" 2 3 4
 # 49 "/usr/include/libio.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 1 3 4
-# 40 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 1 3 4
+# 40 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 3 4
 typedef __builtin_va_list __gnuc_va_list;
 # 50 "/usr/include/libio.h" 2 3 4
 # 144 "/usr/include/libio.h" 3 4
@@ -1077,7 +1078,7 @@ int Heap_getFirst(int[], int);
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 33 "/usr/include/string.h" 2 3 4
 
 
@@ -1467,8 +1468,8 @@ extern int toupper_l (int __c, __locale_t __l) __attribute__ ((__nothrow__ , __l
 # 9 "OperatingSystem.c" 2
 # 1 "/usr/include/stdlib.h" 1 3 4
 # 32 "/usr/include/stdlib.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 328 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 328 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef int wchar_t;
 # 33 "/usr/include/stdlib.h" 2 3 4
 
@@ -1734,7 +1735,7 @@ typedef __clockid_t clockid_t;
 typedef __timer_t timer_t;
 # 133 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 # 146 "/usr/include/x86_64-linux-gnu/sys/types.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 147 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 
 
@@ -2224,7 +2225,7 @@ extern void cfree (void *__ptr) __attribute__ ((__nothrow__ , __leaf__));
 
 # 1 "/usr/include/alloca.h" 1 3 4
 # 24 "/usr/include/alloca.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 25 "/usr/include/alloca.h" 2 3 4
 
 
@@ -2505,7 +2506,7 @@ extern int getloadavg (double __loadavg[], int __nelem)
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 38 "/usr/include/time.h" 2 3 4
 
 
@@ -3010,7 +3011,7 @@ void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
 
 
 void OperatingSystem_MoveToTheBLOCKEDState(int PID) {
- if (Heap_add(PID, sleepingProcessesQueue, 1, &numberOfSleepingProcesses, 4)>=0) {
+ if (Heap_add(PID, sleepingProcessesQueue, 0, &numberOfSleepingProcesses, 4)>=0) {
   OperatingSystem_ShowTime('p');
   ComputerSystem_DebugMessage(110, 'p', executingProcessID, statesNames[processTable[PID].state], statesNames[3]);
   processTable[PID].state = BLOCKED;
@@ -3050,7 +3051,7 @@ int OperatingSystem_ExtractFromBlockedToReady() {
 
  int selectedProcess=-1;
 
- selectedProcess=Heap_poll(sleepingProcessesQueue, 1 ,&numberOfSleepingProcesses);
+ selectedProcess=Heap_poll(sleepingProcessesQueue, 0 ,&numberOfSleepingProcesses);
 
 
  return selectedProcess;
@@ -3148,7 +3149,7 @@ void OperatingSystem_TerminateProcess() {
 
  numberOfNotTerminatedUserProcesses--;
 
- if (numberOfNotTerminatedUserProcesses<=0) {
+ if (OperatingSystem_IsThereANewProgram() == -1 && numberOfNotTerminatedUserProcesses<=0) {
 
   OperatingSystem_ReadyToShutdown();
  }
@@ -3251,8 +3252,7 @@ void OperatingSystem_HandleClockInterrupt(){
   }
  }
 
- int createdProcess = 0;
- createdProcess = OperatingSystem_LongTermScheduler();
+ int createdProcess = OperatingSystem_LongTermScheduler();
 
  if (TrueIfThereIsAnyPIDToWakeUp > 0 || createdProcess > 0) {
   OperatingSystem_PrintStatus();
@@ -3261,7 +3261,7 @@ void OperatingSystem_HandleClockInterrupt(){
 
   if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority || processTable[executingProcessID].queueID == 1) {
    OperatingSystem_ShowTime('s');
-   ComputerSystem_DebugMessage(121, 's', executingProcessID, PID);
+   ComputerSystem_DebugMessage(121, 's', executingProcessID, FirstPIDInHeap);
 
    OperatingSystem_PreemptRunningProcess();
    OperatingSystem_ShortTermScheduler();

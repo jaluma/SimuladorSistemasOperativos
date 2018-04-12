@@ -1,0 +1,9 @@
+Los cambios que he realizado respecto a la V2 entregada han sido las siguientes:
+ - Cambio en como se ordena el Heap de sleepingProcessesQueue. Tenía puesto QUEUE_PRIORITY, pero sin embargo tiene que está ordenada por QUEUE_WAKEUP:
+ 
+ OperatingSystem.c ->
+	LINEA 289: 
+			if (Heap_add(PID, sleepingProcessesQueue, QUEUE_WAKEUP, &numberOfSleepingProcesses, PROCESSTABLEMAXSIZE)>=0) {
+
+	LINEA 329:
+			selectedProcess=Heap_poll(sleepingProcessesQueue, QUEUE_WAKEUP ,&numberOfSleepingProcesses);

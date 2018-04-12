@@ -286,7 +286,7 @@ void OperatingSystem_MoveToTheREADYState(int PID, int queueID) {
 // Move a process to the BLOCKED state: it will be inserted, depending on its priority, in
 // a queue of identifiers of BLOCKED processes
 void OperatingSystem_MoveToTheBLOCKEDState(int PID) {
-	if (Heap_add(PID, sleepingProcessesQueue, QUEUE_PRIORITY, &numberOfSleepingProcesses, PROCESSTABLEMAXSIZE)>=0) {
+	if (Heap_add(PID, sleepingProcessesQueue, QUEUE_WAKEUP, &numberOfSleepingProcesses, PROCESSTABLEMAXSIZE)>=0) {
 		OperatingSystem_ShowTime(SYSPROC);
 		ComputerSystem_DebugMessage(110, SYSPROC, executingProcessID, statesNames[processTable[PID].state], statesNames[3]);
 		processTable[PID].state = BLOCKED;
@@ -326,7 +326,7 @@ int OperatingSystem_ExtractFromBlockedToReady() {
   
 	int selectedProcess=NOPROCESS;
 
-	selectedProcess=Heap_poll(sleepingProcessesQueue, QUEUE_PRIORITY ,&numberOfSleepingProcesses);
+	selectedProcess=Heap_poll(sleepingProcessesQueue, QUEUE_WAKEUP ,&numberOfSleepingProcesses);
 
 	// Return most wakeUp process or NOPROCESS if empty queue
 	return selectedProcess; 
@@ -534,7 +534,7 @@ void OperatingSystem_HandleClockInterrupt(){
 		
 		if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority || processTable[executingProcessID].queueID == DAEMONSQUEUE) {
 			OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
-			ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, PID);
+			ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, FirstPIDInHeap);
 
 			OperatingSystem_PreemptRunningProcess();
 			OperatingSystem_ShortTermScheduler();
