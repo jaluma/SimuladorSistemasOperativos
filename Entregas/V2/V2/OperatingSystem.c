@@ -512,7 +512,7 @@ void OperatingSystem_InterruptLogic(int entryPoint){
 
  // In OperatingSystem.c Exercise 2-b of V2
 void OperatingSystem_HandleClockInterrupt(){
-	OperatingSystem_ShowTime(SYSPROC);
+	OperatingSystem_ShowTime(INTERRUPT);
 	numberOfClockInterrupts++;
 	ComputerSystem_DebugMessage(120,INTERRUPT, numberOfClockInterrupts);
 	

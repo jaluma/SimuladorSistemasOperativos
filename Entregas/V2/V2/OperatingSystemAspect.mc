@@ -25,24 +25,14 @@
 
 int ComputerSystem_ObtainProgramList(int , char *[]);
 void ComputerSystem_DebugMessage(int, char , ...);
-void ComputerSystem_FillInArrivalTimeQueue();
-void ComputerSystem_PrintArrivalTimeQueue();
-
-
-
-extern int numberOfProgramsInArrivalTimeQueue;
-extern int arrivalTimeQueue[30];
 # 6 "ComputerSystem.h" 2
-
-
 
 
 void ComputerSystem_PowerOn(int argc, char *argv[]);
 void ComputerSystem_PowerOff();
 void ComputerSystem_PrintProgramList();
 void ComputerSystem_ShowTime(char section);
-int ComputerSystem_ArrivalTimePull();
-# 38 "ComputerSystem.h"
+# 35 "ComputerSystem.h"
 typedef struct ProgramData {
     char *executableName;
     unsigned int arrivalTime;
@@ -51,7 +41,7 @@ typedef struct ProgramData {
 
 
 
-extern PROGRAMS_DATA *programList[30];
+extern PROGRAMS_DATA *programList[20];
 # 5 "OperatingSystem.h" 2
 # 1 "/usr/include/stdio.h" 1 3 4
 # 27 "/usr/include/stdio.h" 3 4
@@ -927,7 +917,6 @@ extern int sipID;
 void OperatingSystem_Initialize(int);
 void OperatingSystem_InterruptLogic(int);
 void OperatingSystem_HandleClockInterrupt();
- int OperatingSystem_GetExecutingProcessID();
 # 2 "OperatingSystem.c" 2
 # 1 "OperatingSystemBase.h" 1
 # 9 "OperatingSystemBase.h"
@@ -940,7 +929,6 @@ void OperatingSystem_ShowTime(char);
 void OperatingSystem_PrintStatus();
 void OperatingSystem_PrintReadyToRunQueue();
 void OperatingSystem_PrepareTeachersDaemons();
-int OperatingSystem_IsThereANewProgram();
 
 extern int sleepingProcessesQueue[4];
 extern int numberOfSleepingProcesses;
@@ -1051,7 +1039,7 @@ int Buses_write_AddressBus_From_To(int, int);
 int Buses_write_DataBus_From_To(int, int);
 # 6 "OperatingSystem.c" 2
 # 1 "Heap.h" 1
-# 17 "Heap.h"
+# 16 "Heap.h"
 int Heap_add(int, int[], int , int*, int);
 
 
@@ -2795,13 +2783,9 @@ void OperatingSystem_Initialize(int daemonsIndex) {
  OperatingSystem_PrepareDaemons(daemonsIndex);
 
 
- ComputerSystem_FillInArrivalTimeQueue();
- OperatingSystem_PrintStatus();
-
-
  long_term_schreduler = OperatingSystem_LongTermScheduler();
 
- if (OperatingSystem_IsThereANewProgram() == -1 && long_term_schreduler <= 1) {
+ if (long_term_schreduler <= 1) {
   OperatingSystem_ReadyToShutdown();
  }
 
@@ -2850,10 +2834,11 @@ int OperatingSystem_LongTermScheduler() {
  int PID, i,
   numberOfSuccessfullyCreatedProcesses=0;
 
-
- while (OperatingSystem_IsThereANewProgram() == 1) {
-  i = ComputerSystem_ArrivalTimePull();
-
+ for (i=0; programList[i]!=
+# 138 "OperatingSystem.c" 3 4
+                          ((void *)0) 
+# 138 "OperatingSystem.c"
+                               && i<20; i++) {
   if (programList[i]->type == (unsigned int) 1)
    PID=OperatingSystem_CreateProcess(i, 1);
   else
@@ -2885,7 +2870,7 @@ int OperatingSystem_LongTermScheduler() {
   }
  }
 
- if (numberOfSuccessfullyCreatedProcesses > 0)
+ if (numberOfSuccessfullyCreatedProcesses > 1)
   OperatingSystem_PrintStatus();
 
 
@@ -3142,7 +3127,7 @@ void OperatingSystem_TerminateProcess() {
 
  numberOfNotTerminatedUserProcesses--;
 
- if (OperatingSystem_IsThereANewProgram() == -1 && numberOfNotTerminatedUserProcesses<=0) {
+ if (numberOfNotTerminatedUserProcesses<=0) {
 
   OperatingSystem_ReadyToShutdown();
  }
@@ -3245,14 +3230,7 @@ void OperatingSystem_HandleClockInterrupt(){
   }
  }
 
- int createdProcess = OperatingSystem_LongTermScheduler();
-
- if (OperatingSystem_IsThereANewProgram() == -1 && numberOfNotTerminatedUserProcesses<=0) {
-
-  OperatingSystem_ReadyToShutdown();
- }
-
- if (TrueIfThereIsAnyPIDToWakeUp > 0 || createdProcess > 0) {
+ if (TrueIfThereIsAnyPIDToWakeUp > 0) {
   OperatingSystem_PrintStatus();
 
   FirstPIDInHeap = Heap_getFirst(readyToRunQueue[0], numberOfReadyToRunProcesses[0]);
@@ -3299,8 +3277,4 @@ void OperatingSystem_HandleClockInterrupt(){
     ComputerSystem_DebugMessage(107,'s', readyToRunQueue[1][i], processTable[readyToRunQueue[1][i]].priority, ", ");
    }
  }
- }
-
- int OperatingSystem_GetExecutingProcessID() {
-  return executingProcessID;
  }

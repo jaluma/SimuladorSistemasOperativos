@@ -136,48 +136,45 @@ void OperatingSystem_PrepareDaemons(int programListDaemonsBase) {
 // 			command lineand daemons programs
 int OperatingSystem_LongTermScheduler() {
   
-	int PID, i, j,
+	int PID, i,
 		numberOfSuccessfullyCreatedProcesses=0;
 	
-	for (i=0; programList[i]!=NULL && i<PROGRAMSMAXNUMBER; i++) {
-		if (OperatingSystem_IsThereANewProgram() == 1) {
-			j = ComputerSystem_ArrivalTimePull();
-			
-			if (programList[j]->type == DAEMONPROGRAM)
-				PID=OperatingSystem_CreateProcess(j, DAEMONSQUEUE);
-			else
-				PID=OperatingSystem_CreateProcess(j, USERPROCESSQUEUE);
-			
-			if(PID == NOFREEENTRY) {
-				OperatingSystem_ShowTime(ERROR);
-				ComputerSystem_DebugMessage(103,ERROR,programList[i]->executableName);
-			} else if (PID == PROGRAMDOESNOTEXIST) {
-				OperatingSystem_ShowTime(ERROR);
-				ComputerSystem_DebugMessage(104,ERROR,programList[i]->executableName, "--- it does not exist ---");
-			} else if (PID == PROGRAMNOTVALID) {
-				OperatingSystem_ShowTime(ERROR);
-				ComputerSystem_DebugMessage(104,ERROR,programList[i]->executableName, "--- invalid priority or size ---");
-			} else if (PID == TOOBIGPROCESS) {
-				OperatingSystem_ShowTime(ERROR);
-				ComputerSystem_DebugMessage(105,ERROR,programList[i]->executableName);
-			} else {
-				numberOfSuccessfullyCreatedProcesses++;
-				// Move process to the ready state
-				if (programList[i]->type == USERPROGRAM) {
-					numberOfNotTerminatedUserProcesses++;
-				}
-				
-				if (programList[j]->type == DAEMONPROGRAM)
-					OperatingSystem_MoveToTheREADYState(PID, DAEMONSQUEUE);
-				else
-					OperatingSystem_MoveToTheREADYState(PID, USERPROCESSQUEUE);
-			}
+	//for (i=0; programList[i]!=NULL && i<PROGRAMSMAXNUMBER; i++) {
+	while (OperatingSystem_IsThereANewProgram() == 1) {
+		i = ComputerSystem_ArrivalTimePull();
+		
+		if (programList[i]->type == DAEMONPROGRAM)
+			PID=OperatingSystem_CreateProcess(i, DAEMONSQUEUE);
+		else
+			PID=OperatingSystem_CreateProcess(i, USERPROCESSQUEUE);
+		
+		if(PID == NOFREEENTRY) {
+			OperatingSystem_ShowTime(ERROR);
+			ComputerSystem_DebugMessage(103,ERROR,programList[i]->executableName);
+		} else if (PID == PROGRAMDOESNOTEXIST) {
+			OperatingSystem_ShowTime(ERROR);
+			ComputerSystem_DebugMessage(104,ERROR,programList[i]->executableName, "--- it does not exist ---");
+		} else if (PID == PROGRAMNOTVALID) {
+			OperatingSystem_ShowTime(ERROR);
+			ComputerSystem_DebugMessage(104,ERROR,programList[i]->executableName, "--- invalid priority or size ---");
+		} else if (PID == TOOBIGPROCESS) {
+			OperatingSystem_ShowTime(ERROR);
+			ComputerSystem_DebugMessage(105,ERROR,programList[i]->executableName);
 		} else {
-			break;
+			numberOfSuccessfullyCreatedProcesses++;
+			// Move process to the ready state
+			if (programList[i]->type == USERPROGRAM) {
+				numberOfNotTerminatedUserProcesses++;
+			}
+			
+			if (programList[i]->type == DAEMONPROGRAM)
+				OperatingSystem_MoveToTheREADYState(PID, DAEMONSQUEUE);
+			else
+				OperatingSystem_MoveToTheREADYState(PID, USERPROCESSQUEUE);
 		}
 	}
 	
-	if (numberOfSuccessfullyCreatedProcesses > 1)		// revisar
+	if (numberOfSuccessfullyCreatedProcesses > 0)
 		OperatingSystem_PrintStatus();
 
 	// Return the number of succesfully created processes
@@ -522,7 +519,7 @@ void OperatingSystem_InterruptLogic(int entryPoint){
 
  // In OperatingSystem.c Exercise 2-b of V2
 void OperatingSystem_HandleClockInterrupt(){
-	OperatingSystem_ShowTime(SYSPROC);
+	OperatingSystem_ShowTime(INTERRUPT);
 	numberOfClockInterrupts++;
 	ComputerSystem_DebugMessage(120,INTERRUPT, numberOfClockInterrupts);
 	
