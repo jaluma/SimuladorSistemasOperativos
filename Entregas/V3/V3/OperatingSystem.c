@@ -90,6 +90,9 @@ void OperatingSystem_Initialize(int daemonsIndex) {
 	// Create all user processes from the information given in the command line
 	long_term_schreduler = OperatingSystem_LongTermScheduler();
 	
+	if (long_term_schreduler > 0)
+		OperatingSystem_PrintStatus();
+	
 	if (OperatingSystem_IsThereANewProgram() == -1 && long_term_schreduler <= 1) {
 		OperatingSystem_ReadyToShutdown();
 	}
@@ -173,9 +176,6 @@ int OperatingSystem_LongTermScheduler() {
 				OperatingSystem_MoveToTheREADYState(PID, USERPROCESSQUEUE);
 		}
 	}
-	
-	if (numberOfSuccessfullyCreatedProcesses > 0)
-		OperatingSystem_PrintStatus();
 
 	// Return the number of succesfully created processes
 	return numberOfSuccessfullyCreatedProcesses;
@@ -535,6 +535,9 @@ void OperatingSystem_HandleClockInterrupt(){
 	}
 	
 	int createdProcess = OperatingSystem_LongTermScheduler();
+	
+	if (OperatingSystem_IsThereANewProgram() == -1 && createdProcess <= 0)
+		OperatingSystem_ReadyToShutdown();
 	
 	if (TrueIfThereIsAnyPIDToWakeUp > 0 || createdProcess > 0) {
 		OperatingSystem_PrintStatus();
