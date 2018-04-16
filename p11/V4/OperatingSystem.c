@@ -64,7 +64,7 @@ int numberOfSleepingProcesses=0;
 // Initial set of tasks of the OS
 void OperatingSystem_Initialize(int daemonsIndex) {
 	
-	int i, selectedProcess, long_term_schreduler;
+	int i, selectedProcess, long_term_schreduler, createdPartitions;
 	FILE *programFile; // For load Operating System Code
 
 	// Obtain the memory requirements of the program
@@ -86,6 +86,13 @@ void OperatingSystem_Initialize(int daemonsIndex) {
 	// llamada a la creación de la lista de llegada
 	ComputerSystem_FillInArrivalTimeQueue();
 	OperatingSystem_PrintStatus();
+	
+	//inicializacion de tablas de particiones
+	createdPartitions = OperatingSystem_InitializePartitionTable();
+	
+	if (!createdPartitions) {
+		OperatingSystem_ReadyToShutdown();
+	}
 
 	// Create all user processes from the information given in the command line
 	long_term_schreduler = OperatingSystem_LongTermScheduler();
@@ -190,6 +197,7 @@ int OperatingSystem_CreateProcess(int indexOfExecutableProgram, int queueID) {
 	int loadingPhysicalAddress;
 	int priority;
 	int program;
+	int partitionNumber;
 	FILE *programFile;
 	PROGRAMS_DATA *executableProgram=programList[indexOfExecutableProgram];
 
@@ -217,10 +225,14 @@ int OperatingSystem_CreateProcess(int indexOfExecutableProgram, int queueID) {
 	}
 	
 	// Obtain enough memory space
- 	loadingPhysicalAddress=OperatingSystem_ObtainMainMemory(processSize, PID);
+ 	partitionNumber=OperatingSystem_ObtainMainMemory(processSize, PID);
 	
-	if (loadingPhysicalAddress == TOOBIGPROCESS) {
+	if (partitionNumber == TOOBIGPROCESS) {
 		return TOOBIGPROCESS;
+	} else {
+		loadingPhysicalAddress = partitionsTable[partitionNumber].initAddress;
+		OperatingSystem_ShowTime(SYSMEM);
+		ComputerSystem_DebugMessage(143,SYSMEM, partitionNumber ,loadingPhysicalAddress, processSize,PID ,programList[processTable[executingProcessID].programListIndex]->executableName);
 	}
 
 	// Load program in the allocated memory
@@ -248,7 +260,25 @@ int OperatingSystem_ObtainMainMemory(int processSize, int PID) {
  	if (processSize>MAINMEMORYSECTIONSIZE)
 		return TOOBIGPROCESS;
 	
- 	return PID*MAINMEMORYSECTIONSIZE;
+	OperatingSystem_ShowTime(SYSMEM);
+	ComputerSystem_DebugMessage(142, SYSMEM, PID, programList[processTable[PID].programListIndex]->executableName, processSize);
+	
+	int i, indexPartition = -1, memoryLeak = MAINMEMORYSIZE;
+	for (i = 0; i < PARTITIONTABLEMAXSIZE; i++)	{
+		if (!partitionsTable[i].occupied && partitionsTable[i].size - processSize < memoryLeak) {
+			memoryLeak = partitionsTable[i].size - processSize;
+			indexPartition = i;
+		}
+	}
+	
+	if (indexPartition == -1)
+		return TOOBIGPROCESS;
+	
+	partitionsTable[indexPartition].PID = PID;
+	partitionsTable[indexPartition].occupied = 1;
+	
+ 	//return PID*MAINMEMORYSECTIONSIZE;
+	return indexPartition;
 }
 
 
@@ -410,8 +440,27 @@ void OperatingSystem_SaveContext(int PID) {
 void OperatingSystem_HandleException() {
   
 	// Show message "Process [executingProcessID] has generated an exception and is terminating\n"
-	OperatingSystem_ShowTime(SYSPROC);
-	ComputerSystem_DebugMessage(23,SYSPROC,executingProcessID);
+	//OperatingSystem_ShowTime(SYSPROC);
+	//ComputerSystem_DebugMessage(23,SYSPROC,executingProcessID);
+	
+	switch (Processor_GetRegisterB()) {
+		case DIVISIONBYZERO:
+			OperatingSystem_ShowTime(INTERRUPT);
+			ComputerSystem_DebugMessage(140,INTERRUPT,executingProcessID, programList[processTable[executingProcessID].programListIndex]->executableName,"division by zero");
+			break;
+		case INVALIDPROCESSORMODE:
+			OperatingSystem_ShowTime(INTERRUPT);
+			ComputerSystem_DebugMessage(140,INTERRUPT,executingProcessID, programList[processTable[executingProcessID].programListIndex]->executableName,"invalid processor mode");
+			break;
+		case INVALIDADDRESS:
+			OperatingSystem_ShowTime(INTERRUPT);
+			ComputerSystem_DebugMessage(140,INTERRUPT,executingProcessID, programList[processTable[executingProcessID].programListIndex]->executableName,"invalid address");
+			break;
+		case INVALIDINSTRUCTION:
+			OperatingSystem_ShowTime(INTERRUPT);
+			ComputerSystem_DebugMessage(140,INTERRUPT,executingProcessID, programList[processTable[executingProcessID].programListIndex]->executableName,"invalid instruction");
+			break;
+	}
 	
 	OperatingSystem_TerminateProcess();
 	OperatingSystem_PrintStatus();
@@ -486,16 +535,24 @@ void OperatingSystem_HandleSystemCall() {
 			}
 			break;
 			
-			case SYSCALL_SLEEP:	//  SYSCALL_SLEEP=7
-				processTable[executingProcessID].whenToWakeUp = numberOfClockInterrupts + abs(Processor_GetAccumulator()) + 1;
-				
-				//OperatingSystem_PreemptRunningProcess();
-				OperatingSystem_PreemptRunningProcessToBlock();
-				PID = OperatingSystem_ShortTermScheduler();
-				OperatingSystem_Dispatch(PID);
-				
-				OperatingSystem_PrintStatus();
-				break;
+		case SYSCALL_SLEEP:	//  SYSCALL_SLEEP=7
+			processTable[executingProcessID].whenToWakeUp = numberOfClockInterrupts + abs(Processor_GetAccumulator()) + 1;
+			
+			//OperatingSystem_PreemptRunningProcess();
+			OperatingSystem_PreemptRunningProcessToBlock();
+			PID = OperatingSystem_ShortTermScheduler();
+			OperatingSystem_Dispatch(PID);
+			
+			OperatingSystem_PrintStatus();
+			break;
+		
+		default:
+			OperatingSystem_ShowTime(INTERRUPT);
+			ComputerSystem_DebugMessage(141, INTERRUPT, executingProcessID, programList[processTable[executingProcessID].programListIndex]->executableName,systemCallID);
+			OperatingSystem_TerminateProcess();
+			OperatingSystem_PrintStatus();
+			
+			break;
 	}
 }
 	

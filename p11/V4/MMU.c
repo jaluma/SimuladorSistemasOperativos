@@ -28,7 +28,8 @@ int MMU_readMemory() {
 			return MMU_FAIL;
 		}
 	}
-	else // Non-Protected mode
+	else { // Non-Protected mode 
+		
 		if (registerMAR_MMU<registerLimit_MMU) { 
 			// Physical address = logical address + base register
 			registerMAR_MMU+=registerBase_MMU;
@@ -39,9 +40,10 @@ int MMU_readMemory() {
 			return MMU_SUCCESS;
 		}
 		else {
+			Processor_RaiseException(INVALIDADDRESS);
 			return MMU_FAIL;
 		}
-		
+	}
 }
 
 // Logical address is in registerMAR_MMU. If correct, physical address is produced
@@ -59,7 +61,7 @@ int MMU_writeMemory() {
 		else {
 			return MMU_FAIL;
 		}
-	else   // Non-Protected mode
+	else {  // Non-Protected mode 
 		if (registerMAR_MMU<registerLimit_MMU) {
 			// Physical address = logical address + base register
 			registerMAR_MMU+=registerBase_MMU;
@@ -70,8 +72,10 @@ int MMU_writeMemory() {
 			return MMU_SUCCESS;
 		}
 		else {
+			Processor_RaiseException(INVALIDADDRESS);
 			return MMU_FAIL;
 		}
+	}
 }
 
 // Setter for registerMAR_MMU

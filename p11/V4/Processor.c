@@ -28,6 +28,7 @@ int registerMAR_CPU; // Memory Address Register
 MEMORYCELL registerMBR_CPU; // Memory Buffer Register
 
 int registerA_CPU; // General purpose register
+int registerB_CPU; // General purpose register
 
 int interruptLines_CPU; // Processor interrupt lines
 
@@ -110,7 +111,7 @@ void Processor_DecodeAndExecuteInstruction() {
 		// Instruction DIV
 		case 'd':
 			if (registerIR_CPU.operand2 == 0)
-				Processor_RaiseInterrupt(EXCEPTION_BIT); 
+				Processor_RaiseException(DIVISIONBYZERO);
 			else {
 				registerAccumulator_CPU=registerIR_CPU.operand1 / registerIR_CPU.operand2;
 				registerPC_CPU++;
@@ -193,7 +194,7 @@ void Processor_DecodeAndExecuteInstruction() {
 			if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1)
 				Processor_ActivatePSW_Bit(POWEROFF_BIT);
 			else
-				Processor_RaiseInterrupt(EXCEPTION_BIT);
+				Processor_RaiseException(INVALIDPROCESSORMODE);
 			break;
 			  
 		// Instruction OS
@@ -208,7 +209,7 @@ void Processor_DecodeAndExecuteInstruction() {
 				// Update PSW bits (ZERO_BIT, NEGATIVE_BIT, ...)
 				Processor_UpdatePSW();
 			} else {
-				Processor_RaiseInterrupt(EXCEPTION_BIT);
+				Processor_RaiseException(INVALIDPROCESSORMODE);
 			}
 			
 			return; // Note: message show before... for operating system messages after...
@@ -220,12 +221,13 @@ void Processor_DecodeAndExecuteInstruction() {
 				registerPSW_CPU=Processor_CopyFromSystemStack(MAINMEMORYSIZE-2);
 				registerAccumulator_CPU=Processor_CopyFromSystemStack(MAINMEMORYSIZE-3);
 			} else
-				Processor_RaiseInterrupt(EXCEPTION_BIT);
+				Processor_RaiseException(INVALIDPROCESSORMODE);
 			break;		
 
 		// Unknown instruction
 		default : 
 			registerPC_CPU++;
+			Processor_RaiseException(INVALIDINSTRUCTION);
 			break;
 	}
 	
@@ -312,6 +314,11 @@ int Processor_CopyFromSystemStack(int physicalMemoryAddress) {
 	return registerMBR_CPU.operand1;
 }
 
+// Function to raise an exception. Exercise 1-c of V4
+void Processor_RaiseException(int typeOfException) {
+	Processor_RaiseInterrupt(EXCEPTION_BIT);
+	registerB_CPU=typeOfException;
+} 
 
 // Put the specified interrupt line to a high level 
 void Processor_RaiseInterrupt(const unsigned int interruptNumber) {
@@ -449,3 +456,7 @@ char * Processor_ShowPSW(){
 
 /////////////////////////////////////////////////////////
 //  New functions below this line  //////////////////////
+
+int Processor_GetRegisterB() {
+  return registerB_CPU;
+}

@@ -13,6 +13,8 @@ enum PSW_BITS {POWEROFF_BIT=0, ZERO_BIT=1, NEGATIVE_BIT=2, OVERFLOW_BIT=3, EXECU
 // interrupt types 
 enum INT_BITS {SYSCALL_BIT=2, EXCEPTION_BIT=6, CLOCKINT_BIT=9};
 
+enum EXCEPTIONS {DIVISIONBYZERO, INVALIDPROCESSORMODE, INVALIDADDRESS, INVALIDINSTRUCTION}; 
+
 // Functions prototypes
 void Processor_InitializeInterruptVectorTable(int);
 void Processor_InstructionCycleLoop();
@@ -21,6 +23,7 @@ int Processor_CopyFromSystemStack(int);
 unsigned int Processor_PSW_BitState(const unsigned int);
 char * Processor_ShowPSW();
 void Processor_RaiseInterrupt(const unsigned int);
+void Processor_RaiseException(int typeOfException);
 
 // The OS needs to access MAR and MBR registers to save the context of
 // the process to which the processor is being assigned
@@ -44,6 +47,7 @@ void Processor_SetPC(int);
 // The OS needs to access register A to when executing the system call management
 // routine, so it will be able to know the invoked system call identifier
 int Processor_GetRegisterA();
+int Processor_GetRegisterB();
 
 // The OS needs to access the PSW register to restore the context of
 // the process to which the processor is being assigned
