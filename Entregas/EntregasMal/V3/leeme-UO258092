@@ -1,0 +1,26 @@
+Martinez Alvarez Javier
+ - He completado hasta la V3 completa, es decir, ejercicio 4
+ - Ejercicios:
+	- TuProgramaConMEMADD 						ProgramTest_MEMADD						MEMADD
+	- newProgramVerySimple						newProgramVerySimple					PROGRAMA QUE ACABA CON TRAP 3
+	- TuProgramaInvalidoPorTamanioOPrioridad 	ProgramTest_PriorityFail				CONTROL PRIORIDAD/TAMAÑO
+	- TuProgramaDemasiadoGrandePorTamanio 		ProgramTest_VeryBig						PROGRAMA DEMASIADO GRANDE
+	- TuProgramaConDemasiadasInstrucciones 		ProgramTest_MoreInst					PROGRAMA CON DEMASIADAS INTRUCCIONES
+	- TuProgramaConYRET 						ProgramTest_YRET						PROGRAMA CON UN YRET
+	- TuProgramasConOS 							ProgramTest_OS							PROGRAMA CON UN OS
+	- TuProgramaConHALT 						ProgramTest_HALT						PROGRAMA CON UN HALT
+	- TuProgramaConPrioridadMayorQue100 		ProgramTest_LowPriority100				PROGRAMA CON UNA PRIORIDAD MUY BAJA(>100)
+	- TuProgramaQuePruebaYield 					ProgramTest_Yield1						PROGRAMA PARA PROBAR SYSCALL YIELD
+
+ - Otros programas:
+	- programVerySimple																	Programa de prueba
+	- ProgramTest_OnlySize																Programa sin prioridad
+	- ProgramTest_PriorityNotNumber														Programa con una letra como prioridad, en vez de número
+	- ProgramTest_Read																	Programa para probar READ
+	- ProgramTest_SizeNeg																Programa con un tamaño negativo
+	- ProgramTest_SizeNotNumber															Programa con una letra como tamaño, en vez de un número
+	- ProgramTest_Yield1 ProgramTest_Yield2 ProgramTest_Yield3							Programas para probar el uso de SYSCALL YIELD
+	- program-Final-V1-1 program-Final-V1-2 program-Final-V1-3							Programas finales para probar los asserts
+	- ProgramTest_Sleep																	Programa para probar la SYSCALL SLEEP
+	- ProgramTest_Sleep1																Programa para probar la SYSCALL SLEEP
+	- ProgramTest_Sleep2																Programa para probar la SYSCALL SLEEP

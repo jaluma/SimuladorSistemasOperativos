@@ -27,7 +27,6 @@ int OperatingSystem_ExtractFromBlockedToReady();
 void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
 void OperatingSystem_MoveToTheBLOCKEDState(int);
-void OperatingSystem_ChangeExecutingProcess(int);
 
 // The process table
 PCB processTable[PROCESSTABLEMAXSIZE];
@@ -521,7 +520,7 @@ void OperatingSystem_InterruptLogic(int entryPoint){
 
  // In OperatingSystem.c Exercise 2-b of V2
 void OperatingSystem_HandleClockInterrupt(){
-OperatingSystem_ShowTime(INTERRUPT);
+	OperatingSystem_ShowTime(INTERRUPT);
 	numberOfClockInterrupts++;
 	ComputerSystem_DebugMessage(120,INTERRUPT, numberOfClockInterrupts);
 	
@@ -539,38 +538,23 @@ OperatingSystem_ShowTime(INTERRUPT);
 	int createdProcess = OperatingSystem_LongTermScheduler();
 	
 	if (TrueIfThereIsAnyPIDToWakeUp > 0 || createdProcess > 0) {
-		OperatingSystem_PrintStatus();	
+		OperatingSystem_PrintStatus();
+		 
+		FirstPIDInHeap = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);			
+		
+		if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority || processTable[executingProcessID].queueID == DAEMONSQUEUE) {
+			OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
+			ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, FirstPIDInHeap);
 
-		if (numberOfReadyToRunProcesses[USERPROCESSQUEUE]) {
-			FirstPIDInHeap = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);
+			OperatingSystem_PreemptRunningProcess();
+			OperatingSystem_ShortTermScheduler();
+			OperatingSystem_Dispatch(FirstPIDInHeap);
 			
-			if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority || processTable[executingProcessID].queueID == DAEMONSQUEUE) {
-				OperatingSystem_ChangeExecutingProcess(FirstPIDInHeap);
-			}
-		} else if (processTable[executingProcessID].queueID != USERPROCESSQUEUE){
-			FirstPIDInHeap = Heap_getFirst(readyToRunQueue[DAEMONSQUEUE], numberOfReadyToRunProcesses[DAEMONSQUEUE]);
-
-			if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority) {
-				OperatingSystem_ChangeExecutingProcess(FirstPIDInHeap);
-			}
+			OperatingSystem_PrintStatus();
 		}
-		
-		
 	}
 
-}
-
-void OperatingSystem_ChangeExecutingProcess(int nPID) {
-	OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
-	ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, nPID);
-
-	OperatingSystem_PreemptRunningProcess();
-	int selectedProcess = OperatingSystem_ShortTermScheduler();
-	OperatingSystem_Dispatch(selectedProcess);
-	
-	OperatingSystem_PrintStatus();
-}
-
+} 
 
  void OperatingSystem_PrintReadyToRunQueue() {
 	 int i;

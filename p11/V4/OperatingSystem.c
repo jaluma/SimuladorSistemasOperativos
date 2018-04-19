@@ -11,7 +11,7 @@
 
 // Functions prototypes
 void OperatingSystem_PrepareDaemons(int);
-void OperatingSystem_PCBInitialization(int, int, int, int, int,int);
+void OperatingSystem_PCBInitialization(int, int, int, int, int,int, int);
 void OperatingSystem_MoveToTheREADYState(int,int);
 void OperatingSystem_Dispatch(int);
 void OperatingSystem_RestoreContext(int);
@@ -27,6 +27,7 @@ int OperatingSystem_ExtractFromBlockedToReady();
 void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
 void OperatingSystem_MoveToTheBLOCKEDState(int);
+void OperatingSystem_ChangeExecutingProcess(int);
 
 // The process table
 PCB processTable[PROCESSTABLEMAXSIZE];
@@ -170,6 +171,9 @@ int OperatingSystem_LongTermScheduler() {
 		} else if (PID == TOOBIGPROCESS) {
 			OperatingSystem_ShowTime(ERROR);
 			ComputerSystem_DebugMessage(105,ERROR,programList[i]->executableName);
+		} else if (PID == MEMORYFULL) {
+			OperatingSystem_ShowTime(ERROR);
+			ComputerSystem_DebugMessage(144,ERROR,programList[i]->executableName);
 		} else {
 			numberOfSuccessfullyCreatedProcesses++;
 			// Move process to the ready state
@@ -229,10 +233,10 @@ int OperatingSystem_CreateProcess(int indexOfExecutableProgram, int queueID) {
 	
 	if (partitionNumber == TOOBIGPROCESS) {
 		return TOOBIGPROCESS;
+	} else if (partitionNumber == MEMORYFULL) {
+		return MEMORYFULL;
 	} else {
 		loadingPhysicalAddress = partitionsTable[partitionNumber].initAddress;
-		OperatingSystem_ShowTime(SYSMEM);
-		ComputerSystem_DebugMessage(143,SYSMEM, partitionNumber ,loadingPhysicalAddress, processSize,PID ,programList[processTable[executingProcessID].programListIndex]->executableName);
 	}
 
 	// Load program in the allocated memory
@@ -243,7 +247,7 @@ int OperatingSystem_CreateProcess(int indexOfExecutableProgram, int queueID) {
 	}
 	
 	// PCB initialization
-	OperatingSystem_PCBInitialization(PID, loadingPhysicalAddress, processSize, priority, indexOfExecutableProgram, queueID);
+	OperatingSystem_PCBInitialization(PID, loadingPhysicalAddress, processSize, priority, indexOfExecutableProgram, queueID, partitionNumber);
 	
 	// Show message "Process [PID] created from program [executableName]\n"
 	OperatingSystem_ShowTime(INIT);
@@ -256,34 +260,46 @@ int OperatingSystem_CreateProcess(int indexOfExecutableProgram, int queueID) {
 // Main memory is assigned in chunks. All chunks are the same size. A process
 // always obtains the chunk whose position in memory is equal to the processor identifier
 int OperatingSystem_ObtainMainMemory(int processSize, int PID) {
-
- 	if (processSize>MAINMEMORYSECTIONSIZE)
-		return TOOBIGPROCESS;
 	
-	OperatingSystem_ShowTime(SYSMEM);
-	ComputerSystem_DebugMessage(142, SYSMEM, PID, programList[processTable[PID].programListIndex]->executableName, processSize);
-	
-	int i, indexPartition = -1, memoryLeak = MAINMEMORYSIZE;
+	int i, indexPartition = TOOBIGPROCESS, memoryLeak = MAINMEMORYSIZE, TrueIfMemoryFull = 0, CountAvailablePartitions = 0;
 	for (i = 0; i < PARTITIONTABLEMAXSIZE; i++)	{
-		if (!partitionsTable[i].occupied && partitionsTable[i].size - processSize < memoryLeak) {
-			memoryLeak = partitionsTable[i].size - processSize;
-			indexPartition = i;
-		}
+		if (partitionsTable[i].size >= processSize) {
+			if (partitionsTable[i].occupied == 0) {
+				if (memoryLeak > partitionsTable[i].size - processSize) {
+					memoryLeak = partitionsTable[i].size - processSize;
+					indexPartition = i;
+				}
+			} else {
+				TrueIfMemoryFull++;
+			}
+			CountAvailablePartitions++;
+		} 
 	}
 	
-	if (indexPartition == -1)
-		return TOOBIGPROCESS;
-	
-	partitionsTable[indexPartition].PID = PID;
-	partitionsTable[indexPartition].occupied = 1;
-	
+	if (CountAvailablePartitions == TrueIfMemoryFull)
+		return MEMORYFULL;
+		
  	//return PID*MAINMEMORYSECTIONSIZE;
 	return indexPartition;
 }
 
+void OperatingSystem_ReleaseMainMemory() {
+	OperatingSystem_ShowPartitionTable("before releasing memory");
+	
+	int partitionNumber = processTable[executingProcessID].partitionNumber;
+	
+	partitionsTable[partitionNumber].PID = NOPROCESS;
+	partitionsTable[partitionNumber].occupied = 0;
+	
+	OperatingSystem_ShowTime(SYSMEM);
+	ComputerSystem_DebugMessage(145,SYSMEM, partitionNumber, partitionsTable[partitionNumber].initAddress, partitionsTable[partitionNumber].size, executingProcessID, programList[processTable[executingProcessID].programListIndex]->executableName);
+	
+	OperatingSystem_ShowPartitionTable("after releasing memory");
+}
+
 
 // Assign initial values to all fields inside the PCB
-void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int processSize, int priority, int processPLIndex, int queueID) {
+void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int processSize, int priority, int processPLIndex, int queueID, int partitionNumber) {
 
 	processTable[PID].busy=1;
 	processTable[PID].initialPhysicalAddress=initialPhysicalAddress;
@@ -306,6 +322,16 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
 	}
 	processTable[PID].queueID=queueID;
 	processTable[PID].whenToWakeUp=0;
+	
+	OperatingSystem_ShowTime(SYSMEM);
+	ComputerSystem_DebugMessage(142, SYSMEM, PID, programList[processTable[PID].programListIndex]->executableName, processSize);
+	OperatingSystem_ShowPartitionTable("before allocating memory");
+	processTable[PID].partitionNumber = partitionNumber;
+	partitionsTable[partitionNumber].PID = PID;
+	partitionsTable[partitionNumber].occupied = 1;
+	OperatingSystem_ShowTime(SYSMEM);
+	ComputerSystem_DebugMessage(143,SYSMEM, partitionNumber, partitionsTable[partitionNumber].initAddress, processSize, PID, programList[processTable[PID].programListIndex]->executableName);
+	OperatingSystem_ShowPartitionTable("after allocating memory");
 }
 
 
@@ -473,6 +499,9 @@ void OperatingSystem_TerminateProcess() {
 	int selectedProcess;
   	
 	processTable[executingProcessID].state=EXIT;
+	processTable[executingProcessID].busy=0;
+	
+	OperatingSystem_ReleaseMainMemory();
 	
 	OperatingSystem_ShowTime(SYSPROC);
 	ComputerSystem_DebugMessage(110, SYSPROC, executingProcessID, statesNames[2], statesNames[4]);
@@ -480,7 +509,7 @@ void OperatingSystem_TerminateProcess() {
 	// One more process that has terminated
 	numberOfNotTerminatedUserProcesses--;
 	
-	if (OperatingSystem_IsThereANewProgram() == -1 && numberOfNotTerminatedUserProcesses<=0) {
+	if (OperatingSystem_IsThereANewProgram() == -1 && numberOfNotTerminatedUserProcesses<=0 && !numberOfSleepingProcesses) {
 		// Simulation must finish 
 		OperatingSystem_ReadyToShutdown();
 	}
@@ -593,27 +622,38 @@ void OperatingSystem_HandleClockInterrupt(){
 	
 	int createdProcess = OperatingSystem_LongTermScheduler();
 	
-	if (OperatingSystem_IsThereANewProgram() == -1 && createdProcess <= 0)
-		OperatingSystem_ReadyToShutdown();
-	
 	if (TrueIfThereIsAnyPIDToWakeUp > 0 || createdProcess > 0) {
-		OperatingSystem_PrintStatus();
-		 
-		FirstPIDInHeap = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);			
-		
-		if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority || processTable[executingProcessID].queueID == DAEMONSQUEUE) {
-			OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
-			ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, FirstPIDInHeap);
+		OperatingSystem_PrintStatus();	
 
-			OperatingSystem_PreemptRunningProcess();
-			OperatingSystem_ShortTermScheduler();
-			OperatingSystem_Dispatch(FirstPIDInHeap);
+		if (numberOfReadyToRunProcesses[USERPROCESSQUEUE]) {
+			FirstPIDInHeap = Heap_getFirst(readyToRunQueue[USERPROCESSQUEUE], numberOfReadyToRunProcesses[USERPROCESSQUEUE]);
 			
-			OperatingSystem_PrintStatus();
+			if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority || processTable[executingProcessID].queueID == DAEMONSQUEUE) {
+				OperatingSystem_ChangeExecutingProcess(FirstPIDInHeap);
+			}
+		} else if (processTable[executingProcessID].queueID != USERPROCESSQUEUE){
+			FirstPIDInHeap = Heap_getFirst(readyToRunQueue[DAEMONSQUEUE], numberOfReadyToRunProcesses[DAEMONSQUEUE]);
+
+			if (processTable[executingProcessID].priority > processTable[FirstPIDInHeap].priority) {
+				OperatingSystem_ChangeExecutingProcess(FirstPIDInHeap);
+			}
 		}
+		
+		
 	}
 
-} 
+}
+
+void OperatingSystem_ChangeExecutingProcess(int nPID) {
+	OperatingSystem_ShowTime(SHORTTERMSCHEDULE);
+	ComputerSystem_DebugMessage(121, SHORTTERMSCHEDULE, executingProcessID, nPID);
+
+	OperatingSystem_PreemptRunningProcess();
+	int selectedProcess = OperatingSystem_ShortTermScheduler();
+	OperatingSystem_Dispatch(selectedProcess);
+	
+	OperatingSystem_PrintStatus();
+}
 
  void OperatingSystem_PrintReadyToRunQueue() {
 	 int i;

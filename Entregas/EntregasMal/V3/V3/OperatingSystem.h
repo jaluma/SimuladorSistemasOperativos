@@ -27,13 +27,8 @@
 // so we can use 60 positions for OS code and the system stack
 #define MAINMEMORYSECTIONSIZE (MAINMEMORYSIZE / (PROCESSTABLEMAXSIZE+1))
 
-// Partitions configuration file name definition
-#define MEMCONFIG "MemConfig" // in OperatingSystem.h 
-
 #define NOFREEENTRY -3
 #define TOOBIGPROCESS -4
-
-#define MEMORYFULL -5 // In OperatingSystem.h
 
 #define NOPROCESS -1
 
@@ -56,7 +51,6 @@ typedef struct {
 	int programListIndex;
 	int queueID;
 	int whenToWakeUp;
-	int partitionNumber;
 } PCB;
 
 // These "extern" declaration enables other source code files to gain access

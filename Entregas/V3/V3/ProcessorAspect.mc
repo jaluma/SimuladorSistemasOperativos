@@ -37,8 +37,6 @@ enum PSW_BITS {POWEROFF_BIT=0, ZERO_BIT=1, NEGATIVE_BIT=2, OVERFLOW_BIT=3, EXECU
 
 enum INT_BITS {SYSCALL_BIT=2, EXCEPTION_BIT=6, CLOCKINT_BIT=9};
 
-enum EXCEPTIONS {DIVISIONBYZERO, INVALIDPROCESSORMODE, INVALIDADDRESS, INVALIDINSTRUCTION};
-
 
 void Processor_InitializeInterruptVectorTable(int);
 void Processor_InstructionCycleLoop();
@@ -47,7 +45,6 @@ int Processor_CopyFromSystemStack(int);
 unsigned int Processor_PSW_BitState(const unsigned int);
 char * Processor_ShowPSW();
 void Processor_RaiseInterrupt(const unsigned int);
-void Processor_RaiseException(int typeOfException);
 
 
 
@@ -71,7 +68,6 @@ void Processor_SetPC(int);
 
 
 int Processor_GetRegisterA();
-int Processor_GetRegisterB();
 
 
 
@@ -968,9 +964,9 @@ extern void funlockfile (FILE *__stream) __attribute__ ((__nothrow__ , __leaf__)
 # 942 "/usr/include/stdio.h" 3 4
 
 # 6 "OperatingSystem.h" 2
-# 41 "OperatingSystem.h"
+# 36 "OperatingSystem.h"
 
-# 41 "OperatingSystem.h"
+# 36 "OperatingSystem.h"
 enum ProcessStates { NEW, READY, EXECUTING, BLOCKED, EXIT};
 
 
@@ -989,7 +985,6 @@ typedef struct {
  int programListIndex;
  int queueID;
  int whenToWakeUp;
- int partitionNumber;
 } PCB;
 
 
@@ -1323,7 +1318,6 @@ int registerMAR_CPU;
 MEMORYCELL registerMBR_CPU;
 
 int registerA_CPU;
-int registerB_CPU;
 
 int interruptLines_CPU;
 
@@ -1406,7 +1400,7 @@ void Processor_DecodeAndExecuteInstruction() {
 
   case 'd':
    if (registerIR_CPU.operand2 == 0)
-    Processor_RaiseException(DIVISIONBYZERO);
+    Processor_RaiseInterrupt(EXCEPTION_BIT);
    else {
     registerAccumulator_CPU=registerIR_CPU.operand1 / registerIR_CPU.operand2;
     registerPC_CPU++;
@@ -1489,7 +1483,7 @@ void Processor_DecodeAndExecuteInstruction() {
    if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1)
     Processor_ActivatePSW_Bit(POWEROFF_BIT);
    else
-    Processor_RaiseException(INVALIDPROCESSORMODE);
+    Processor_RaiseInterrupt(EXCEPTION_BIT);
    break;
 
 
@@ -1504,7 +1498,7 @@ void Processor_DecodeAndExecuteInstruction() {
 
     Processor_UpdatePSW();
    } else {
-    Processor_RaiseException(INVALIDPROCESSORMODE);
+    Processor_RaiseInterrupt(EXCEPTION_BIT);
    }
 
    return;
@@ -1516,13 +1510,12 @@ void Processor_DecodeAndExecuteInstruction() {
     registerPSW_CPU=Processor_CopyFromSystemStack(300 -2);
     registerAccumulator_CPU=Processor_CopyFromSystemStack(300 -3);
    } else
-    Processor_RaiseException(INVALIDPROCESSORMODE);
+    Processor_RaiseInterrupt(EXCEPTION_BIT);
    break;
 
 
   default :
    registerPC_CPU++;
-   Processor_RaiseException(INVALIDINSTRUCTION);
    break;
  }
 
@@ -1609,11 +1602,6 @@ int Processor_CopyFromSystemStack(int physicalMemoryAddress) {
  return registerMBR_CPU.operand1;
 }
 
-
-void Processor_RaiseException(int typeOfException) {
- Processor_RaiseInterrupt(EXCEPTION_BIT);
- registerB_CPU=typeOfException;
-}
 
 
 void Processor_RaiseInterrupt(const unsigned int interruptNumber) {
@@ -1747,11 +1735,4 @@ char * Processor_ShowPSW(){
  if (Processor_PSW_BitState(INTERRUPT_MASKED_BIT))
   pswmask[tam-INTERRUPT_MASKED_BIT]='M';
  return pswmask;
-}
-
-
-
-
-int Processor_GetRegisterB() {
-  return registerB_CPU;
 }
