@@ -538,6 +538,10 @@ OperatingSystem_ShowTime(INTERRUPT);
 	
 	int createdProcess = OperatingSystem_LongTermScheduler();
 	
+	if (OperatingSystem_IsThereANewProgram() == -1 && numberOfNotTerminatedUserProcesses <= 0) {
+		OperatingSystem_ReadyToShutdown();
+	}
+	
 	if (TrueIfThereIsAnyPIDToWakeUp > 0 || createdProcess > 0) {
 		OperatingSystem_PrintStatus();	
 

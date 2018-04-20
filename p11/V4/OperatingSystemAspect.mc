@@ -3239,7 +3239,7 @@ void OperatingSystem_TerminateProcess() {
 
  numberOfNotTerminatedUserProcesses--;
 
- if (OperatingSystem_IsThereANewProgram() == -1 && numberOfNotTerminatedUserProcesses<=0 && !numberOfSleepingProcesses) {
+ if (OperatingSystem_IsThereANewProgram() == -1 && numberOfNotTerminatedUserProcesses<=0 && numberOfSleepingProcesses<=0) {
 
   OperatingSystem_ReadyToShutdown();
  }
@@ -3351,6 +3351,10 @@ void OperatingSystem_HandleClockInterrupt(){
  }
 
  int createdProcess = OperatingSystem_LongTermScheduler();
+
+ if (OperatingSystem_IsThereANewProgram() == -1 && numberOfNotTerminatedUserProcesses <= 0) {
+  OperatingSystem_ReadyToShutdown();
+ }
 
  if (TrueIfThereIsAnyPIDToWakeUp > 0 || createdProcess > 0) {
   OperatingSystem_PrintStatus();
