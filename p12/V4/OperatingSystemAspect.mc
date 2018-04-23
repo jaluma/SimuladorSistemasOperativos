@@ -2997,8 +2997,8 @@ int OperatingSystem_ObtainMainMemory(int processSize, int PID) {
     if (memoryLeak > partitionsTable[i].size - processSize) {
      memoryLeak = partitionsTable[i].size - processSize;
      indexPartition = i;
-    if (memoryLeak == 0)
-     return indexPartition;
+
+
     }
    } else {
     TrueIfMemoryFull++;

@@ -17,7 +17,7 @@ int registerMAR_MMU;
 int MMU_readMemory() {
 	 
 	if (Processor_PSW_BitState(EXECUTION_MODE_BIT)){ // Protected mode
-		if (registerMAR_MMU < MAINMEMORYSIZE){
+		if (registerMAR_MMU >= 0 && registerMAR_MMU < MAINMEMORYSIZE){
 			// Send to the main memory HW the physical address to write in
 			Buses_write_AddressBus_From_To(MMU, MAINMEMORY);
 			// Tell the main memory HW to read
@@ -30,7 +30,7 @@ int MMU_readMemory() {
 	}
 	else { // Non-Protected mode 
 		
-		if (registerMAR_MMU<registerLimit_MMU) { 
+		if (registerMAR_MMU >= 0 && registerMAR_MMU<registerLimit_MMU) { 
 			// Physical address = logical address + base register
 			registerMAR_MMU+=registerBase_MMU;
 			// Send to the main memory HW the physical address to write in
