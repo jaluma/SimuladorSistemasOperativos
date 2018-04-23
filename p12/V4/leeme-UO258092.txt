@@ -1,0 +1,8 @@
+./Simulator A ProgramTest_InvalidAdress
+./Simulator A ProgramTest_HALT
+./Simulator A ProgramTest_Div0
+./Simulator A ProgramTest_InstructionError
+./Simulator A ProgramTest_SyscallError
+./Simulator A ProgramTest_VeryBig
+./Simulator A ProgramTest_MemoryFull ProgramTest_MemoryFull ProgramTest_MemoryFull
+./Simulator A ProgramTest_BetterFit ProgramTest_BetterFit1 ProgramTest_BetterFit2

@@ -1,0 +1,5 @@
+// Programa para probar EXCEPTION DIVISION_BY_0
+20
+5
+DIV 5 0
+TRAP 3

@@ -1,0 +1,1523 @@
+51 Messages Loaded
+Asserts file unavailable
+[0] User program list:
+	Program [userProgram1] with arrival time [50]
+	Program [userProgram2] with arrival time [50]
+	[0] Running Process Information:
+		[--- No running process ---]
+	[0] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[0] SLEEPING Queue:
+		[--- empty queue ---]
+	[0] PID association with program's name:
+	[0] Arrival Time Queue:
+		[SystemIdleProcess, 0, DAEMON]
+		[userProgram1, 50, USER]
+		[userProgram2, 50, USER]
+	[0] New process [3] moving to the [NEW] state
+	[0] Process [3]->[SystemIdleProcess] requests [4] memory positions
+	[0] Main memory state (before allocating memory):
+		[0] [0 -> 4][AVAILABLE]
+		[1] [4 -> 12][AVAILABLE]
+		[2] [16 -> 16][AVAILABLE]
+		[3] [32 -> 96][AVAILABLE]
+		[4] [128 -> 64][AVAILABLE]
+		[5] [192 -> 16][AVAILABLE]
+		[6] [208 -> 17][AVAILABLE]
+	[0] Partition [0: 0-> 4] has been assigned to process [3]->[SystemIdleProcess]
+	[0] Main memory state (after allocating memory):
+		[0] [0 -> 4][3]
+		[1] [4 -> 12][AVAILABLE]
+		[2] [16 -> 16][AVAILABLE]
+		[3] [32 -> 96][AVAILABLE]
+		[4] [128 -> 64][AVAILABLE]
+		[5] [192 -> 16][AVAILABLE]
+		[6] [208 -> 17][AVAILABLE]
+	[0] Process [3] created from program [SystemIdleProcess]
+	[0] Process [3] moving from the [NEW] state to the [READY] state
+	[0] Running Process Information:
+		[--- No running process ---]
+	[0] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[0] SLEEPING Queue:
+		[--- empty queue ---]
+	[0] PID association with program's name:
+		PID: 3 -> SystemIdleProcess
+	[0] Arrival Time Queue:
+		[userProgram2, 50, USER]
+		[userProgram1, 50, USER]
+	[0] Process [3] moving from the [READY] state to the [EXECUTING] state
+[1] y 0 0 (PID: 3, PC: 0, Accumulator: 0, PSW: 130 [--------X-----Z-])
+[2] a 1301 417 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[3] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[4] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[5] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[6] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[7] Clock interrupt number [1] has occurred
+[8] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[9] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[10] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[11] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[12] Clock interrupt number [2] has occurred
+[13] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[14] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[15] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[16] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[17] Clock interrupt number [3] has occurred
+[18] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[19] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[20] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[21] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[22] Clock interrupt number [4] has occurred
+[23] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[24] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[25] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[26] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[27] Clock interrupt number [5] has occurred
+[28] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[29] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[30] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[31] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[32] Clock interrupt number [6] has occurred
+[33] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[34] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[35] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[36] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[37] Clock interrupt number [7] has occurred
+[38] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[39] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[40] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[41] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[42] Clock interrupt number [8] has occurred
+[43] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[44] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[45] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[46] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[47] Clock interrupt number [9] has occurred
+[48] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[49] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[50] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[51] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[52] Clock interrupt number [10] has occurred
+	[52] New process [0] moving to the [NEW] state
+	[52] Process [0]->[userProgram2] requests [50] memory positions
+	[52] Main memory state (before allocating memory):
+		[0] [0 -> 4][3]
+		[1] [4 -> 12][AVAILABLE]
+		[2] [16 -> 16][AVAILABLE]
+		[3] [32 -> 96][AVAILABLE]
+		[4] [128 -> 64][AVAILABLE]
+		[5] [192 -> 16][AVAILABLE]
+		[6] [208 -> 17][AVAILABLE]
+	[52] Partition [4: 128-> 50] has been assigned to process [0]->[userProgram2]
+	[52] Main memory state (after allocating memory):
+		[0] [0 -> 4][3]
+		[1] [4 -> 12][AVAILABLE]
+		[2] [16 -> 16][AVAILABLE]
+		[3] [32 -> 96][AVAILABLE]
+		[4] [128 -> 64][0]
+		[5] [192 -> 16][AVAILABLE]
+		[6] [208 -> 17][AVAILABLE]
+	[52] Process [0] created from program [userProgram2]
+	[52] Process [0] moving from the [NEW] state to the [READY] state
+	[52] New process [1] moving to the [NEW] state
+	[52] Process [1]->[userProgram1] requests [50] memory positions
+	[52] Main memory state (before allocating memory):
+		[0] [0 -> 4][3]
+		[1] [4 -> 12][AVAILABLE]
+		[2] [16 -> 16][AVAILABLE]
+		[3] [32 -> 96][AVAILABLE]
+		[4] [128 -> 64][0]
+		[5] [192 -> 16][AVAILABLE]
+		[6] [208 -> 17][AVAILABLE]
+	[52] Partition [3: 32-> 50] has been assigned to process [1]->[userProgram1]
+	[52] Main memory state (after allocating memory):
+		[0] [0 -> 4][3]
+		[1] [4 -> 12][AVAILABLE]
+		[2] [16 -> 16][AVAILABLE]
+		[3] [32 -> 96][1]
+		[4] [128 -> 64][0]
+		[5] [192 -> 16][AVAILABLE]
+		[6] [208 -> 17][AVAILABLE]
+	[52] Process [1] created from program [userProgram1]
+	[52] Process [1] moving from the [NEW] state to the [READY] state
+	[52] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[52] Ready-to-run processes queue:
+		USER: [1,101], [0,102]
+		DAEMONS: 
+	[52] SLEEPING Queue:
+		[--- empty queue ---]
+	[52] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[52] Process [3] is thrown out of the processor by process [1]
+	[52] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[52] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[52] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 0, Queue: USER]
+	[52] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: [3,100]
+	[52] SLEEPING Queue:
+		[--- empty queue ---]
+	[52] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[53] y 0 0 (PID: 1, PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[54] a 10 0 (PID: 1, PC: 1, Accumulator: 10, PSW: 0 [----------------])
+[55] w 40 0 (PID: 1, PC: 2, Accumulator: 10, PSW: 0 [----------------])
+[56] o 9 0 (PID: 1, PC: 245, Accumulator: 10, PSW: 32896 [M-------X-------])
+	[57] Clock interrupt number [11] has occurred
+[58] y 0 0 (PID: 1, PC: 2, Accumulator: 10, PSW: 0 [----------------])
+[59] a 7 0 (PID: 1, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[60] t 7 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[61] o 2 0 (PID: 1, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[62] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[62] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[62] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 0, Queue: USER]
+	[62] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[62] SLEEPING Queue:
+		[1, 101, 19]
+	[62] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[63] y 0 0 (PID: 0, PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[64] o 9 0 (PID: 0, PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[65] Clock interrupt number [12] has occurred
+[66] y 0 0 (PID: 0, PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[67] o 9 0 (PID: 0, PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[68] Clock interrupt number [13] has occurred
+[69] y 0 0 (PID: 0, PC: 0, Accumulator: 0, PSW: 2 [--------------Z-])
+[70] a 10 0 (PID: 0, PC: 1, Accumulator: 10, PSW: 0 [----------------])
+[71] o 9 0 (PID: 0, PC: 245, Accumulator: 10, PSW: 32896 [M-------X-------])
+	[72] Clock interrupt number [14] has occurred
+[73] y 0 0 (PID: 0, PC: 1, Accumulator: 10, PSW: 0 [----------------])
+[74] w 40 0 (PID: 0, PC: 2, Accumulator: 10, PSW: 0 [----------------])
+[75] a 7 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[76] o 9 0 (PID: 0, PC: 245, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[77] Clock interrupt number [15] has occurred
+[78] y 0 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[79] t 7 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[80] o 2 0 (PID: 0, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[81] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[81] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[81] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[81] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[81] SLEEPING Queue:
+		[1, 101, 19], [0, 102, 23]
+	[81] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[82] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[83] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[84] Clock interrupt number [16] has occurred
+[85] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[86] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[87] Clock interrupt number [17] has occurred
+[88] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[89] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[90] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[91] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[92] Clock interrupt number [18] has occurred
+[93] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[94] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[95] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[96] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[97] Clock interrupt number [19] has occurred
+	[97] Process [1] moving from the [BLOCKED] state to the [READY] state
+	[97] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[97] Ready-to-run processes queue:
+		USER: [1,101]
+		DAEMONS: 
+	[97] SLEEPING Queue:
+		[0, 102, 23]
+	[97] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[97] Process [3] is thrown out of the processor by process [1]
+	[97] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[97] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[97] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 19, Queue: USER]
+	[97] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[97] SLEEPING Queue:
+		[0, 102, 23]
+	[97] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[98] y 0 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[99] m -1 40 (PID: 1, PC: 5, Accumulator: 9, PSW: 0 [----------------])
+[100] z 2 0 (PID: 1, PC: 6, Accumulator: 9, PSW: 0 [----------------])
+[101] o 9 0 (PID: 1, PC: 245, Accumulator: 9, PSW: 32896 [M-------X-------])
+	[102] Clock interrupt number [20] has occurred
+[103] y 0 0 (PID: 1, PC: 6, Accumulator: 9, PSW: 0 [----------------])
+[104] j -5 0 (PID: 1, PC: 1, Accumulator: 9, PSW: 0 [----------------])
+[105] w 40 0 (PID: 1, PC: 2, Accumulator: 9, PSW: 0 [----------------])
+[106] o 9 0 (PID: 1, PC: 245, Accumulator: 9, PSW: 32896 [M-------X-------])
+	[107] Clock interrupt number [21] has occurred
+[108] y 0 0 (PID: 1, PC: 2, Accumulator: 9, PSW: 0 [----------------])
+[109] a 7 0 (PID: 1, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[110] t 7 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[111] o 2 0 (PID: 1, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[112] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[112] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[112] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[112] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[112] SLEEPING Queue:
+		[0, 102, 23], [1, 101, 29]
+	[112] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[113] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[114] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[115] Clock interrupt number [22] has occurred
+[116] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[117] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[118] Clock interrupt number [23] has occurred
+	[118] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[118] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[118] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: 
+	[118] SLEEPING Queue:
+		[1, 101, 29]
+	[118] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[118] Process [3] is thrown out of the processor by process [0]
+	[118] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[118] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[118] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 23, Queue: USER]
+	[118] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[118] SLEEPING Queue:
+		[1, 101, 29]
+	[118] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[119] y 0 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[120] m -1 40 (PID: 0, PC: 5, Accumulator: 9, PSW: 0 [----------------])
+[121] o 9 0 (PID: 0, PC: 245, Accumulator: 9, PSW: 32896 [M-------X-------])
+	[122] Clock interrupt number [24] has occurred
+[123] y 0 0 (PID: 0, PC: 5, Accumulator: 9, PSW: 0 [----------------])
+[124] z 2 0 (PID: 0, PC: 6, Accumulator: 9, PSW: 0 [----------------])
+[125] j -5 0 (PID: 0, PC: 1, Accumulator: 9, PSW: 0 [----------------])
+[126] o 9 0 (PID: 0, PC: 245, Accumulator: 9, PSW: 32896 [M-------X-------])
+	[127] Clock interrupt number [25] has occurred
+[128] y 0 0 (PID: 0, PC: 1, Accumulator: 9, PSW: 0 [----------------])
+[129] w 40 0 (PID: 0, PC: 2, Accumulator: 9, PSW: 0 [----------------])
+[130] a 7 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[131] o 9 0 (PID: 0, PC: 245, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[132] Clock interrupt number [26] has occurred
+[133] y 0 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[134] t 7 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[135] o 2 0 (PID: 0, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[136] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[136] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[136] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[136] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[136] SLEEPING Queue:
+		[1, 101, 29], [0, 102, 34]
+	[136] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[137] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[138] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[139] Clock interrupt number [27] has occurred
+[140] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[141] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[142] Clock interrupt number [28] has occurred
+[143] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[144] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[145] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[146] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[147] Clock interrupt number [29] has occurred
+	[147] Process [1] moving from the [BLOCKED] state to the [READY] state
+	[147] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[147] Ready-to-run processes queue:
+		USER: [1,101]
+		DAEMONS: 
+	[147] SLEEPING Queue:
+		[0, 102, 34]
+	[147] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[147] Process [3] is thrown out of the processor by process [1]
+	[147] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[147] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[147] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 29, Queue: USER]
+	[147] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[147] SLEEPING Queue:
+		[0, 102, 34]
+	[147] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[148] y 0 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[149] m -1 40 (PID: 1, PC: 5, Accumulator: 8, PSW: 0 [----------------])
+[150] z 2 0 (PID: 1, PC: 6, Accumulator: 8, PSW: 0 [----------------])
+[151] o 9 0 (PID: 1, PC: 245, Accumulator: 8, PSW: 32896 [M-------X-------])
+	[152] Clock interrupt number [30] has occurred
+[153] y 0 0 (PID: 1, PC: 6, Accumulator: 8, PSW: 0 [----------------])
+[154] j -5 0 (PID: 1, PC: 1, Accumulator: 8, PSW: 0 [----------------])
+[155] w 40 0 (PID: 1, PC: 2, Accumulator: 8, PSW: 0 [----------------])
+[156] o 9 0 (PID: 1, PC: 245, Accumulator: 8, PSW: 32896 [M-------X-------])
+	[157] Clock interrupt number [31] has occurred
+[158] y 0 0 (PID: 1, PC: 2, Accumulator: 8, PSW: 0 [----------------])
+[159] a 7 0 (PID: 1, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[160] t 7 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[161] o 2 0 (PID: 1, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[162] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[162] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[162] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[162] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[162] SLEEPING Queue:
+		[0, 102, 34], [1, 101, 39]
+	[162] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[163] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[164] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[165] Clock interrupt number [32] has occurred
+[166] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[167] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[168] Clock interrupt number [33] has occurred
+[169] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[170] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[171] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[172] Clock interrupt number [34] has occurred
+	[172] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[172] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[172] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: 
+	[172] SLEEPING Queue:
+		[1, 101, 39]
+	[172] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[172] Process [3] is thrown out of the processor by process [0]
+	[172] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[172] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[172] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 34, Queue: USER]
+	[172] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[172] SLEEPING Queue:
+		[1, 101, 39]
+	[172] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[173] y 0 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[174] m -1 40 (PID: 0, PC: 5, Accumulator: 8, PSW: 0 [----------------])
+[175] z 2 0 (PID: 0, PC: 6, Accumulator: 8, PSW: 0 [----------------])
+[176] o 9 0 (PID: 0, PC: 245, Accumulator: 8, PSW: 32896 [M-------X-------])
+	[177] Clock interrupt number [35] has occurred
+[178] y 0 0 (PID: 0, PC: 6, Accumulator: 8, PSW: 0 [----------------])
+[179] j -5 0 (PID: 0, PC: 1, Accumulator: 8, PSW: 0 [----------------])
+[180] w 40 0 (PID: 0, PC: 2, Accumulator: 8, PSW: 0 [----------------])
+[181] o 9 0 (PID: 0, PC: 245, Accumulator: 8, PSW: 32896 [M-------X-------])
+	[182] Clock interrupt number [36] has occurred
+[183] y 0 0 (PID: 0, PC: 2, Accumulator: 8, PSW: 0 [----------------])
+[184] a 7 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[185] t 7 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[186] o 2 0 (PID: 0, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[187] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[187] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[187] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[187] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[187] SLEEPING Queue:
+		[1, 101, 39], [0, 102, 44]
+	[187] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[188] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[189] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[190] Clock interrupt number [37] has occurred
+[191] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[192] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[193] Clock interrupt number [38] has occurred
+[194] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[195] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[196] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[197] Clock interrupt number [39] has occurred
+	[197] Process [1] moving from the [BLOCKED] state to the [READY] state
+	[197] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[197] Ready-to-run processes queue:
+		USER: [1,101]
+		DAEMONS: 
+	[197] SLEEPING Queue:
+		[0, 102, 44]
+	[197] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[197] Process [3] is thrown out of the processor by process [1]
+	[197] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[197] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[197] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 39, Queue: USER]
+	[197] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[197] SLEEPING Queue:
+		[0, 102, 44]
+	[197] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[198] y 0 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[199] m -1 40 (PID: 1, PC: 5, Accumulator: 7, PSW: 0 [----------------])
+[200] z 2 0 (PID: 1, PC: 6, Accumulator: 7, PSW: 0 [----------------])
+[201] o 9 0 (PID: 1, PC: 245, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[202] Clock interrupt number [40] has occurred
+[203] y 0 0 (PID: 1, PC: 6, Accumulator: 7, PSW: 0 [----------------])
+[204] j -5 0 (PID: 1, PC: 1, Accumulator: 7, PSW: 0 [----------------])
+[205] w 40 0 (PID: 1, PC: 2, Accumulator: 7, PSW: 0 [----------------])
+[206] o 9 0 (PID: 1, PC: 245, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[207] Clock interrupt number [41] has occurred
+[208] y 0 0 (PID: 1, PC: 2, Accumulator: 7, PSW: 0 [----------------])
+[209] a 7 0 (PID: 1, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[210] t 7 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[211] o 2 0 (PID: 1, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[212] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[212] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[212] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[212] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[212] SLEEPING Queue:
+		[0, 102, 44], [1, 101, 49]
+	[212] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[213] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[214] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[215] Clock interrupt number [42] has occurred
+[216] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[217] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[218] Clock interrupt number [43] has occurred
+[219] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[220] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[221] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[222] Clock interrupt number [44] has occurred
+	[222] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[222] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[222] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: 
+	[222] SLEEPING Queue:
+		[1, 101, 49]
+	[222] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[222] Process [3] is thrown out of the processor by process [0]
+	[222] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[222] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[222] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 44, Queue: USER]
+	[222] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[222] SLEEPING Queue:
+		[1, 101, 49]
+	[222] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[223] y 0 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[224] m -1 40 (PID: 0, PC: 5, Accumulator: 7, PSW: 0 [----------------])
+[225] z 2 0 (PID: 0, PC: 6, Accumulator: 7, PSW: 0 [----------------])
+[226] o 9 0 (PID: 0, PC: 245, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[227] Clock interrupt number [45] has occurred
+[228] y 0 0 (PID: 0, PC: 6, Accumulator: 7, PSW: 0 [----------------])
+[229] j -5 0 (PID: 0, PC: 1, Accumulator: 7, PSW: 0 [----------------])
+[230] w 40 0 (PID: 0, PC: 2, Accumulator: 7, PSW: 0 [----------------])
+[231] o 9 0 (PID: 0, PC: 245, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[232] Clock interrupt number [46] has occurred
+[233] y 0 0 (PID: 0, PC: 2, Accumulator: 7, PSW: 0 [----------------])
+[234] a 7 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[235] t 7 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[236] o 2 0 (PID: 0, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[237] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[237] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[237] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[237] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[237] SLEEPING Queue:
+		[1, 101, 49], [0, 102, 54]
+	[237] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[238] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[239] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[240] Clock interrupt number [47] has occurred
+[241] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[242] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[243] Clock interrupt number [48] has occurred
+[244] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[245] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[246] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[247] Clock interrupt number [49] has occurred
+	[247] Process [1] moving from the [BLOCKED] state to the [READY] state
+	[247] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[247] Ready-to-run processes queue:
+		USER: [1,101]
+		DAEMONS: 
+	[247] SLEEPING Queue:
+		[0, 102, 54]
+	[247] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[247] Process [3] is thrown out of the processor by process [1]
+	[247] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[247] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[247] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 49, Queue: USER]
+	[247] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[247] SLEEPING Queue:
+		[0, 102, 54]
+	[247] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[248] y 0 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[249] m -1 40 (PID: 1, PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[250] z 2 0 (PID: 1, PC: 6, Accumulator: 6, PSW: 0 [----------------])
+[251] o 9 0 (PID: 1, PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[252] Clock interrupt number [50] has occurred
+[253] y 0 0 (PID: 1, PC: 6, Accumulator: 6, PSW: 0 [----------------])
+[254] j -5 0 (PID: 1, PC: 1, Accumulator: 6, PSW: 0 [----------------])
+[255] w 40 0 (PID: 1, PC: 2, Accumulator: 6, PSW: 0 [----------------])
+[256] o 9 0 (PID: 1, PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[257] Clock interrupt number [51] has occurred
+[258] y 0 0 (PID: 1, PC: 2, Accumulator: 6, PSW: 0 [----------------])
+[259] a 7 0 (PID: 1, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[260] t 7 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[261] o 2 0 (PID: 1, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[262] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[262] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[262] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[262] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[262] SLEEPING Queue:
+		[0, 102, 54], [1, 101, 59]
+	[262] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[263] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[264] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[265] Clock interrupt number [52] has occurred
+[266] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[267] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[268] Clock interrupt number [53] has occurred
+[269] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[270] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[271] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[272] Clock interrupt number [54] has occurred
+	[272] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[272] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[272] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: 
+	[272] SLEEPING Queue:
+		[1, 101, 59]
+	[272] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[272] Process [3] is thrown out of the processor by process [0]
+	[272] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[272] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[272] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 54, Queue: USER]
+	[272] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[272] SLEEPING Queue:
+		[1, 101, 59]
+	[272] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[273] y 0 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[274] m -1 40 (PID: 0, PC: 5, Accumulator: 6, PSW: 0 [----------------])
+[275] z 2 0 (PID: 0, PC: 6, Accumulator: 6, PSW: 0 [----------------])
+[276] o 9 0 (PID: 0, PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[277] Clock interrupt number [55] has occurred
+[278] y 0 0 (PID: 0, PC: 6, Accumulator: 6, PSW: 0 [----------------])
+[279] j -5 0 (PID: 0, PC: 1, Accumulator: 6, PSW: 0 [----------------])
+[280] w 40 0 (PID: 0, PC: 2, Accumulator: 6, PSW: 0 [----------------])
+[281] o 9 0 (PID: 0, PC: 245, Accumulator: 6, PSW: 32896 [M-------X-------])
+	[282] Clock interrupt number [56] has occurred
+[283] y 0 0 (PID: 0, PC: 2, Accumulator: 6, PSW: 0 [----------------])
+[284] a 7 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[285] t 7 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[286] o 2 0 (PID: 0, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[287] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[287] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[287] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[287] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[287] SLEEPING Queue:
+		[1, 101, 59], [0, 102, 64]
+	[287] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[288] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[289] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[290] Clock interrupt number [57] has occurred
+[291] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[292] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[293] Clock interrupt number [58] has occurred
+[294] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[295] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[296] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[297] Clock interrupt number [59] has occurred
+	[297] Process [1] moving from the [BLOCKED] state to the [READY] state
+	[297] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[297] Ready-to-run processes queue:
+		USER: [1,101]
+		DAEMONS: 
+	[297] SLEEPING Queue:
+		[0, 102, 64]
+	[297] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[297] Process [3] is thrown out of the processor by process [1]
+	[297] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[297] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[297] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 59, Queue: USER]
+	[297] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[297] SLEEPING Queue:
+		[0, 102, 64]
+	[297] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[298] y 0 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[299] m -1 40 (PID: 1, PC: 5, Accumulator: 5, PSW: 0 [----------------])
+[300] z 2 0 (PID: 1, PC: 6, Accumulator: 5, PSW: 0 [----------------])
+[301] o 9 0 (PID: 1, PC: 245, Accumulator: 5, PSW: 32896 [M-------X-------])
+	[302] Clock interrupt number [60] has occurred
+[303] y 0 0 (PID: 1, PC: 6, Accumulator: 5, PSW: 0 [----------------])
+[304] j -5 0 (PID: 1, PC: 1, Accumulator: 5, PSW: 0 [----------------])
+[305] w 40 0 (PID: 1, PC: 2, Accumulator: 5, PSW: 0 [----------------])
+[306] o 9 0 (PID: 1, PC: 245, Accumulator: 5, PSW: 32896 [M-------X-------])
+	[307] Clock interrupt number [61] has occurred
+[308] y 0 0 (PID: 1, PC: 2, Accumulator: 5, PSW: 0 [----------------])
+[309] a 7 0 (PID: 1, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[310] t 7 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[311] o 2 0 (PID: 1, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[312] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[312] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[312] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[312] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[312] SLEEPING Queue:
+		[0, 102, 64], [1, 101, 69]
+	[312] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[313] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[314] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[315] Clock interrupt number [62] has occurred
+[316] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[317] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[318] Clock interrupt number [63] has occurred
+[319] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[320] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[321] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[322] Clock interrupt number [64] has occurred
+	[322] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[322] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[322] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: 
+	[322] SLEEPING Queue:
+		[1, 101, 69]
+	[322] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[322] Process [3] is thrown out of the processor by process [0]
+	[322] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[322] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[322] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 64, Queue: USER]
+	[322] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[322] SLEEPING Queue:
+		[1, 101, 69]
+	[322] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[323] y 0 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[324] m -1 40 (PID: 0, PC: 5, Accumulator: 5, PSW: 0 [----------------])
+[325] z 2 0 (PID: 0, PC: 6, Accumulator: 5, PSW: 0 [----------------])
+[326] o 9 0 (PID: 0, PC: 245, Accumulator: 5, PSW: 32896 [M-------X-------])
+	[327] Clock interrupt number [65] has occurred
+[328] y 0 0 (PID: 0, PC: 6, Accumulator: 5, PSW: 0 [----------------])
+[329] j -5 0 (PID: 0, PC: 1, Accumulator: 5, PSW: 0 [----------------])
+[330] w 40 0 (PID: 0, PC: 2, Accumulator: 5, PSW: 0 [----------------])
+[331] o 9 0 (PID: 0, PC: 245, Accumulator: 5, PSW: 32896 [M-------X-------])
+	[332] Clock interrupt number [66] has occurred
+[333] y 0 0 (PID: 0, PC: 2, Accumulator: 5, PSW: 0 [----------------])
+[334] a 7 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[335] t 7 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[336] o 2 0 (PID: 0, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[337] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[337] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[337] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[337] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[337] SLEEPING Queue:
+		[1, 101, 69], [0, 102, 74]
+	[337] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[338] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[339] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[340] Clock interrupt number [67] has occurred
+[341] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[342] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[343] Clock interrupt number [68] has occurred
+[344] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[345] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[346] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[347] Clock interrupt number [69] has occurred
+	[347] Process [1] moving from the [BLOCKED] state to the [READY] state
+	[347] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[347] Ready-to-run processes queue:
+		USER: [1,101]
+		DAEMONS: 
+	[347] SLEEPING Queue:
+		[0, 102, 74]
+	[347] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[347] Process [3] is thrown out of the processor by process [1]
+	[347] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[347] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[347] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 69, Queue: USER]
+	[347] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[347] SLEEPING Queue:
+		[0, 102, 74]
+	[347] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[348] y 0 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[349] m -1 40 (PID: 1, PC: 5, Accumulator: 4, PSW: 0 [----------------])
+[350] z 2 0 (PID: 1, PC: 6, Accumulator: 4, PSW: 0 [----------------])
+[351] o 9 0 (PID: 1, PC: 245, Accumulator: 4, PSW: 32896 [M-------X-------])
+	[352] Clock interrupt number [70] has occurred
+[353] y 0 0 (PID: 1, PC: 6, Accumulator: 4, PSW: 0 [----------------])
+[354] j -5 0 (PID: 1, PC: 1, Accumulator: 4, PSW: 0 [----------------])
+[355] w 40 0 (PID: 1, PC: 2, Accumulator: 4, PSW: 0 [----------------])
+[356] o 9 0 (PID: 1, PC: 245, Accumulator: 4, PSW: 32896 [M-------X-------])
+	[357] Clock interrupt number [71] has occurred
+[358] y 0 0 (PID: 1, PC: 2, Accumulator: 4, PSW: 0 [----------------])
+[359] a 7 0 (PID: 1, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[360] t 7 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[361] o 2 0 (PID: 1, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[362] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[362] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[362] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[362] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[362] SLEEPING Queue:
+		[0, 102, 74], [1, 101, 79]
+	[362] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[363] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[364] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[365] Clock interrupt number [72] has occurred
+[366] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[367] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[368] Clock interrupt number [73] has occurred
+[369] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[370] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[371] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[372] Clock interrupt number [74] has occurred
+	[372] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[372] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[372] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: 
+	[372] SLEEPING Queue:
+		[1, 101, 79]
+	[372] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[372] Process [3] is thrown out of the processor by process [0]
+	[372] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[372] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[372] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 74, Queue: USER]
+	[372] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[372] SLEEPING Queue:
+		[1, 101, 79]
+	[372] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[373] y 0 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[374] m -1 40 (PID: 0, PC: 5, Accumulator: 4, PSW: 0 [----------------])
+[375] z 2 0 (PID: 0, PC: 6, Accumulator: 4, PSW: 0 [----------------])
+[376] o 9 0 (PID: 0, PC: 245, Accumulator: 4, PSW: 32896 [M-------X-------])
+	[377] Clock interrupt number [75] has occurred
+[378] y 0 0 (PID: 0, PC: 6, Accumulator: 4, PSW: 0 [----------------])
+[379] j -5 0 (PID: 0, PC: 1, Accumulator: 4, PSW: 0 [----------------])
+[380] w 40 0 (PID: 0, PC: 2, Accumulator: 4, PSW: 0 [----------------])
+[381] o 9 0 (PID: 0, PC: 245, Accumulator: 4, PSW: 32896 [M-------X-------])
+	[382] Clock interrupt number [76] has occurred
+[383] y 0 0 (PID: 0, PC: 2, Accumulator: 4, PSW: 0 [----------------])
+[384] a 7 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[385] t 7 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[386] o 2 0 (PID: 0, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[387] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[387] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[387] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[387] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[387] SLEEPING Queue:
+		[1, 101, 79], [0, 102, 84]
+	[387] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[388] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[389] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[390] Clock interrupt number [77] has occurred
+[391] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[392] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[393] Clock interrupt number [78] has occurred
+[394] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[395] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[396] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[397] Clock interrupt number [79] has occurred
+	[397] Process [1] moving from the [BLOCKED] state to the [READY] state
+	[397] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[397] Ready-to-run processes queue:
+		USER: [1,101]
+		DAEMONS: 
+	[397] SLEEPING Queue:
+		[0, 102, 84]
+	[397] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[397] Process [3] is thrown out of the processor by process [1]
+	[397] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[397] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[397] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 79, Queue: USER]
+	[397] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[397] SLEEPING Queue:
+		[0, 102, 84]
+	[397] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[398] y 0 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[399] m -1 40 (PID: 1, PC: 5, Accumulator: 3, PSW: 0 [----------------])
+[400] z 2 0 (PID: 1, PC: 6, Accumulator: 3, PSW: 0 [----------------])
+[401] o 9 0 (PID: 1, PC: 245, Accumulator: 3, PSW: 32896 [M-------X-------])
+	[402] Clock interrupt number [80] has occurred
+[403] y 0 0 (PID: 1, PC: 6, Accumulator: 3, PSW: 0 [----------------])
+[404] j -5 0 (PID: 1, PC: 1, Accumulator: 3, PSW: 0 [----------------])
+[405] w 40 0 (PID: 1, PC: 2, Accumulator: 3, PSW: 0 [----------------])
+[406] o 9 0 (PID: 1, PC: 245, Accumulator: 3, PSW: 32896 [M-------X-------])
+	[407] Clock interrupt number [81] has occurred
+[408] y 0 0 (PID: 1, PC: 2, Accumulator: 3, PSW: 0 [----------------])
+[409] a 7 0 (PID: 1, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[410] t 7 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[411] o 2 0 (PID: 1, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[412] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[412] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[412] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[412] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[412] SLEEPING Queue:
+		[0, 102, 84], [1, 101, 89]
+	[412] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[413] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[414] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[415] Clock interrupt number [82] has occurred
+[416] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[417] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[418] Clock interrupt number [83] has occurred
+[419] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[420] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[421] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[422] Clock interrupt number [84] has occurred
+	[422] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[422] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[422] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: 
+	[422] SLEEPING Queue:
+		[1, 101, 89]
+	[422] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[422] Process [3] is thrown out of the processor by process [0]
+	[422] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[422] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[422] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 84, Queue: USER]
+	[422] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[422] SLEEPING Queue:
+		[1, 101, 89]
+	[422] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[423] y 0 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[424] m -1 40 (PID: 0, PC: 5, Accumulator: 3, PSW: 0 [----------------])
+[425] z 2 0 (PID: 0, PC: 6, Accumulator: 3, PSW: 0 [----------------])
+[426] o 9 0 (PID: 0, PC: 245, Accumulator: 3, PSW: 32896 [M-------X-------])
+	[427] Clock interrupt number [85] has occurred
+[428] y 0 0 (PID: 0, PC: 6, Accumulator: 3, PSW: 0 [----------------])
+[429] j -5 0 (PID: 0, PC: 1, Accumulator: 3, PSW: 0 [----------------])
+[430] w 40 0 (PID: 0, PC: 2, Accumulator: 3, PSW: 0 [----------------])
+[431] o 9 0 (PID: 0, PC: 245, Accumulator: 3, PSW: 32896 [M-------X-------])
+	[432] Clock interrupt number [86] has occurred
+[433] y 0 0 (PID: 0, PC: 2, Accumulator: 3, PSW: 0 [----------------])
+[434] a 7 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[435] t 7 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[436] o 2 0 (PID: 0, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[437] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[437] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[437] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[437] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[437] SLEEPING Queue:
+		[1, 101, 89], [0, 102, 94]
+	[437] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[438] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[439] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[440] Clock interrupt number [87] has occurred
+[441] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[442] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[443] Clock interrupt number [88] has occurred
+[444] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[445] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[446] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[447] Clock interrupt number [89] has occurred
+	[447] Process [1] moving from the [BLOCKED] state to the [READY] state
+	[447] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[447] Ready-to-run processes queue:
+		USER: [1,101]
+		DAEMONS: 
+	[447] SLEEPING Queue:
+		[0, 102, 94]
+	[447] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[447] Process [3] is thrown out of the processor by process [1]
+	[447] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[447] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[447] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 89, Queue: USER]
+	[447] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[447] SLEEPING Queue:
+		[0, 102, 94]
+	[447] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[448] y 0 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[449] m -1 40 (PID: 1, PC: 5, Accumulator: 2, PSW: 0 [----------------])
+[450] z 2 0 (PID: 1, PC: 6, Accumulator: 2, PSW: 0 [----------------])
+[451] o 9 0 (PID: 1, PC: 245, Accumulator: 2, PSW: 32896 [M-------X-------])
+	[452] Clock interrupt number [90] has occurred
+[453] y 0 0 (PID: 1, PC: 6, Accumulator: 2, PSW: 0 [----------------])
+[454] j -5 0 (PID: 1, PC: 1, Accumulator: 2, PSW: 0 [----------------])
+[455] w 40 0 (PID: 1, PC: 2, Accumulator: 2, PSW: 0 [----------------])
+[456] o 9 0 (PID: 1, PC: 245, Accumulator: 2, PSW: 32896 [M-------X-------])
+	[457] Clock interrupt number [91] has occurred
+[458] y 0 0 (PID: 1, PC: 2, Accumulator: 2, PSW: 0 [----------------])
+[459] a 7 0 (PID: 1, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[460] t 7 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[461] o 2 0 (PID: 1, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[462] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[462] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[462] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[462] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[462] SLEEPING Queue:
+		[0, 102, 94], [1, 101, 99]
+	[462] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[463] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[464] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[465] Clock interrupt number [92] has occurred
+[466] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[467] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[468] Clock interrupt number [93] has occurred
+[469] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[470] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[471] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[472] Clock interrupt number [94] has occurred
+	[472] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[472] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[472] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: 
+	[472] SLEEPING Queue:
+		[1, 101, 99]
+	[472] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[472] Process [3] is thrown out of the processor by process [0]
+	[472] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[472] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[472] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 94, Queue: USER]
+	[472] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[472] SLEEPING Queue:
+		[1, 101, 99]
+	[472] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[473] y 0 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[474] m -1 40 (PID: 0, PC: 5, Accumulator: 2, PSW: 0 [----------------])
+[475] z 2 0 (PID: 0, PC: 6, Accumulator: 2, PSW: 0 [----------------])
+[476] o 9 0 (PID: 0, PC: 245, Accumulator: 2, PSW: 32896 [M-------X-------])
+	[477] Clock interrupt number [95] has occurred
+[478] y 0 0 (PID: 0, PC: 6, Accumulator: 2, PSW: 0 [----------------])
+[479] j -5 0 (PID: 0, PC: 1, Accumulator: 2, PSW: 0 [----------------])
+[480] w 40 0 (PID: 0, PC: 2, Accumulator: 2, PSW: 0 [----------------])
+[481] o 9 0 (PID: 0, PC: 245, Accumulator: 2, PSW: 32896 [M-------X-------])
+	[482] Clock interrupt number [96] has occurred
+[483] y 0 0 (PID: 0, PC: 2, Accumulator: 2, PSW: 0 [----------------])
+[484] a 7 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[485] t 7 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[486] o 2 0 (PID: 0, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[487] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[487] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[487] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[487] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[487] SLEEPING Queue:
+		[1, 101, 99], [0, 102, 104]
+	[487] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[488] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[489] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[490] Clock interrupt number [97] has occurred
+[491] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[492] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[493] Clock interrupt number [98] has occurred
+[494] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[495] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[496] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[497] Clock interrupt number [99] has occurred
+	[497] Process [1] moving from the [BLOCKED] state to the [READY] state
+	[497] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[497] Ready-to-run processes queue:
+		USER: [1,101]
+		DAEMONS: 
+	[497] SLEEPING Queue:
+		[0, 102, 104]
+	[497] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[497] Process [3] is thrown out of the processor by process [1]
+	[497] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[497] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[497] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 99, Queue: USER]
+	[497] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[497] SLEEPING Queue:
+		[0, 102, 104]
+	[497] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[498] y 0 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[499] m -1 40 (PID: 1, PC: 5, Accumulator: 1, PSW: 0 [----------------])
+[500] z 2 0 (PID: 1, PC: 6, Accumulator: 1, PSW: 0 [----------------])
+[501] o 9 0 (PID: 1, PC: 245, Accumulator: 1, PSW: 32896 [M-------X-------])
+	[502] Clock interrupt number [100] has occurred
+[503] y 0 0 (PID: 1, PC: 6, Accumulator: 1, PSW: 0 [----------------])
+[504] j -5 0 (PID: 1, PC: 1, Accumulator: 1, PSW: 0 [----------------])
+[505] w 40 0 (PID: 1, PC: 2, Accumulator: 1, PSW: 0 [----------------])
+[506] o 9 0 (PID: 1, PC: 245, Accumulator: 1, PSW: 32896 [M-------X-------])
+	[507] Clock interrupt number [101] has occurred
+[508] y 0 0 (PID: 1, PC: 2, Accumulator: 1, PSW: 0 [----------------])
+[509] a 7 0 (PID: 1, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[510] t 7 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[511] o 2 0 (PID: 1, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[512] Process [1] moving from the [EXECUTING] state to the [BLOCKED] state
+	[512] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[512] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[512] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[512] SLEEPING Queue:
+		[0, 102, 104], [1, 101, 109]
+	[512] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[513] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[514] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[515] Clock interrupt number [102] has occurred
+[516] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[517] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[518] Clock interrupt number [103] has occurred
+[519] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[520] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[521] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[522] Clock interrupt number [104] has occurred
+	[522] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[522] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[522] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: 
+	[522] SLEEPING Queue:
+		[1, 101, 109]
+	[522] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[522] Process [3] is thrown out of the processor by process [0]
+	[522] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[522] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[522] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 104, Queue: USER]
+	[522] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[522] SLEEPING Queue:
+		[1, 101, 109]
+	[522] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[523] y 0 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[524] m -1 40 (PID: 0, PC: 5, Accumulator: 1, PSW: 0 [----------------])
+[525] z 2 0 (PID: 0, PC: 6, Accumulator: 1, PSW: 0 [----------------])
+[526] o 9 0 (PID: 0, PC: 245, Accumulator: 1, PSW: 32896 [M-------X-------])
+	[527] Clock interrupt number [105] has occurred
+[528] y 0 0 (PID: 0, PC: 6, Accumulator: 1, PSW: 0 [----------------])
+[529] j -5 0 (PID: 0, PC: 1, Accumulator: 1, PSW: 0 [----------------])
+[530] w 40 0 (PID: 0, PC: 2, Accumulator: 1, PSW: 0 [----------------])
+[531] o 9 0 (PID: 0, PC: 245, Accumulator: 1, PSW: 32896 [M-------X-------])
+	[532] Clock interrupt number [106] has occurred
+[533] y 0 0 (PID: 0, PC: 2, Accumulator: 1, PSW: 0 [----------------])
+[534] a 7 0 (PID: 0, PC: 3, Accumulator: 7, PSW: 0 [----------------])
+[535] t 7 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[536] o 2 0 (PID: 0, PC: 241, Accumulator: 7, PSW: 32896 [M-------X-------])
+	[537] Process [0] moving from the [EXECUTING] state to the [BLOCKED] state
+	[537] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[537] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[537] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[537] SLEEPING Queue:
+		[1, 101, 109], [0, 102, 114]
+	[537] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[538] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[539] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[540] Clock interrupt number [107] has occurred
+[541] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[542] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[543] Clock interrupt number [108] has occurred
+[544] y 0 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[545] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[546] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[547] Clock interrupt number [109] has occurred
+	[547] Process [1] moving from the [BLOCKED] state to the [READY] state
+	[547] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[547] Ready-to-run processes queue:
+		USER: [1,101]
+		DAEMONS: 
+	[547] SLEEPING Queue:
+		[0, 102, 114]
+	[547] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+	[547] Process [3] is thrown out of the processor by process [1]
+	[547] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[547] Process [1] moving from the [READY] state to the [EXECUTING] state
+	[547] Running Process Information:
+		[PID: 1, Priority: 101, WakeUp: 109, Queue: USER]
+	[547] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[547] SLEEPING Queue:
+		[0, 102, 114]
+	[547] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 1 -> userProgram1
+		PID: 3 -> SystemIdleProcess
+[548] y 0 0 (PID: 1, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[549] m -1 40 (PID: 1, PC: 5, Accumulator: 0, PSW: 2 [--------------Z-])
+[550] z 2 0 (PID: 1, PC: 7, Accumulator: 0, PSW: 2 [--------------Z-])
+[551] o 9 0 (PID: 1, PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[552] Clock interrupt number [110] has occurred
+[553] y 0 0 (PID: 1, PC: 7, Accumulator: 0, PSW: 2 [--------------Z-])
+[554] t 3 0 (PID: 1, PC: 8, Accumulator: 0, PSW: 2 [--------------Z-])
+[555] o 2 0 (PID: 1, PC: 241, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[556] Process [1] has requested to terminate
+	[556] Main memory state (before releasing memory):
+		[0] [0 -> 4][3]
+		[1] [4 -> 12][AVAILABLE]
+		[2] [16 -> 16][AVAILABLE]
+		[3] [32 -> 96][1]
+		[4] [128 -> 64][0]
+		[5] [192 -> 16][AVAILABLE]
+		[6] [208 -> 17][AVAILABLE]
+	[556] Partition [3: 32-> 96] used by process [1]->[userProgram1] has been released
+	[556] Main memory state (after releasing memory):
+		[0] [0 -> 4][3]
+		[1] [4 -> 12][AVAILABLE]
+		[2] [16 -> 16][AVAILABLE]
+		[3] [32 -> 96][AVAILABLE]
+		[4] [128 -> 64][0]
+		[5] [192 -> 16][AVAILABLE]
+		[6] [208 -> 17][AVAILABLE]
+	[556] Process [1] moving from the [EXECUTING] state to the [EXIT] state
+	[556] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[556] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[556] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[556] SLEEPING Queue:
+		[0, 102, 114]
+	[556] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 3 -> SystemIdleProcess
+[557] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[558] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[559] Clock interrupt number [111] has occurred
+[560] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[561] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[562] Clock interrupt number [112] has occurred
+[563] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[564] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[565] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[566] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[567] Clock interrupt number [113] has occurred
+[568] y 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[569] j -1 0 (PID: 3, PC: 1, Accumulator: 1718, PSW: 128 [--------X-------])
+[570] n 0 0 (PID: 3, PC: 2, Accumulator: 1718, PSW: 128 [--------X-------])
+[571] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[572] Clock interrupt number [114] has occurred
+	[572] Process [0] moving from the [BLOCKED] state to the [READY] state
+	[572] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[572] Ready-to-run processes queue:
+		USER: [0,102]
+		DAEMONS: 
+	[572] SLEEPING Queue:
+		[--- empty queue ---]
+	[572] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 3 -> SystemIdleProcess
+	[572] Process [3] is thrown out of the processor by process [0]
+	[572] Process [3] moving from the [EXECUTING] state to the [READY] state
+	[572] Process [0] moving from the [READY] state to the [EXECUTING] state
+	[572] Running Process Information:
+		[PID: 0, Priority: 102, WakeUp: 114, Queue: USER]
+	[572] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: [3,100]
+	[572] SLEEPING Queue:
+		[--- empty queue ---]
+	[572] PID association with program's name:
+		PID: 0 -> userProgram2
+		PID: 3 -> SystemIdleProcess
+[573] y 0 0 (PID: 0, PC: 4, Accumulator: 7, PSW: 0 [----------------])
+[574] m -1 40 (PID: 0, PC: 5, Accumulator: 0, PSW: 2 [--------------Z-])
+[575] z 2 0 (PID: 0, PC: 7, Accumulator: 0, PSW: 2 [--------------Z-])
+[576] o 9 0 (PID: 0, PC: 245, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[577] Clock interrupt number [115] has occurred
+[578] y 0 0 (PID: 0, PC: 7, Accumulator: 0, PSW: 2 [--------------Z-])
+[579] t 3 0 (PID: 0, PC: 8, Accumulator: 0, PSW: 2 [--------------Z-])
+[580] o 2 0 (PID: 0, PC: 241, Accumulator: 0, PSW: 32898 [M-------X-----Z-])
+	[581] Process [0] has requested to terminate
+	[581] Main memory state (before releasing memory):
+		[0] [0 -> 4][3]
+		[1] [4 -> 12][AVAILABLE]
+		[2] [16 -> 16][AVAILABLE]
+		[3] [32 -> 96][AVAILABLE]
+		[4] [128 -> 64][0]
+		[5] [192 -> 16][AVAILABLE]
+		[6] [208 -> 17][AVAILABLE]
+	[581] Partition [4: 128-> 64] used by process [0]->[userProgram2] has been released
+	[581] Main memory state (after releasing memory):
+		[0] [0 -> 4][3]
+		[1] [4 -> 12][AVAILABLE]
+		[2] [16 -> 16][AVAILABLE]
+		[3] [32 -> 96][AVAILABLE]
+		[4] [128 -> 64][AVAILABLE]
+		[5] [192 -> 16][AVAILABLE]
+		[6] [208 -> 17][AVAILABLE]
+	[581] Process [0] moving from the [EXECUTING] state to the [EXIT] state
+	[581] Process [3] moving from the [READY] state to the [EXECUTING] state
+	[581] Running Process Information:
+		[PID: 3, Priority: 100, WakeUp: 0, Queue: DAEMONS]
+	[581] Ready-to-run processes queue:
+		USER: 
+		DAEMONS: 
+	[581] SLEEPING Queue:
+		[--- empty queue ---]
+	[581] PID association with program's name:
+		PID: 3 -> SystemIdleProcess
+[582] y 0 0 (PID: 3, PC: 3, Accumulator: 1718, PSW: 128 [--------X-------])
+[583] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[584] Clock interrupt number [116] has occurred
+[585] y 0 0 (PID: 3, PC: 3, Accumulator: 1718, PSW: 128 [--------X-------])
+[586] o 9 0 (PID: 3, PC: 245, Accumulator: 1718, PSW: 32896 [M-------X-------])
+	[587] Clock interrupt number [117] has occurred
+[588] y 0 0 (PID: 3, PC: 3, Accumulator: 1718, PSW: 128 [--------X-------])
+[589] h 0 0 (PID: 3, PC: 3, Accumulator: 1718, PSW: 129 [--------X------S])
+[589] END of the simulation
