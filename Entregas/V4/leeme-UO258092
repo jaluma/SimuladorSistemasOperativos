@@ -1,0 +1,68 @@
+Martinez Alvarez Javier
+UO258092
+
+ - Simulaciones para probar
+ 
+./Simulator A ProgramTest_InvalidAdress
+./Simulator A ProgramTest_InvalidAdress1
+./Simulator A ProgramTest_HALT
+./Simulator A ProgramTest_OS
+./Simulator A ProgramTest_YRET
+./Simulator A ProgramTest_Div0
+./Simulator A ProgramTest_InstructionError
+./Simulator A ProgramTest_SyscallError
+./Simulator A ProgramTest_VeryBig
+./Simulator A ProgramTest_MemoryFull ProgramTest_MemoryFull ProgramTest_MemoryFull
+./Simulator A ProgramTest_BetterFit ProgramTest_BetterFit1 ProgramTest_BetterFit2
+./Simulator A ProgramTest_JumpErroneo
+./Simulator A ProgramTest_InstructionError 0 ProgramTest_SyscallError 0 ProgramTest_VeryBig 0 ProgramTest_JumpErroneo 5 ProgramTest_MemoryFull 25 ProgramTest_MemoryFull 25 ProgramTest_MemoryFull 25 ProgramTest_BetterFit 50 ProgramTest_BetterFit1 50 ProgramTest_BetterFit2 50
+
+ - Archivo de MEMCONFIG
+ 
+4
+12
+16
+96
+64
+16
+17
+
+ - Cosas a tener en cuenta
+ 
+ Creo que me falta controlar cuando se hace un JUMP X que este dentro de los limites del programa. Cuando se sale de este rango, la MMU devuelve MMU_FAIL y se lee una instruccion _ _ _. No lo he conseguido arreglar.
+ No tengo demasiado claro cual es el orden de imprimir los mensajes de Memoria
+
+ - Ejercicios:
+	- TuProgramaConMEMADD 						ProgramTest_MEMADD						MEMADD
+	- newProgramVerySimple						newProgramVerySimple					PROGRAMA QUE ACABA CON TRAP 3
+	- TuProgramaInvalidoPorTamanioOPrioridad 	ProgramTest_PriorityFail				CONTROL PRIORIDAD/TAMAÑO
+	- TuProgramaDemasiadoGrandePorTamanio 		ProgramTest_VeryBig						PROGRAMA DEMASIADO GRANDE
+	- TuProgramaConDemasiadasInstrucciones 		ProgramTest_MoreInst					PROGRAMA CON DEMASIADAS INTRUCCIONES
+	- TuProgramaConYRET 						ProgramTest_YRET						PROGRAMA CON UN YRET
+	- TuProgramasConOS 							ProgramTest_OS							PROGRAMA CON UN OS
+	- TuProgramaConHALT 						ProgramTest_HALT						PROGRAMA CON UN HALT
+	- TuProgramaConPrioridadMayorQue100 		ProgramTest_LowPriority100				PROGRAMA CON UNA PRIORIDAD MUY BAJA(>100)
+	- TuProgramaQuePruebaYield 					ProgramTest_Yield1						PROGRAMA PARA PROBAR SYSCALL YIELD
+
+ - Otros programas:
+	- programVerySimple																	Programa de prueba
+	- ProgramTest_OnlySize																Programa sin prioridad
+	- ProgramTest_PriorityNotNumber														Programa con una letra como prioridad, en vez de número
+	- ProgramTest_Read																	Programa para probar READ
+	- ProgramTest_SizeNeg																Programa con un tamaño negativo
+	- ProgramTest_SizeNotNumber															Programa con una letra como tamaño, en vez de un número
+	- ProgramTest_Yield1 ProgramTest_Yield2 ProgramTest_Yield3							Programas para probar el uso de SYSCALL YIELD
+	- program-Final-V1-1 program-Final-V1-2 program-Final-V1-3							Programas finales para probar los asserts
+	- ProgramTest_Sleep																	Programa para probar la SYSCALL SLEEP
+	- ProgramTest_Sleep1																Programa para probar la SYSCALL SLEEP
+	- ProgramTest_Sleep2																Programa para probar la SYSCALL SLEEP
+	- ProgramTest_InvalidAdress															Programa para probar EXCEPTION INVALID ADRESS
+	- ProgramTest_InvalidAdress1														Programa para probar EXCEPTION INVALID ADRESS
+	- ProgramTest_Div0																	Programa para probar EXCEPTION DIVISION_BY_0
+	- ProgramTest_InstructionError														Programa para probar EXCEPTION INVALID_INSTRUCTION
+	- ProgramTest_VeryBig																Programa para probar ERROR PROGRAM_TOO_BIG
+	- ProgramTest_JumpErroneo															[NO CREO QUE ESTE CORRECTO] Programa para probar la EXCEPCION cuando salta a una dirección fuera del rango
+	- ProgramTest_MemoryFull															Programa para probar ERROR MEMORY FULL. Se ha de ejecutar 3 veces, para que llene la partición 3 y 4 y no entre en ninguna otra.
+	- ProgramTest_BetterFit																Programa usado para comprobar la correcta colocación de los procesos en la tabla de particiones. Se deben de lanzar los tres programas juntos.
+																						Se prueba con dos progrmaas con tamaño de 16 y un programa de 17 que se coloquen perfectamente siguiente el criterio de Mejor Ajuste. Se debe de colocar 
+																						en [2] y [5] los programas de tamaño 16 y en [6] el programa de tamaño 17.

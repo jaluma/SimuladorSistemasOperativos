@@ -305,14 +305,13 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
 	
 	OperatingSystem_ShowTime(SYSMEM);
 	ComputerSystem_DebugMessage(142, SYSMEM, PID, programList[processTable[PID].programListIndex]->executableName, processSize);
+	
 	OperatingSystem_ShowPartitionTable("before allocating memory");
 
 	processTable[PID].busy=1;
 	processTable[PID].initialPhysicalAddress=initialPhysicalAddress;
 	processTable[PID].processSize=processSize;
 	processTable[PID].state=NEW;
-	OperatingSystem_ShowTime(SYSPROC);
-	ComputerSystem_DebugMessage(111, SYSPROC, PID, statesNames[0]);
 	processTable[PID].priority=priority;
 	processTable[PID].programListIndex=processPLIndex;
 	// Daemons run in protected mode and MMU use real address
@@ -337,6 +336,9 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
 	OperatingSystem_ShowTime(SYSMEM);
 	ComputerSystem_DebugMessage(143,SYSMEM, partitionNumber, partitionsTable[partitionNumber].initAddress, processSize, PID, programList[processTable[PID].programListIndex]->executableName);
 	OperatingSystem_ShowPartitionTable("after allocating memory");
+	
+	OperatingSystem_ShowTime(SYSPROC);
+	ComputerSystem_DebugMessage(111, SYSPROC, PID, statesNames[0]);
 }
 
 
@@ -506,10 +508,10 @@ void OperatingSystem_TerminateProcess() {
 	processTable[executingProcessID].state=EXIT;
 	processTable[executingProcessID].busy=0;
 	
-	OperatingSystem_ReleaseMainMemory();
-	
 	OperatingSystem_ShowTime(SYSPROC);
 	ComputerSystem_DebugMessage(110, SYSPROC, executingProcessID, statesNames[2], statesNames[4]);
+	
+	OperatingSystem_ReleaseMainMemory();
 	
 	// One more process that has terminated
 	numberOfNotTerminatedUserProcesses--;

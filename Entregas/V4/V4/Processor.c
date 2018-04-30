@@ -80,10 +80,12 @@ void Processor_FetchInstruction() {
 		ComputerSystem_ShowTime(HARDWARE);
 		ComputerSystem_DebugMessage(1, HARDWARE, registerIR_CPU.operationCode, registerIR_CPU.operand1, registerIR_CPU.operand2);
 	}
-	else 
+	else {
 	  // Show message: "_ _ _ "
+	  ComputerSystem_ShowTime(HARDWARE);
 	  ComputerSystem_DebugMessage(2,HARDWARE);
 	  //Processor_RaiseException(INVALIDINSTRUCTION);
+	}
 }
 
 

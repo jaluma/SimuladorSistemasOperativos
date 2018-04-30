@@ -1,0 +1,5 @@
+20
+5
+JUMP 100
+NOP
+TRAP 3

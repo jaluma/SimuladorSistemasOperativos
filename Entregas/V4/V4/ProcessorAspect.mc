@@ -1375,10 +1375,12 @@ void Processor_FetchInstruction() {
   ComputerSystem_ShowTime('h');
   ComputerSystem_DebugMessage(1, 'h', registerIR_CPU.operationCode, registerIR_CPU.operand1, registerIR_CPU.operand2);
  }
- else
+ else {
 
+   ComputerSystem_ShowTime('h');
    ComputerSystem_DebugMessage(2,'h');
 
+ }
 }
 
 

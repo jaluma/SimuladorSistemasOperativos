@@ -1,0 +1,5 @@
+// Programa para probar EXCEPTION INVALID_INSTRUCTION
+20
+5
+QWE 25
+TRAP 777
