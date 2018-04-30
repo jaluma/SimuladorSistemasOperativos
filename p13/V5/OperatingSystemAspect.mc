@@ -41,7 +41,7 @@ void ComputerSystem_PowerOff();
 void ComputerSystem_PrintProgramList();
 void ComputerSystem_ShowTime(char section);
 int ComputerSystem_ArrivalTimePull();
-# 38 "ComputerSystem.h"
+# 39 "ComputerSystem.h"
 typedef struct ProgramData {
     char *executableName;
     unsigned int arrivalTime;
@@ -1011,7 +1011,7 @@ enum PSW_BITS {POWEROFF_BIT=0, ZERO_BIT=1, NEGATIVE_BIT=2, OVERFLOW_BIT=3, EXECU
 
 
 
-enum INT_BITS {SYSCALL_BIT=2, EXCEPTION_BIT=6, CLOCKINT_BIT=9};
+enum INT_BITS {SYSCALL_BIT=2, EXCEPTION_BIT=6, IOEND_BIT= 8, CLOCKINT_BIT=9};
 
 enum EXCEPTIONS {DIVISIONBYZERO, INVALIDPROCESSORMODE, INVALIDADDRESS, INVALIDINSTRUCTION};
 
@@ -1089,6 +1089,24 @@ int Heap_compare(int, int, int);
 
 int Heap_getFirst(int[], int);
 # 7 "OperatingSystem.c" 2
+# 1 "Device.h" 1
+
+
+
+enum DeviceStatus {FREE, BUSY};
+
+typedef struct {
+ int info;
+ int IOEndTick;
+} IODATA;
+
+
+void Device_UpdateStatus();
+void Device_PrintIOResult();
+void Device_StartIO(int);
+int Device_GetStatus();
+void Device_Initialize(char *, int);
+# 8 "OperatingSystem.c" 2
 # 1 "/usr/include/string.h" 1 3 4
 # 27 "/usr/include/string.h" 3 4
 
@@ -1347,7 +1365,7 @@ extern char *stpncpy (char *__restrict __dest,
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1, 2)));
 # 658 "/usr/include/string.h" 3 4
 
-# 8 "OperatingSystem.c" 2
+# 9 "OperatingSystem.c" 2
 # 1 "/usr/include/ctype.h" 1 3 4
 # 28 "/usr/include/ctype.h" 3 4
 
@@ -1483,7 +1501,7 @@ extern int __toupper_l (int __c, __locale_t __l) __attribute__ ((__nothrow__ , _
 extern int toupper_l (int __c, __locale_t __l) __attribute__ ((__nothrow__ , __leaf__));
 # 347 "/usr/include/ctype.h" 3 4
 
-# 9 "OperatingSystem.c" 2
+# 10 "OperatingSystem.c" 2
 # 1 "/usr/include/stdlib.h" 1 3 4
 # 32 "/usr/include/stdlib.h" 3 4
 # 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
@@ -2513,7 +2531,7 @@ extern int getloadavg (double __loadavg[], int __nelem)
 # 955 "/usr/include/stdlib.h" 2 3 4
 # 967 "/usr/include/stdlib.h" 3 4
 
-# 10 "OperatingSystem.c" 2
+# 11 "OperatingSystem.c" 2
 # 1 "/usr/include/time.h" 1 3 4
 # 29 "/usr/include/time.h" 3 4
 
@@ -2734,11 +2752,11 @@ extern int timespec_get (struct timespec *__ts, int __base)
      __attribute__ ((__nothrow__ , __leaf__)) __attribute__ ((__nonnull__ (1)));
 # 430 "/usr/include/time.h" 3 4
 
-# 11 "OperatingSystem.c" 2
+# 12 "OperatingSystem.c" 2
 
 
 
-# 13 "OperatingSystem.c"
+# 14 "OperatingSystem.c"
 void OperatingSystem_PrepareDaemons(int);
 void OperatingSystem_PCBInitialization(int, int, int, int, int,int, int);
 void OperatingSystem_MoveToTheREADYState(int,int);
@@ -2757,6 +2775,9 @@ void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
 void OperatingSystem_MoveToTheBLOCKEDState(int);
 void OperatingSystem_ChangeExecutingProcess(int);
+
+
+
 
 
 PCB processTable[4];
@@ -2791,6 +2812,9 @@ int numberOfClockInterrupts = 0;
 int sleepingProcessesQueue[4];
 int numberOfSleepingProcesses=0;
 
+int IOWaitingProcessesQueue[4];
+int numberOfIOWaitingProcesses=0;
+
 
 void OperatingSystem_Initialize(int daemonsIndex) {
 
@@ -2823,6 +2847,8 @@ void OperatingSystem_Initialize(int daemonsIndex) {
  if (!createdPartitions) {
   OperatingSystem_ReadyToShutdown();
  }
+
+ Device_Initialize ("OutputDevice-2018", 7);
 
 
  long_term_schreduler = OperatingSystem_LongTermScheduler();
@@ -3330,6 +3356,10 @@ void OperatingSystem_InterruptLogic(int entryPoint){
 
   case EXCEPTION_BIT:
    OperatingSystem_HandleException();
+   break;
+
+  case IOEND_BIT:
+   OperatingSystem_HandleIOEndInterrupt();
    break;
 
   case CLOCKINT_BIT:

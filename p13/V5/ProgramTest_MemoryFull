@@ -1,0 +1,5 @@
+// Programa para probar ERROR MEMORY FULL. Se ha de ejecutar 3 veces, para que llene la partición 3 y 4 y no entre en ninguna otra.
+64
+5
+ADD 7 0
+TRAP 3

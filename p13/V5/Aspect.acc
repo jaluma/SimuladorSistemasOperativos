@@ -66,7 +66,7 @@ void ComputerSystem_PowerOff();
 void ComputerSystem_PrintProgramList();
 void ComputerSystem_ShowTime(char section);
 int ComputerSystem_ArrivalTimePull();
-# 38 "ComputerSystem.h"
+# 39 "ComputerSystem.h"
 typedef struct ProgramData {
     char *executableName;
     unsigned int arrivalTime;
@@ -992,13 +992,31 @@ typedef struct {
 
 extern PARTITIONDATA partitionsTable[4*2];
 # 4 "MyAspect.c" 2
+# 1 "Device.h" 1
 
+
+
+enum DeviceStatus {FREE, BUSY};
+
+typedef struct {
+ int info;
+ int IOEndTick;
+} IODATA;
+
+
+void Device_UpdateStatus();
+void Device_PrintIOResult();
+void Device_StartIO(int);
+int Device_GetStatus();
+void Device_Initialize(char *, int);
+# 5 "MyAspect.c" 2
 
 before(): execution(void Processor_FetchInstruction()) {
  Clock_Update();
 }
 
-after(): execution(void Processor_DecodeAndExecuteInstruction()){
+after(): execution(void Processor_DecodeAndExecuteInstruction()) {
+ Device_UpdateStatus();
     Asserts_CheckAsserts();
 }
 

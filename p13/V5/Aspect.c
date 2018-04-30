@@ -84,10 +84,10 @@ void ComputerSystem_ShowTime(char section);
 #line 14 "ComputerSystem.h"
 int ComputerSystem_ArrivalTimePull(); 
 # 6 "ComputerSystem.h" 2
-# 42 "ComputerSystem.h" 
+# 43 "ComputerSystem.h" 
 typedef struct ProgramData {char *executableName; unsigned int arrivalTime; unsigned int type; 
 }PROGRAMS_DATA; 
-#line 46 "ComputerSystem.h"
+#line 47 "ComputerSystem.h"
 extern  PROGRAMS_DATA *programList[30]; 
 # 5 "OperatingSystemBase.h" 2
 # 1 "OperatingSystem.h" 1
@@ -600,7 +600,23 @@ typedef struct {int occupied; int initAddress; int size; int PID;
 #line 37 "OperatingSystemBase.h"
 extern  PARTITIONDATA partitionsTable[4 * 2]; 
 # 6 "OperatingSystemBase.h" 2
-# 6 "MyAspect.c" 2
+# 4 "MyAspect.c" 2
+# 4 "Device.h" 1
+enum DeviceStatus {FREE,BUSY}; 
+#line 9 "Device.h"
+typedef struct {int info; int IOEndTick; 
+}IODATA; 
+#line 12 "Device.h"
+void Device_UpdateStatus(); 
+#line 13 "Device.h"
+void Device_PrintIOResult(); 
+#line 14 "Device.h"
+void Device_StartIO(int ); 
+#line 15 "Device.h"
+int Device_GetStatus(); 
+#line 16 "Device.h"
+void Device_Initialize(char *, int ); 
+#line 6 "MyAspect.c"
  inline void __utac_acc__Aspect__1(void) { 
 
 
@@ -615,33 +631,35 @@ Clock_Update(); }
 
 
 #line 11 "MyAspect.c"
+Device_UpdateStatus(); 
+#line 12 "MyAspect.c"
 Asserts_CheckAsserts(); }
 
  
-#line 14 "MyAspect.c"
+#line 15 "MyAspect.c"
  inline void __utac_acc__Aspect__3(void) { 
 
 
 
-#line 15 "MyAspect.c"
+#line 16 "MyAspect.c"
 Clock_Update(); }
 
  
-#line 18 "MyAspect.c"
+#line 19 "MyAspect.c"
  inline void __utac_acc__Aspect__4(void) { 
 
 
 
-#line 19 "MyAspect.c"
+#line 20 "MyAspect.c"
 OperatingSystem_PrepareTeachersDaemons(); }
 
  
-#line 22 "MyAspect.c"
+#line 23 "MyAspect.c"
  inline void __utac_acc__Aspect__5(void) { 
 
 
 
-#line 23 "MyAspect.c"
+#line 24 "MyAspect.c"
 Asserts_TerminateAssertions(); }
 
  

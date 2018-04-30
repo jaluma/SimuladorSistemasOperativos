@@ -1,0 +1,8 @@
+// Programa para probar EXCEPTION INVALID ADRESS
+20
+5
+ADD 25 0
+WRITE 10
+MEMADD 5 -1
+TRAP 3
+

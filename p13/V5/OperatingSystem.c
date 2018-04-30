@@ -4,6 +4,7 @@
 #include "Processor.h"
 #include "Buses.h"
 #include "Heap.h"
+#include "Device.h"
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
@@ -28,6 +29,9 @@ void OperatingSystem_HandleException();
 void OperatingSystem_HandleSystemCall();
 void OperatingSystem_MoveToTheBLOCKEDState(int);
 void OperatingSystem_ChangeExecutingProcess(int);
+/* void OperatingSystem_HandleIOEndInterrupt();
+void OperatingSystem_IOScheduler();
+void OperatingSystem_DeviceControlerStartIOOperation(); */
 
 // The process table
 PCB processTable[PROCESSTABLEMAXSIZE];
@@ -62,6 +66,9 @@ int numberOfClockInterrupts = 0;
 int sleepingProcessesQueue[PROCESSTABLEMAXSIZE]; 
 int numberOfSleepingProcesses=0;
 
+int IOWaitingProcessesQueue[PROCESSTABLEMAXSIZE];
+int numberOfIOWaitingProcesses=0; 
+
 // Initial set of tasks of the OS
 void OperatingSystem_Initialize(int daemonsIndex) {
 	
@@ -95,6 +102,8 @@ void OperatingSystem_Initialize(int daemonsIndex) {
 		OperatingSystem_ReadyToShutdown();
 	}
 
+	Device_Initialize ("OutputDevice-2018", 7); 
+	
 	// Create all user processes from the information given in the command line
 	long_term_schreduler = OperatingSystem_LongTermScheduler();
 	
@@ -603,6 +612,10 @@ void OperatingSystem_InterruptLogic(int entryPoint){
 			OperatingSystem_HandleException();
 			break;
 			
+		case IOEND_BIT: // IOEND_BIT=8
+			OperatingSystem_HandleIOEndInterrupt();
+			break;
+			
 		case CLOCKINT_BIT: // CLOCKINT_BIT=9
 			OperatingSystem_HandleClockInterrupt();
 			break;
@@ -699,4 +712,15 @@ void OperatingSystem_ChangeExecutingProcess(int nPID) {
  int OperatingSystem_GetExecutingProcessID() {
 	 return executingProcessID;
  }
+ 
+/* void OperatingSystem_HandleIOEndInterrupt(){
+	 
+ }
 
+void OperatingSystem_IOScheduler {
+	 
+ }
+ 
+void OperatingSystem_DeviceControlerStartIOOperation(){
+	 
+ } */

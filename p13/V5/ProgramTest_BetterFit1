@@ -1,0 +1,10 @@
+
+17
+5
+ADD 25 4
+WRITE 10
+TRAP 3
+
+// Programa usado para comprobar la correcta colocación de los procesos en la tabla de particiones. Se deben de lanzar los tres programas juntos.
+// Se prueba con dos progrmaas con tamaño de 16 y un programa de 17 que se coloquen perfectamente siguiente el criterio de Mejor Ajuste. Se debe de colocar 
+// en [2] y [5] los programas de tamaño 16 y en [6] el programa de tamaño 17.
