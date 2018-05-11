@@ -30,8 +30,9 @@ struct JoinPoint {
 # 1 "Processor.c" 
 # 1 "<built-in>" 
 # 1 "<command-line>" 
+# 31 "<command-line>" 
 # 1 "/usr/include/stdc-predef.h" 1 3 4
-# 1 "<command-line>" 2
+# 32 "<command-line>" 2
 # 1 "Processor.c" 
 # 1 "Processor.h" 1
 # 1 "MainMemory.h" 1
@@ -147,9 +148,9 @@ extern  PROGRAMS_DATA *programList[30];
 # 11 "/usr/include/x86_64-linux-gnu/gnu/stubs.h" 2 3 4
 # 392 "/usr/include/features.h" 2 3 4
 # 28 "/usr/include/stdio.h" 2 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef long unsigned int size_t; 
 # 34 "/usr/include/stdio.h" 2 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/types.h" 1 3 4
@@ -275,7 +276,7 @@ typedef struct _IO_FILE __FILE;
 # 31 "/usr/include/libio.h" 3 4
 # 1 "/usr/include/_G_config.h" 1 3 4
 # 15 "/usr/include/_G_config.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 16 "/usr/include/_G_config.h" 2 3 4
 # 1 "/usr/include/wchar.h" 1 3 4
 # 94 "/usr/include/wchar.h" 3 4
@@ -291,8 +292,8 @@ typedef struct { __off64_t __pos;  __mbstate_t __state;
 # 21 "/usr/include/_G_config.h" 2 3 4
 # 32 "/usr/include/libio.h" 2 3 4
 # 49 "/usr/include/libio.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 1 3 4
-# 40 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 1 3 4
+# 40 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 3 4
 typedef __builtin_va_list __gnuc_va_list; 
 # 50 "/usr/include/libio.h" 2 3 4
 # 144 "/usr/include/libio.h" 3 4
@@ -631,7 +632,7 @@ int MMU_GetLimit();
 # 5 "Processor.c" 2
 # 1 "/usr/include/string.h" 1 3 4
 # 27 "/usr/include/string.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 33 "/usr/include/string.h" 2 3 4
 # 43 "/usr/include/string.h" 3 4
 extern void *memcpy(void *__restrict __dest, const void *__restrict __src,  size_t __n) __attribute__  (( __nothrow__ , __leaf__ ))  __attribute__  (( __nonnull__ ( 1, 2 )  )) ; 
@@ -788,12 +789,12 @@ int interruptVectorTable[10];
 char pswmask[] = "----------------"; 
 #line 42 "Processor.c"
 void Processor_InitializeInterruptVectorTable(int interruptVectorInitialAddress)  
-# 792 "ProcessorAspect.c"
+# 793 "ProcessorAspect.c"
 {
 
 
 
-# 797 "ProcessorAspect.c"
+# 798 "ProcessorAspect.c"
 {
 
 #line 43 "Processor.c"
@@ -808,11 +809,11 @@ interruptVectorTable[SYSCALL_BIT] = interruptVectorInitialAddress;
 interruptVectorTable[EXCEPTION_BIT] = interruptVectorInitialAddress + 2; 
 #line 49 "Processor.c"
 interruptVectorTable[CLOCKINT_BIT] = interruptVectorInitialAddress + 4; 
-# 812 "ProcessorAspect.c"
+# 813 "ProcessorAspect.c"
 
 }
 
-# 816 "ProcessorAspect.c"
+# 817 "ProcessorAspect.c"
 
 }
  
@@ -821,12 +822,12 @@ interruptVectorTable[CLOCKINT_BIT] = interruptVectorInitialAddress + 4;
 
 #line 56 "Processor.c"
 void Processor_InstructionCycleLoop()  
-# 825 "ProcessorAspect.c"
+# 826 "ProcessorAspect.c"
 {
 
 
 
-# 830 "ProcessorAspect.c"
+# 831 "ProcessorAspect.c"
 {
 
 #line 63 "Processor.c"
@@ -838,7 +839,7 @@ Processor_DecodeAndExecuteInstruction();
 #line 61 "Processor.c"
 if (interruptLines_CPU && (!Processor_PSW_BitState(INTERRUPT_MASKED_BIT))){
 Processor_ManageInterrupts(); }} } 
-# 842 "ProcessorAspect.c"
+# 843 "ProcessorAspect.c"
 
 }
 
@@ -847,7 +848,7 @@ __utac_acc__Aspect__5();
 
 }
 
-# 851 "ProcessorAspect.c"
+# 852 "ProcessorAspect.c"
 
 }
  
@@ -856,7 +857,7 @@ __utac_acc__Aspect__5();
 
 #line 67 "Processor.c"
 void Processor_FetchInstruction()  
-# 860 "ProcessorAspect.c"
+# 861 "ProcessorAspect.c"
 {
 
 
@@ -866,7 +867,7 @@ __utac_acc__Aspect__1();
 
 }
 
-# 870 "ProcessorAspect.c"
+# 871 "ProcessorAspect.c"
 {
 
 #line 70 "Processor.c"
@@ -887,11 +888,11 @@ ComputerSystem_DebugMessage(1, 'h', registerIR_CPU.operationCode, registerIR_CPU
 ComputerSystem_ShowTime('h'); 
 #line 86 "Processor.c"
 ComputerSystem_DebugMessage(2, 'h'); } }
-# 891 "ProcessorAspect.c"
+# 892 "ProcessorAspect.c"
 
 }
 
-# 895 "ProcessorAspect.c"
+# 896 "ProcessorAspect.c"
 
 }
  
@@ -903,12 +904,12 @@ ComputerSystem_DebugMessage(2, 'h'); } }
 
 #line 93 "Processor.c"
 void Processor_DecodeAndExecuteInstruction()  
-# 907 "ProcessorAspect.c"
+# 908 "ProcessorAspect.c"
 {
 
 
 
-# 912 "ProcessorAspect.c"
+# 913 "ProcessorAspect.c"
 {
 
 #line 94 "Processor.c"
@@ -1058,16 +1059,14 @@ Processor_RaiseException(INVALIDPROCESSORMODE); }
 #line 228 "Processor.c"
 break; 
 #line 231 "Processor.c"
-default: registerPC_CPU++; 
-#line 233 "Processor.c"
-Processor_RaiseException(INVALIDINSTRUCTION); 
+default: Processor_RaiseException(INVALIDINSTRUCTION); 
 #line 234 "Processor.c"
 break; } } 
 #line 238 "Processor.c"
 Processor_UpdatePSW(); 
 #line 242 "Processor.c"
 ComputerSystem_DebugMessage(130, 'h', OperatingSystem_GetExecutingProcessID(), registerPC_CPU, registerAccumulator_CPU, registerPSW_CPU, Processor_ShowPSW()); 
-# 1071 "ProcessorAspect.c"
+# 1070 "ProcessorAspect.c"
 
 }
 
@@ -1076,18 +1075,18 @@ __utac_acc__Aspect__2();
 
 }
 
-# 1080 "ProcessorAspect.c"
+# 1079 "ProcessorAspect.c"
 
 }
  
 #line 247 "Processor.c"
 void Processor_ManageInterrupts()  
-# 1086 "ProcessorAspect.c"
+# 1085 "ProcessorAspect.c"
 {
 
 
 
-# 1091 "ProcessorAspect.c"
+# 1090 "ProcessorAspect.c"
 {
 
 #line 249 "Processor.c"
@@ -1113,22 +1112,22 @@ Processor_ActivatePSW_Bit(EXECUTION_MODE_BIT);
 registerPC_CPU = interruptVectorTable[i]; 
 #line 266 "Processor.c"
 break; } }} 
-# 1117 "ProcessorAspect.c"
+# 1116 "ProcessorAspect.c"
 
 }
 
-# 1121 "ProcessorAspect.c"
+# 1120 "ProcessorAspect.c"
 
 }
  
 #line 271 "Processor.c"
 void Processor_UpdatePSW()  
-# 1127 "ProcessorAspect.c"
+# 1126 "ProcessorAspect.c"
 {
 
 
 
-# 1132 "ProcessorAspect.c"
+# 1131 "ProcessorAspect.c"
 {
 
 #line 280 "Processor.c"
@@ -1151,43 +1150,43 @@ Processor_ActivatePSW_Bit(NEGATIVE_BIT); }} }else{
 #line 290 "Processor.c"
 if (Processor_PSW_BitState(NEGATIVE_BIT)){
 Processor_DeactivatePSW_Bit(NEGATIVE_BIT); }} }
-# 1155 "ProcessorAspect.c"
+# 1154 "ProcessorAspect.c"
 
 }
 
-# 1159 "ProcessorAspect.c"
+# 1158 "ProcessorAspect.c"
 
 }
  
 #line 295 "Processor.c"
 void Processor_CheckOverflow(int op1, int op2)  
-# 1165 "ProcessorAspect.c"
+# 1164 "ProcessorAspect.c"
 {
 
 
 
-# 1170 "ProcessorAspect.c"
+# 1169 "ProcessorAspect.c"
 {
 
 #line 299 "Processor.c"
 if ((op1 > 0 && op2 > 0 && registerAccumulator_CPU < 0) || (op1 < 0 && op2 < 0 && registerAccumulator_CPU > 0)){
 Processor_ActivatePSW_Bit(OVERFLOW_BIT); }
-# 1176 "ProcessorAspect.c"
+# 1175 "ProcessorAspect.c"
 
 }
 
-# 1180 "ProcessorAspect.c"
+# 1179 "ProcessorAspect.c"
 
 }
  
 #line 302 "Processor.c"
 void Processor_CopyInSystemStack(int physicalMemoryAddress, int data)  
-# 1186 "ProcessorAspect.c"
+# 1185 "ProcessorAspect.c"
 {
 
 
 
-# 1191 "ProcessorAspect.c"
+# 1190 "ProcessorAspect.c"
 {
 
 #line 304 "Processor.c"
@@ -1200,25 +1199,25 @@ Buses_write_AddressBus_From_To(CPU, MAINMEMORY);
 Buses_write_DataBus_From_To(CPU, MAINMEMORY); 
 #line 308 "Processor.c"
 MainMemory_writeMemory(); 
-# 1204 "ProcessorAspect.c"
+# 1203 "ProcessorAspect.c"
 
 }
 
-# 1208 "ProcessorAspect.c"
+# 1207 "ProcessorAspect.c"
 
 }
  
 #line 312 "Processor.c"
 int Processor_CopyFromSystemStack(int physicalMemoryAddress)  
-# 1214 "ProcessorAspect.c"
+# 1213 "ProcessorAspect.c"
 {
-# 1216 "ProcessorAspect.c"
+# 1215 "ProcessorAspect.c"
 int retValue_acc;
 
 
 
 
-# 1222 "ProcessorAspect.c"
+# 1221 "ProcessorAspect.c"
 {
 
 #line 314 "Processor.c"
@@ -1229,52 +1228,52 @@ Buses_write_AddressBus_From_To(CPU, MAINMEMORY);
 MainMemory_readMemory(); 
 #line 317 "Processor.c"
 
-# 1233 "ProcessorAspect.c"
+# 1232 "ProcessorAspect.c"
 retValue_acc = registerMBR_CPU.operand1;
-# 1235 "ProcessorAspect.c"
+# 1234 "ProcessorAspect.c"
 return (int )retValue_acc;
  
-# 1238 "ProcessorAspect.c"
+# 1237 "ProcessorAspect.c"
 
 }
 
-# 1242 "ProcessorAspect.c"
+# 1241 "ProcessorAspect.c"
 return (int )retValue_acc;
 
-# 1245 "ProcessorAspect.c"
+# 1244 "ProcessorAspect.c"
 
 }
  
 #line 321 "Processor.c"
 void Processor_RaiseException(int typeOfException)  
-# 1251 "ProcessorAspect.c"
+# 1250 "ProcessorAspect.c"
 {
 
 
 
-# 1256 "ProcessorAspect.c"
+# 1255 "ProcessorAspect.c"
 {
 
 #line 322 "Processor.c"
 Processor_RaiseInterrupt(EXCEPTION_BIT); 
 #line 323 "Processor.c"
 registerB_CPU = typeOfException; 
-# 1263 "ProcessorAspect.c"
+# 1262 "ProcessorAspect.c"
 
 }
 
-# 1267 "ProcessorAspect.c"
+# 1266 "ProcessorAspect.c"
 
 }
  
 #line 327 "Processor.c"
 void Processor_RaiseInterrupt(const unsigned int interruptNumber)  
-# 1273 "ProcessorAspect.c"
+# 1272 "ProcessorAspect.c"
 {
 
 
 
-# 1278 "ProcessorAspect.c"
+# 1277 "ProcessorAspect.c"
 {
 
 #line 328 "Processor.c"
@@ -1285,22 +1284,22 @@ unsigned int mask = 1;
 mask = mask << interruptNumber; 
 #line 331 "Processor.c"
 interruptLines_CPU = interruptLines_CPU | mask; 
-# 1289 "ProcessorAspect.c"
+# 1288 "ProcessorAspect.c"
 
 }
 
-# 1293 "ProcessorAspect.c"
+# 1292 "ProcessorAspect.c"
 
 }
  
 #line 335 "Processor.c"
 void Processor_ACKInterrupt(const unsigned int interruptNumber)  
-# 1299 "ProcessorAspect.c"
+# 1298 "ProcessorAspect.c"
 {
 
 
 
-# 1304 "ProcessorAspect.c"
+# 1303 "ProcessorAspect.c"
 {
 
 #line 336 "Processor.c"
@@ -1313,25 +1312,25 @@ mask = mask << interruptNumber;
 mask = (~mask); 
 #line 341 "Processor.c"
 interruptLines_CPU = interruptLines_CPU & mask; 
-# 1317 "ProcessorAspect.c"
+# 1316 "ProcessorAspect.c"
 
 }
 
-# 1321 "ProcessorAspect.c"
+# 1320 "ProcessorAspect.c"
 
 }
  
 #line 345 "Processor.c"
 unsigned int Processor_GetInterruptLineStatus(const unsigned int interruptNumber)  
-# 1327 "ProcessorAspect.c"
+# 1326 "ProcessorAspect.c"
 {
-# 1329 "ProcessorAspect.c"
+# 1328 "ProcessorAspect.c"
 unsigned int retValue_acc;
 
 
 
 
-# 1335 "ProcessorAspect.c"
+# 1334 "ProcessorAspect.c"
 {
 
 #line 346 "Processor.c"
@@ -1342,30 +1341,30 @@ unsigned int mask = 1;
 mask = mask << interruptNumber; 
 #line 349 "Processor.c"
 
-# 1346 "ProcessorAspect.c"
+# 1345 "ProcessorAspect.c"
 retValue_acc = (interruptLines_CPU & mask) >> interruptNumber;
-# 1348 "ProcessorAspect.c"
+# 1347 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
  
-# 1351 "ProcessorAspect.c"
+# 1350 "ProcessorAspect.c"
 
 }
 
-# 1355 "ProcessorAspect.c"
+# 1354 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
 
-# 1358 "ProcessorAspect.c"
+# 1357 "ProcessorAspect.c"
 
 }
  
 #line 353 "Processor.c"
 void Processor_ActivatePSW_Bit(const unsigned int nbit)  
-# 1364 "ProcessorAspect.c"
+# 1363 "ProcessorAspect.c"
 {
 
 
 
-# 1369 "ProcessorAspect.c"
+# 1368 "ProcessorAspect.c"
 {
 
 #line 354 "Processor.c"
@@ -1376,22 +1375,22 @@ unsigned int mask = 1;
 mask = mask << nbit; 
 #line 358 "Processor.c"
 registerPSW_CPU = registerPSW_CPU | mask; 
-# 1380 "ProcessorAspect.c"
+# 1379 "ProcessorAspect.c"
 
 }
 
-# 1384 "ProcessorAspect.c"
+# 1383 "ProcessorAspect.c"
 
 }
  
 #line 362 "Processor.c"
 void Processor_DeactivatePSW_Bit(const unsigned int nbit)  
-# 1390 "ProcessorAspect.c"
+# 1389 "ProcessorAspect.c"
 {
 
 
 
-# 1395 "ProcessorAspect.c"
+# 1394 "ProcessorAspect.c"
 {
 
 #line 363 "Processor.c"
@@ -1404,25 +1403,25 @@ mask = mask << nbit;
 mask = (~mask); 
 #line 368 "Processor.c"
 registerPSW_CPU = registerPSW_CPU & mask; 
-# 1408 "ProcessorAspect.c"
+# 1407 "ProcessorAspect.c"
 
 }
 
-# 1412 "ProcessorAspect.c"
+# 1411 "ProcessorAspect.c"
 
 }
  
 #line 372 "Processor.c"
 unsigned int Processor_PSW_BitState(const unsigned int nbit)  
-# 1418 "ProcessorAspect.c"
+# 1417 "ProcessorAspect.c"
 {
-# 1420 "ProcessorAspect.c"
+# 1419 "ProcessorAspect.c"
 unsigned int retValue_acc;
 
 
 
 
-# 1426 "ProcessorAspect.c"
+# 1425 "ProcessorAspect.c"
 {
 
 #line 373 "Processor.c"
@@ -1433,328 +1432,328 @@ unsigned int mask = 1;
 mask = mask << nbit; 
 #line 376 "Processor.c"
 
-# 1437 "ProcessorAspect.c"
+# 1436 "ProcessorAspect.c"
 retValue_acc = (registerPSW_CPU & mask) >> nbit;
-# 1439 "ProcessorAspect.c"
+# 1438 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
  
-# 1442 "ProcessorAspect.c"
+# 1441 "ProcessorAspect.c"
 
 }
 
-# 1446 "ProcessorAspect.c"
+# 1445 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
 
-# 1449 "ProcessorAspect.c"
+# 1448 "ProcessorAspect.c"
 
 }
  
 #line 380 "Processor.c"
 int Processor_GetMAR()  
-# 1455 "ProcessorAspect.c"
+# 1454 "ProcessorAspect.c"
 {
-# 1457 "ProcessorAspect.c"
+# 1456 "ProcessorAspect.c"
 int retValue_acc;
 
 
 
 
-# 1463 "ProcessorAspect.c"
+# 1462 "ProcessorAspect.c"
 {
 
 #line 381 "Processor.c"
 
-# 1468 "ProcessorAspect.c"
+# 1467 "ProcessorAspect.c"
 retValue_acc = registerMAR_CPU;
-# 1470 "ProcessorAspect.c"
+# 1469 "ProcessorAspect.c"
 return (int )retValue_acc;
  
-# 1473 "ProcessorAspect.c"
+# 1472 "ProcessorAspect.c"
 
 }
 
-# 1477 "ProcessorAspect.c"
+# 1476 "ProcessorAspect.c"
 return (int )retValue_acc;
 
-# 1480 "ProcessorAspect.c"
+# 1479 "ProcessorAspect.c"
 
 }
  
 #line 385 "Processor.c"
 void Processor_SetMAR(int data)  
-# 1486 "ProcessorAspect.c"
+# 1485 "ProcessorAspect.c"
 {
 
 
 
-# 1491 "ProcessorAspect.c"
+# 1490 "ProcessorAspect.c"
 {
 
 #line 386 "Processor.c"
 registerMAR_CPU = data; 
-# 1496 "ProcessorAspect.c"
+# 1495 "ProcessorAspect.c"
 
 }
 
-# 1500 "ProcessorAspect.c"
+# 1499 "ProcessorAspect.c"
 
 }
  
 #line 390 "Processor.c"
 void Processor_GetMBR( MEMORYCELL *toRegister)  
-# 1506 "ProcessorAspect.c"
+# 1505 "ProcessorAspect.c"
 {
 
 
 
-# 1511 "ProcessorAspect.c"
+# 1510 "ProcessorAspect.c"
 {
 
 #line 391 "Processor.c"
 memcpy(((void *)toRegister), ((void *)((&registerMBR_CPU))), sizeof ( MEMORYCELL )); 
-# 1516 "ProcessorAspect.c"
+# 1515 "ProcessorAspect.c"
 
 }
 
-# 1520 "ProcessorAspect.c"
+# 1519 "ProcessorAspect.c"
 
 }
  
 #line 395 "Processor.c"
 void Processor_SetMBR( MEMORYCELL *fromRegister)  
-# 1526 "ProcessorAspect.c"
+# 1525 "ProcessorAspect.c"
 {
 
 
 
-# 1531 "ProcessorAspect.c"
+# 1530 "ProcessorAspect.c"
 {
 
 #line 396 "Processor.c"
 memcpy(((void *)((&registerMBR_CPU))), ((void *)fromRegister), sizeof ( MEMORYCELL )); 
-# 1536 "ProcessorAspect.c"
+# 1535 "ProcessorAspect.c"
 
 }
 
-# 1540 "ProcessorAspect.c"
+# 1539 "ProcessorAspect.c"
 
 }
  
 #line 400 "Processor.c"
 int Processor_GetMBR_Value()  
-# 1546 "ProcessorAspect.c"
+# 1545 "ProcessorAspect.c"
 {
-# 1548 "ProcessorAspect.c"
+# 1547 "ProcessorAspect.c"
 int retValue_acc;
 
 
 
 
-# 1554 "ProcessorAspect.c"
+# 1553 "ProcessorAspect.c"
 {
 
 #line 401 "Processor.c"
 
-# 1559 "ProcessorAspect.c"
+# 1558 "ProcessorAspect.c"
 retValue_acc = registerMBR_CPU.operationCode;
-# 1561 "ProcessorAspect.c"
+# 1560 "ProcessorAspect.c"
 return (int )retValue_acc;
  
-# 1564 "ProcessorAspect.c"
+# 1563 "ProcessorAspect.c"
 
 }
 
-# 1568 "ProcessorAspect.c"
+# 1567 "ProcessorAspect.c"
 return (int )retValue_acc;
 
-# 1571 "ProcessorAspect.c"
+# 1570 "ProcessorAspect.c"
 
 }
  
 #line 405 "Processor.c"
 void Processor_SetAccumulator(int acc)  
-# 1577 "ProcessorAspect.c"
+# 1576 "ProcessorAspect.c"
 {
 
 
 
-# 1582 "ProcessorAspect.c"
+# 1581 "ProcessorAspect.c"
 {
 
 #line 406 "Processor.c"
 registerAccumulator_CPU = acc; 
-# 1587 "ProcessorAspect.c"
+# 1586 "ProcessorAspect.c"
 
 }
 
-# 1591 "ProcessorAspect.c"
+# 1590 "ProcessorAspect.c"
 
 }
  
 #line 410 "Processor.c"
 void Processor_SetPC(int pc)  
-# 1597 "ProcessorAspect.c"
+# 1596 "ProcessorAspect.c"
 {
 
 
 
-# 1602 "ProcessorAspect.c"
+# 1601 "ProcessorAspect.c"
 {
 
 #line 411 "Processor.c"
 registerPC_CPU = pc; 
-# 1607 "ProcessorAspect.c"
+# 1606 "ProcessorAspect.c"
 
 }
 
-# 1611 "ProcessorAspect.c"
+# 1610 "ProcessorAspect.c"
 
 }
  
 #line 415 "Processor.c"
 void Processor_SetRegisterA(int rA)  
-# 1617 "ProcessorAspect.c"
+# 1616 "ProcessorAspect.c"
 {
 
 
 
-# 1622 "ProcessorAspect.c"
+# 1621 "ProcessorAspect.c"
 {
 
 #line 416 "Processor.c"
 registerA_CPU = rA; 
-# 1627 "ProcessorAspect.c"
+# 1626 "ProcessorAspect.c"
 
 }
 
-# 1631 "ProcessorAspect.c"
+# 1630 "ProcessorAspect.c"
 
 }
  
 #line 420 "Processor.c"
 int Processor_GetAccumulator()  
-# 1637 "ProcessorAspect.c"
+# 1636 "ProcessorAspect.c"
 {
-# 1639 "ProcessorAspect.c"
+# 1638 "ProcessorAspect.c"
 int retValue_acc;
 
 
 
 
-# 1645 "ProcessorAspect.c"
+# 1644 "ProcessorAspect.c"
 {
 
 #line 421 "Processor.c"
 
-# 1650 "ProcessorAspect.c"
+# 1649 "ProcessorAspect.c"
 retValue_acc = registerAccumulator_CPU;
-# 1652 "ProcessorAspect.c"
+# 1651 "ProcessorAspect.c"
 return (int )retValue_acc;
  
-# 1655 "ProcessorAspect.c"
+# 1654 "ProcessorAspect.c"
 
 }
 
-# 1659 "ProcessorAspect.c"
+# 1658 "ProcessorAspect.c"
 return (int )retValue_acc;
 
-# 1662 "ProcessorAspect.c"
+# 1661 "ProcessorAspect.c"
 
 }
  
 #line 428 "Processor.c"
 int Processor_GetRegisterA()  
-# 1668 "ProcessorAspect.c"
+# 1667 "ProcessorAspect.c"
 {
-# 1670 "ProcessorAspect.c"
+# 1669 "ProcessorAspect.c"
 int retValue_acc;
 
 
 
 
-# 1676 "ProcessorAspect.c"
+# 1675 "ProcessorAspect.c"
 {
 
 #line 429 "Processor.c"
 
-# 1681 "ProcessorAspect.c"
+# 1680 "ProcessorAspect.c"
 retValue_acc = registerA_CPU;
-# 1683 "ProcessorAspect.c"
+# 1682 "ProcessorAspect.c"
 return (int )retValue_acc;
  
-# 1686 "ProcessorAspect.c"
+# 1685 "ProcessorAspect.c"
 
 }
 
-# 1690 "ProcessorAspect.c"
+# 1689 "ProcessorAspect.c"
 return (int )retValue_acc;
 
-# 1693 "ProcessorAspect.c"
+# 1692 "ProcessorAspect.c"
 
 }
  
 #line 433 "Processor.c"
 void Processor_SetPSW(unsigned int psw)  
-# 1699 "ProcessorAspect.c"
+# 1698 "ProcessorAspect.c"
 {
 
 
 
-# 1704 "ProcessorAspect.c"
+# 1703 "ProcessorAspect.c"
 {
 
 #line 434 "Processor.c"
 registerPSW_CPU = psw; 
-# 1709 "ProcessorAspect.c"
+# 1708 "ProcessorAspect.c"
 
 }
 
-# 1713 "ProcessorAspect.c"
+# 1712 "ProcessorAspect.c"
 
 }
  
 #line 438 "Processor.c"
 unsigned int Processor_GetPSW()  
-# 1719 "ProcessorAspect.c"
+# 1718 "ProcessorAspect.c"
 {
-# 1721 "ProcessorAspect.c"
+# 1720 "ProcessorAspect.c"
 unsigned int retValue_acc;
 
 
 
 
-# 1727 "ProcessorAspect.c"
+# 1726 "ProcessorAspect.c"
 {
 
 #line 439 "Processor.c"
 
-# 1732 "ProcessorAspect.c"
+# 1731 "ProcessorAspect.c"
 retValue_acc = registerPSW_CPU;
-# 1734 "ProcessorAspect.c"
+# 1733 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
  
-# 1737 "ProcessorAspect.c"
+# 1736 "ProcessorAspect.c"
 
 }
 
-# 1741 "ProcessorAspect.c"
+# 1740 "ProcessorAspect.c"
 return (unsigned int )retValue_acc;
 
-# 1744 "ProcessorAspect.c"
+# 1743 "ProcessorAspect.c"
 
 }
  
 #line 442 "Processor.c"
 char *Processor_ShowPSW()  
-# 1750 "ProcessorAspect.c"
+# 1749 "ProcessorAspect.c"
 {
-# 1752 "ProcessorAspect.c"
+# 1751 "ProcessorAspect.c"
 char* retValue_acc;
 
 
 
 
-# 1758 "ProcessorAspect.c"
+# 1757 "ProcessorAspect.c"
 {
 
 #line 443 "Processor.c"
@@ -1783,50 +1782,50 @@ if (Processor_PSW_BitState(INTERRUPT_MASKED_BIT)){
 pswmask[tam - INTERRUPT_MASKED_BIT] = 'M'; }
 #line 457 "Processor.c"
 
-# 1787 "ProcessorAspect.c"
+# 1786 "ProcessorAspect.c"
 retValue_acc = pswmask;
-# 1789 "ProcessorAspect.c"
+# 1788 "ProcessorAspect.c"
 return (char* )retValue_acc;
  
-# 1792 "ProcessorAspect.c"
+# 1791 "ProcessorAspect.c"
 
 }
 
-# 1796 "ProcessorAspect.c"
+# 1795 "ProcessorAspect.c"
 return (char* )retValue_acc;
 
-# 1799 "ProcessorAspect.c"
+# 1798 "ProcessorAspect.c"
 
 }
  
 #line 463 "Processor.c"
 int Processor_GetRegisterB()  
-# 1805 "ProcessorAspect.c"
+# 1804 "ProcessorAspect.c"
 {
-# 1807 "ProcessorAspect.c"
+# 1806 "ProcessorAspect.c"
 int retValue_acc;
 
 
 
 
-# 1813 "ProcessorAspect.c"
+# 1812 "ProcessorAspect.c"
 {
 
 #line 464 "Processor.c"
 
-# 1818 "ProcessorAspect.c"
+# 1817 "ProcessorAspect.c"
 retValue_acc = registerB_CPU;
-# 1820 "ProcessorAspect.c"
+# 1819 "ProcessorAspect.c"
 return (int )retValue_acc;
  
-# 1823 "ProcessorAspect.c"
+# 1822 "ProcessorAspect.c"
 
 }
 
-# 1827 "ProcessorAspect.c"
+# 1826 "ProcessorAspect.c"
 return (int )retValue_acc;
 
-# 1830 "ProcessorAspect.c"
+# 1829 "ProcessorAspect.c"
 
 }
  

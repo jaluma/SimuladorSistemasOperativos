@@ -1,8 +1,9 @@
 # 1 "OperatingSystem.c"
 # 1 "<built-in>"
 # 1 "<command-line>"
+# 31 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
-# 1 "<command-line>" 2
+# 32 "<command-line>" 2
 # 1 "OperatingSystem.c"
 # 1 "OperatingSystem.h" 1
 
@@ -73,10 +74,10 @@ extern PROGRAMS_DATA *programList[30];
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 
-# 216 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 216 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef long unsigned int size_t;
 # 34 "/usr/include/stdio.h" 2 3 4
 
@@ -200,7 +201,7 @@ typedef struct _IO_FILE __FILE;
 # 31 "/usr/include/libio.h" 3 4
 # 1 "/usr/include/_G_config.h" 1 3 4
 # 15 "/usr/include/_G_config.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 16 "/usr/include/_G_config.h" 2 3 4
 
 
@@ -234,8 +235,8 @@ typedef struct
 } _G_fpos64_t;
 # 32 "/usr/include/libio.h" 2 3 4
 # 49 "/usr/include/libio.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 1 3 4
-# 40 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 1 3 4
+# 40 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stdarg.h" 3 4
 typedef __builtin_va_list __gnuc_va_list;
 # 50 "/usr/include/libio.h" 2 3 4
 # 144 "/usr/include/libio.h" 3 4
@@ -1096,7 +1097,7 @@ int Heap_getFirst(int[], int);
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 33 "/usr/include/string.h" 2 3 4
 
 
@@ -1486,8 +1487,8 @@ extern int toupper_l (int __c, __locale_t __l) __attribute__ ((__nothrow__ , __l
 # 9 "OperatingSystem.c" 2
 # 1 "/usr/include/stdlib.h" 1 3 4
 # 32 "/usr/include/stdlib.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
-# 328 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
+# 328 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 3 4
 typedef int wchar_t;
 # 33 "/usr/include/stdlib.h" 2 3 4
 
@@ -1753,7 +1754,7 @@ typedef __clockid_t clockid_t;
 typedef __timer_t timer_t;
 # 133 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 # 146 "/usr/include/x86_64-linux-gnu/sys/types.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 147 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 
 
@@ -2243,7 +2244,7 @@ extern void cfree (void *__ptr) __attribute__ ((__nothrow__ , __leaf__));
 
 # 1 "/usr/include/alloca.h" 1 3 4
 # 24 "/usr/include/alloca.h" 3 4
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 25 "/usr/include/alloca.h" 2 3 4
 
 
@@ -2524,7 +2525,7 @@ extern int getloadavg (double __loadavg[], int __nelem)
 
 
 
-# 1 "/usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h" 1 3 4
+# 1 "/usr/lib/gcc/x86_64-linux-gnu/6/include/stddef.h" 1 3 4
 # 38 "/usr/include/time.h" 2 3 4
 
 
@@ -2897,12 +2898,12 @@ int OperatingSystem_LongTermScheduler() {
   } else if (PID == -2) {
    OperatingSystem_ShowTime('e');
    ComputerSystem_DebugMessage(104,'e',programList[i]->executableName, "--- invalid priority or size ---");
-  } else if (PID == -4) {
-   OperatingSystem_ShowTime('e');
-   ComputerSystem_DebugMessage(105,'e',programList[i]->executableName);
   } else if (PID == -5) {
    OperatingSystem_ShowTime('e');
    ComputerSystem_DebugMessage(144,'e',programList[i]->executableName);
+  } else if (PID == -4) {
+   OperatingSystem_ShowTime('e');
+   ComputerSystem_DebugMessage(105,'e',programList[i]->executableName);
   } else {
    numberOfSuccessfullyCreatedProcesses++;
 
@@ -2958,6 +2959,9 @@ int OperatingSystem_CreateProcess(int indexOfExecutableProgram, int queueID) {
  }
 
 
+ OperatingSystem_ShowTime('m');
+ ComputerSystem_DebugMessage(142, 'm', PID, programList[indexOfExecutableProgram]->executableName, processSize);
+
   partitionNumber=OperatingSystem_ObtainMainMemory(processSize, PID);
 
  if (partitionNumber == -4) {
@@ -2990,24 +2994,20 @@ int OperatingSystem_CreateProcess(int indexOfExecutableProgram, int queueID) {
 
 int OperatingSystem_ObtainMainMemory(int processSize, int PID) {
 
- int i, indexPartition = -4, memoryLeak = 300, TrueIfMemoryFull = 0, CountAvailablePartitions = 0;
+ int i, indexPartition = -4, memoryLeak = 300, existPartition = 0;
  for (i = 0; i < 4*2; i++) {
   if (partitionsTable[i].size >= processSize) {
    if (partitionsTable[i].occupied == 0) {
     if (memoryLeak > partitionsTable[i].size - processSize) {
      memoryLeak = partitionsTable[i].size - processSize;
      indexPartition = i;
-
-
     }
-   } else {
-    TrueIfMemoryFull++;
+    existPartition++;
    }
-   CountAvailablePartitions++;
   }
  }
 
- if (CountAvailablePartitions == TrueIfMemoryFull)
+ if (indexPartition == -4 && existPartition)
   return -5;
 
 
@@ -3031,9 +3031,6 @@ void OperatingSystem_ReleaseMainMemory() {
 
 
 void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int processSize, int priority, int processPLIndex, int queueID, int partitionNumber) {
-
- OperatingSystem_ShowTime('m');
- ComputerSystem_DebugMessage(142, 'm', PID, programList[processPLIndex]->executableName, processSize);
 
  OperatingSystem_ShowPartitionTable("before allocating memory");
 
@@ -3063,7 +3060,7 @@ void OperatingSystem_PCBInitialization(int PID, int initialPhysicalAddress, int 
  partitionsTable[partitionNumber].occupied = 1;
 
  OperatingSystem_ShowTime('m');
- ComputerSystem_DebugMessage(143,'m', partitionNumber, partitionsTable[partitionNumber].initAddress, processSize, PID, programList[processTable[PID].programListIndex]->executableName);
+ ComputerSystem_DebugMessage(143,'m', partitionNumber, partitionsTable[partitionNumber].initAddress, partitionsTable[partitionNumber].size, PID, programList[processTable[PID].programListIndex]->executableName);
  OperatingSystem_ShowPartitionTable("after allocating memory");
 
  OperatingSystem_ShowTime('p');

@@ -28,7 +28,6 @@ int registerMAR_CPU; // Memory Address Register
 MEMORYCELL registerMBR_CPU; // Memory Buffer Register
 
 int registerA_CPU; // General purpose register
-int registerB_CPU; // General purpose register
 
 int interruptLines_CPU; // Processor interrupt lines
 
@@ -80,12 +79,9 @@ void Processor_FetchInstruction() {
 		ComputerSystem_ShowTime(HARDWARE);
 		ComputerSystem_DebugMessage(1, HARDWARE, registerIR_CPU.operationCode, registerIR_CPU.operand1, registerIR_CPU.operand2);
 	}
-	else {
+	else 
 	  // Show message: "_ _ _ "
-	  ComputerSystem_ShowTime(HARDWARE);
 	  ComputerSystem_DebugMessage(2,HARDWARE);
-	  //Processor_RaiseException(INVALIDINSTRUCTION);
-	}
 }
 
 
@@ -114,7 +110,7 @@ void Processor_DecodeAndExecuteInstruction() {
 		// Instruction DIV
 		case 'd':
 			if (registerIR_CPU.operand2 == 0)
-				Processor_RaiseException(DIVISIONBYZERO);
+				Processor_RaiseInterrupt(EXCEPTION_BIT); 
 			else {
 				registerAccumulator_CPU=registerIR_CPU.operand1 / registerIR_CPU.operand2;
 				registerPC_CPU++;
@@ -197,14 +193,14 @@ void Processor_DecodeAndExecuteInstruction() {
 			if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1)
 				Processor_ActivatePSW_Bit(POWEROFF_BIT);
 			else
-				Processor_RaiseException(INVALIDPROCESSORMODE);
+				Processor_RaiseInterrupt(EXCEPTION_BIT);
 			break;
 			  
 		// Instruction OS
 		case 'o': // Make a operating system routine in entry point indicated by operand1
 			// Show final part of HARDWARE message with CPU registers
 			// Show message: " (PC: registerPC_CPU, Accumulator: registerAccumulator_CPU, PSW: registerPSW_CPU [Processor_ShowPSW()]\n
-			ComputerSystem_DebugMessage(130, HARDWARE,OperatingSystem_GetExecutingProcessID(),registerPC_CPU,registerAccumulator_CPU,registerPSW_CPU,Processor_ShowPSW());
+			ComputerSystem_DebugMessage(3, HARDWARE,registerPC_CPU,registerAccumulator_CPU,registerPSW_CPU,Processor_ShowPSW());
 			if (Processor_PSW_BitState(EXECUTION_MODE_BIT) == 1) {
 				// Not all operating system code is executed in simulated processor, but really must do it... 
 				OperatingSystem_InterruptLogic(registerIR_CPU.operand1);
@@ -212,7 +208,7 @@ void Processor_DecodeAndExecuteInstruction() {
 				// Update PSW bits (ZERO_BIT, NEGATIVE_BIT, ...)
 				Processor_UpdatePSW();
 			} else {
-				Processor_RaiseException(INVALIDPROCESSORMODE);
+				Processor_RaiseInterrupt(EXCEPTION_BIT);
 			}
 			
 			return; // Note: message show before... for operating system messages after...
@@ -224,13 +220,12 @@ void Processor_DecodeAndExecuteInstruction() {
 				registerPSW_CPU=Processor_CopyFromSystemStack(MAINMEMORYSIZE-2);
 				registerAccumulator_CPU=Processor_CopyFromSystemStack(MAINMEMORYSIZE-3);
 			} else
-				Processor_RaiseException(INVALIDPROCESSORMODE);
+				Processor_RaiseInterrupt(EXCEPTION_BIT);
 			break;		
 
 		// Unknown instruction
 		default : 
-			//registerPC_CPU++;
-			Processor_RaiseException(INVALIDINSTRUCTION);
+			registerPC_CPU++;
 			break;
 	}
 	
@@ -239,7 +234,7 @@ void Processor_DecodeAndExecuteInstruction() {
 	
 	// Show final part of HARDWARE message with	CPU registers
 	// Show message: " (PC: registerPC_CPU, Accumulator: registerAccumulator_CPU, PSW: registerPSW_CPU [Processor_ShowPSW()]\n
-	ComputerSystem_DebugMessage(130, HARDWARE, OperatingSystem_GetExecutingProcessID(), registerPC_CPU,registerAccumulator_CPU,registerPSW_CPU,Processor_ShowPSW());
+	ComputerSystem_DebugMessage(3, HARDWARE,registerPC_CPU,registerAccumulator_CPU,registerPSW_CPU,Processor_ShowPSW());
 }
 	
 	
@@ -317,11 +312,6 @@ int Processor_CopyFromSystemStack(int physicalMemoryAddress) {
 	return registerMBR_CPU.operand1;
 }
 
-// Function to raise an exception. Exercise 1-c of V4
-void Processor_RaiseException(int typeOfException) {
-	Processor_RaiseInterrupt(EXCEPTION_BIT);
-	registerB_CPU=typeOfException;
-} 
 
 // Put the specified interrupt line to a high level 
 void Processor_RaiseInterrupt(const unsigned int interruptNumber) {
@@ -459,7 +449,3 @@ char * Processor_ShowPSW(){
 
 /////////////////////////////////////////////////////////
 //  New functions below this line  //////////////////////
-
-int Processor_GetRegisterB() {
-  return registerB_CPU;
-}
