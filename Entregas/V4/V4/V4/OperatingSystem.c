@@ -272,12 +272,12 @@ int OperatingSystem_ObtainMainMemory(int processSize, int PID) {
 					memoryLeak = partitionsTable[i].size - processSize;
 					indexPartition = i;
 				}
-				existPartition++;
 			}
+			existPartition++;
 		} 
 	}
 	
-	if (indexPartition == TOOBIGPROCESS && existPartition)
+	if (indexPartition == TOOBIGPROCESS && existPartition > 0)
 		return MEMORYFULL;
 		
  	//return PID*MAINMEMORYSECTIONSIZE;
